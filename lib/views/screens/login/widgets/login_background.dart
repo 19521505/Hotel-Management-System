@@ -66,7 +66,7 @@ class LoginBackground extends StatelessWidget {
                                               height: 5,
                                             ),
                                             Text(
-                                              "EndCoVi",
+                                              "Hotel Name",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   decoration:
