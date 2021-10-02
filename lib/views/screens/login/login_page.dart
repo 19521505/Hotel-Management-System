@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/component/rounded_button.dart';
-import 'package:hotel_management_system/component/rounded_input_field.dart';
-import 'package:hotel_management_system/component/rounded_password_field.dart';
-import 'package:hotel_management_system/views/login/widgets/login_background.dart';
-import '../../constrants.dart';
+import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/views/screens/login/widgets/login_background.dart';
+import 'package:hotel_management_system/widgets/rounded_button.dart';
+import 'package:hotel_management_system/widgets/rounded_input_field.dart';
+import 'package:hotel_management_system/widgets/rounded_password_field.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String nameRoute = '/';
+  static Route route() {
+    return MaterialPageRoute(
+      builder: (_) => LoginPage(),
+      settings: RouteSettings(name: nameRoute),
+    );
+  }
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override

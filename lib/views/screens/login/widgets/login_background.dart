@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../constrants.dart';
+import 'package:hotel_management_system/constrants/constrants.dart';
 
 class LoginBackground extends StatelessWidget {
   final Widget child;
