@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/views/login/login_view.dart';
+import 'package:hotel_management_system/views/routes/app_routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      initialRoute: '/',
     );
   }
 }

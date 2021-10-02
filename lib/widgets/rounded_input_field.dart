@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/component/text_field_container.dart';
-import '../constrants.dart';
+import 'package:hotel_management_system/widgets/text_field_container.dart';
+import '../constrants/constrants.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
