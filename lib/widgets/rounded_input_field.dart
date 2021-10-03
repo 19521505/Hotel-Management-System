@@ -4,12 +4,14 @@ import '../constrants/constrants.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
+  final String inputName;
   final IconData icon;
   final ValueChanged<String> onChanged;
   // final TextEditingController controller;
   const RoundedInputField({
     Key? key,
     required this.hintText,
+    required this.inputName,
     required this.icon,
     required this.onChanged,
     // required this.controller,
@@ -20,6 +22,8 @@ class RoundedInputField extends StatelessWidget {
       child: TextFormField(
         // controller: controller,
         onChanged: onChanged,
+        validator: (val) =>
+            val!.isNotEmpty ? null : inputName + "cannot be blank!",
         decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
