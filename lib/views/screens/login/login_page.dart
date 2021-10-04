@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
-import 'package:hotel_management_system/services/authentication.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/views/screens/login/widgets/login_background.dart';
 import 'package:hotel_management_system/widgets/rounded_button.dart';
@@ -28,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   double _height = 56;
   GlobalKey _globalKey = GlobalKey();
-  var name, password, token;
+  var name, password;
+  bool loginSuccess = false;
 
   @override
   void initState() {
@@ -73,9 +71,13 @@ class _LoginPageState extends State<LoginPage> {
                 RoundedButton(
                   text: "SIGN IN",
                   height: _height,
-                  press: () {
+                  press: () async {
                     if (_formKey.currentState!.validate()) {
-                      authProvider.Login(name, password);
+                      loginSuccess = await authProvider.Login(name, password);
+                      if (loginSuccess) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/home', (route) => false);
+                      }
                     }
                   },
                   textColor: Colors.white,

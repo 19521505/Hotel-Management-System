@@ -24,4 +24,9 @@ class AuthService {
           fontSize: 16.0);
     }
   }
+
+  getStaffInfo(token) async {
+    dio.options.headers['Authorization'] = 'Bearer ' + token;
+    return await dio.get('https://flutter-auth-khan.herokuapp.com/getinfo');
+  }
 }
