@@ -1,8 +1,8 @@
 class Staff {
-  String? staffID;
-  String? account;
-  int? role;
-  String? fullName;
+  late String staffID;
+  late String account;
+  late int role;
+  late String fullName;
   int? phoneNum;
   String? dateOfBirth;
 

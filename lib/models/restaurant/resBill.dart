@@ -2,11 +2,11 @@ import 'package:hotel_management_system/models/restaurant/detailResBill.dart';
 import 'package:hotel_management_system/models/staff.dart';
 
 class ResBill {
-  String? resBillID;
-  String? date;
-  List<DetailResBill>? detailsResBill;
-  Staff? staff;
-  double? totalPrice;
+  late String resBillID;
+  late String date;
+  late List<DetailResBill> detailsResBill;
+  late Staff staff;
+  late double totalPrice;
 
   ResBill(
       {required this.resBillID,
@@ -21,7 +21,7 @@ class ResBill {
     if (json['detailsResBill'] != null) {
       detailsResBill = <DetailResBill>[];
       json['detailsResBill'].forEach((v) {
-        detailsResBill!.add(new DetailResBill.fromJson(v));
+        detailsResBill.add(new DetailResBill.fromJson(v));
       });
     }
     staff = (json['staff'] != null ? new Staff.fromJson(json['staff']) : null)!;
@@ -32,12 +32,10 @@ class ResBill {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['resBillID'] = this.resBillID;
     data['date'] = this.date;
-    if (this.detailsResBill != null) {
-      data['detailsResBill'] =
-          this.detailsResBill!.map((v) => v.toJson()).toList();
-    }
+    data['detailsResBill'] =
+        this.detailsResBill.map((v) => v.toJson()).toList();
     if (this.staff != null) {
-      data['staff'] = this.staff!.toJson();
+      data['staff'] = this.staff.toJson();
     }
     data['totalPrice'] = this.totalPrice;
     return data;

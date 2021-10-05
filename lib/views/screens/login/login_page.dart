@@ -6,7 +6,7 @@ import 'package:hotel_management_system/widgets/rounded_input_field.dart';
 import 'package:hotel_management_system/widgets/rounded_password_field.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String nameRoute = '/';
+  static const String nameRoute = '/login';
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => LoginPage(),

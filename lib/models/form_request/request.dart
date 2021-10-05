@@ -2,12 +2,12 @@ import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 import 'package:hotel_management_system/models/staff.dart';
 
 class Request {
-  String? importID;
-  int? type;
-  String? date;
-  Staff? staff;
-  List<DetailsReq>? detailsReq;
-  double? totalPrice;
+  late String importID;
+  late int type;
+  late String date;
+  late Staff staff;
+  late List<DetailsReq> detailsReq;
+  late double totalPrice;
 
   Request(
       {required this.importID,
@@ -25,7 +25,7 @@ class Request {
     if (json['detailsReq'] != null) {
       detailsReq = <DetailsReq>[];
       json['detailsReq'].forEach((v) {
-        detailsReq!.add(new DetailsReq.fromJson(v));
+        detailsReq.add(new DetailsReq.fromJson(v));
       });
     }
     totalPrice = json['totalPrice'];
@@ -36,12 +36,8 @@ class Request {
     data['importID'] = this.importID;
     data['type'] = this.type;
     data['date'] = this.date;
-    if (this.staff != null) {
-      data['staff'] = this.staff!.toJson();
-    }
-    if (this.detailsReq != null) {
-      data['detailsReq'] = this.detailsReq!.map((v) => v.toJson()).toList();
-    }
+    data['staff'] = this.staff.toJson();
+    data['detailsReq'] = this.detailsReq.map((v) => v.toJson()).toList();
     data['totalPrice'] = this.totalPrice;
     return data;
   }

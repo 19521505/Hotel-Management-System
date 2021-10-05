@@ -1,7 +1,7 @@
 class Room {
-  String? roomID;
-  String? roomName;
-  double? roomPrice;
+  late String roomID;
+  late String roomName;
+  late double roomPrice;
 
   Room({required this.roomID, required this.roomName, required this.roomPrice});
 

@@ -3,22 +3,22 @@ import 'package:hotel_management_system/models/hotel/room.dart';
 import '../staff.dart';
 
 class RoomBill {
-  String? roomBillID;
-  String? date;
+  late String roomBillID;
+  late String date;
   String? cusName;
   int? cusPhone;
-  List<Room>? room;
-  Staff? staff;
-  double? totalPrice;
+  late List<Room> room;
+  late Staff staff;
+  late double totalPrice;
 
   RoomBill(
-      {this.roomBillID,
-      this.date,
+      {required this.roomBillID,
+      required this.date,
       this.cusName,
       this.cusPhone,
-      this.room,
-      this.staff,
-      this.totalPrice});
+      required this.room,
+      required this.staff,
+      required this.totalPrice});
 
   RoomBill.fromJson(Map<String, dynamic> json) {
     roomBillID = json['roomBillID'];
@@ -28,10 +28,10 @@ class RoomBill {
     if (json['room'] != null) {
       room = <Room>[];
       json['room'].forEach((v) {
-        room!.add(new Room.fromJson(v));
+        room.add(new Room.fromJson(v));
       });
     }
-    staff = json['staff'] != null ? new Staff.fromJson(json['staff']) : null;
+    staff = Staff.fromJson(json['staff']);
     totalPrice = json['totalPrice'];
   }
 
@@ -41,12 +41,8 @@ class RoomBill {
     data['date'] = this.date;
     data['cusName'] = this.cusName;
     data['cusPhone'] = this.cusPhone;
-    if (this.room != null) {
-      data['room'] = this.room!.map((v) => v.toJson()).toList();
-    }
-    if (this.staff != null) {
-      data['staff'] = this.staff!.toJson();
-    }
+    data['room'] = this.room.map((v) => v.toJson()).toList();
+    data['staff'] = this.staff.toJson();
     data['totalPrice'] = this.totalPrice;
     return data;
   }

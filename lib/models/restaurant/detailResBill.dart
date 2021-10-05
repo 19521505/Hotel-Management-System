@@ -1,10 +1,10 @@
 import 'package:hotel_management_system/models/restaurant/food.dart';
 
 class DetailResBill {
-  String? detailsBill;
-  Food? food;
-  int? quantity;
-  String? totalPrice;
+  late String detailsBill;
+  late Food food;
+  late int quantity;
+  late String totalPrice;
 
   DetailResBill(
       {required this.detailsBill,
@@ -22,9 +22,8 @@ class DetailResBill {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['detailsBill'] = this.detailsBill;
-    if (this.food != null) {
-      data['food'] = this.food!.toJson();
-    }
+    data['food'] = this.food.toJson();
+
     data['quantity'] = this.quantity;
     data['totalPrice'] = this.totalPrice;
     return data;

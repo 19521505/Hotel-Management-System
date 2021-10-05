@@ -1,25 +1,25 @@
 import 'package:hotel_management_system/models/staff.dart';
 
 class OtherBill {
-  String? otherBillID;
-  String? troubleName;
-  Staff? staff;
+  late String otherBillID;
+  late String troubleName;
+  late Staff staff;
   String? date;
   String? detail;
-  double? price;
+  late double price;
 
   OtherBill(
-      {this.otherBillID,
-      this.troubleName,
-      this.staff,
+      {required this.otherBillID,
+      required this.troubleName,
+      required this.staff,
       this.date,
       this.detail,
-      this.price});
+      required this.price});
 
   OtherBill.fromJson(Map<String, dynamic> json) {
     otherBillID = json['otherBillID'];
     troubleName = json['troubleName'];
-    staff = json['staff'] != null ? new Staff.fromJson(json['staff']) : null;
+    staff = Staff.fromJson(json['staff']);
     date = json['date'];
     detail = json['detail'];
     price = json['price'];
@@ -29,9 +29,7 @@ class OtherBill {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['otherBillID'] = this.otherBillID;
     data['troubleName'] = this.troubleName;
-    if (this.staff != null) {
-      data['staff'] = this.staff!.toJson();
-    }
+    data['staff'] = this.staff.toJson();
     data['date'] = this.date;
     data['detail'] = this.detail;
     data['price'] = this.price;
