@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomePagState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          "Welcome ",
+          authProvider.currentStaff.fullName.toString(),
           style: TextStyle(
             fontSize: 20,
             color: Colors.white,
@@ -58,7 +59,23 @@ class _HomePagState extends State<HomePage> {
       ),
       body: Container(
         child: Center(
-          child: Text("Home Page", style: TextStyle(fontSize: 20)),
+          child: Column(
+            children: [
+              Text("Home Page", style: TextStyle(fontSize: 20)),
+              Container(
+                height: 60,
+                width: 150,
+                child: RoundedButton(
+                    text: "Logout",
+                    press: () {
+                      authProvider.logout();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/', (route) => false);
+                    },
+                    textColor: Colors.white),
+              )
+            ],
+          ),
         ),
       ),
     );

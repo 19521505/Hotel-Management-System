@@ -15,8 +15,8 @@ class Staff {
       required this.dateOfBirth});
 
   Staff.fromJson(Map<String, dynamic> json) {
-    staffID = json['staffID'];
-    account = json['account'];
+    staffID = json['_id'];
+    account = json['uid'];
     role = json['role'];
     fullName = json['fullName'];
     phoneNum = json['phoneNum'];

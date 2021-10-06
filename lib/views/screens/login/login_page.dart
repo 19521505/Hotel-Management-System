@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: _height,
                   press: () async {
                     if (_formKey.currentState!.validate()) {
-                      loginSuccess = await authProvider.Login(name, password);
+                      loginSuccess = await authProvider.login(name, password);
                       if (loginSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
                             context, '/home', (route) => false);
