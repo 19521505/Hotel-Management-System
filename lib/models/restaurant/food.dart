@@ -1,7 +1,7 @@
 class Food {
-  String? foodID;
-  String? foodName;
-  int? foodPrice;
+  late String foodID;
+  late String foodName;
+  late int foodPrice;
 
   Food({required this.foodID, required this.foodName, required this.foodPrice});
 

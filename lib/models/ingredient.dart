@@ -1,7 +1,7 @@
 class Ingredient {
-  String? ingreID;
-  String? ingreName;
-  double? ingrePrice;
+  late String ingreID;
+  late String ingreName;
+  late double ingrePrice;
 
   Ingredient(
       {required this.ingreID,
