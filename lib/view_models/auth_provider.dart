@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hotel_management_system/models/staff.dart';
 import 'package:hotel_management_system/services/authentication.dart';
+import 'package:hotel_management_system/views/screens/home/home_page.dart';
+import 'package:hotel_management_system/views/screens/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -27,14 +29,10 @@ class AuthProvider extends ChangeNotifier {
           backgroundColor: Colors.green[400],
           textColor: Colors.white,
           fontSize: 16.0);
-      await getStaffInfo(token);
+      this.currentStaff = await AuthService.requestStaffInfo(token);
       isLogin = true;
     }
     return isLogin;
-  }
-
-  Future<void> getStaffInfo(token) async {
-    this.currentStaff = await AuthService.requestStaffInfo(token);
   }
 
   Future<void> logout() async {
@@ -42,15 +40,15 @@ class AuthProvider extends ChangeNotifier {
     prefs.remove("token");
   }
 
-  Future<String> loadUserInfo() async {
+  Future<String> loadStaffInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var staffID = (prefs.getString('token') ?? "");
+    var token = (prefs.getString('token') ?? "");
     var route;
-    if (staffID == "") {
-      route = "/";
+    if (token == "") {
+      route = LoginPage.nameRoute;
     } else {
-      AuthProvider().currentStaff = await AuthService.requestStaffInfo(staffID);
-      route = "/home";
+      this.currentStaff = await AuthService.requestStaffInfo(token);
+      route = HomePage.nameRoute;
     }
     return route;
   }

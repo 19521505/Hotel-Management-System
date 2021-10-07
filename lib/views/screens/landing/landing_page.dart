@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage extends StatefulWidget {
@@ -16,15 +17,17 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  @override
-  void initState() {
-    super.initState();
-    _checkLoginState();
+  late AuthProvider _authProvider;
+  _checkLoginState() async {
+    var routeName = await _authProvider.loadStaffInfo();
+    Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => false);
   }
 
-  _checkLoginState() async {
-    var routeName = await AuthProvider().loadUserInfo();
-    Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => false);
+  @override
+  void didChangeDependencies() {
+    _authProvider = context.read<AuthProvider>();
+    super.didChangeDependencies();
+    _checkLoginState();
   }
 
   @override

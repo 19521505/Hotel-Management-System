@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/views/screens/home/home_page.dart';
 import 'package:hotel_management_system/views/screens/login/widgets/login_background.dart';
 import 'package:hotel_management_system/widgets/rounded_button.dart';
 import 'package:hotel_management_system/widgets/rounded_input_field.dart';
@@ -7,7 +8,7 @@ import 'package:hotel_management_system/widgets/rounded_password_field.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String nameRoute = '/';
+  static const String nameRoute = '/login';
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => LoginPage(),
@@ -76,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       loginSuccess = await authProvider.login(name, password);
                       if (loginSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
-                            context, '/home', (route) => false);
+                            context, HomePage.nameRoute, (route) => false);
                       }
                     }
                   },

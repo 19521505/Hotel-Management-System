@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/views/screens/login/login_page.dart';
 import 'package:hotel_management_system/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +71,7 @@ class _HomePagState extends State<HomePage> {
                     press: () {
                       authProvider.logout();
                       Navigator.pushNamedAndRemoveUntil(
-                          context, '/', (route) => false);
+                          context, LoginPage.nameRoute, (route) => false);
                     },
                     textColor: Colors.white),
               )
