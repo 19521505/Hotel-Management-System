@@ -4,10 +4,10 @@ import 'package:hotel_management_system/views/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(HotelManagerSystem());
 }
 
-class MyApp extends StatelessWidget {
+class HotelManagerSystem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
             create: (context) => AuthProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Hotel Management System',
         theme: ThemeData(
           primarySwatch: Colors.blue,
