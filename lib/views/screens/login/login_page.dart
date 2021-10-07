@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
-import 'package:hotel_management_system/views/screens/home/home_page.dart';
 import 'package:hotel_management_system/views/screens/login/widgets/login_background.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/widgets/rounded_button.dart';
