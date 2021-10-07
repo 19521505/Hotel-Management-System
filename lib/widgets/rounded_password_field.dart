@@ -35,7 +35,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         textInputAction: TextInputAction.next,
         // controller: widget.controller,
         validator: (val) =>
-            val!.isNotEmpty ? null : "Password Cannot be blank!",
+            val!.isNotEmpty ? null : "Password cannot be blank!",
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           prefixIcon: Icon(

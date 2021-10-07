@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
+import 'package:hotel_management_system/views/screens/home/home_page.dart';
+import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
 import 'package:hotel_management_system/views/screens/screens.dart';
 
 class AppRoutes {
@@ -9,6 +11,10 @@ class AppRoutes {
         return LoginPage.route();
       case MainScreen.nameRoute:
         return MainScreen.route();
+      case HomePage.nameRoute:
+        return HomePage.route();
+      case LandingPage.nameRoute:
+        return LandingPage.route();
       default:
         return _errorRoute();
     }
