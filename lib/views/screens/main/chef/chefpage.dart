@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ChefPage extends StatelessWidget {
   const ChefPage({Key? key}) : super(key: key);
@@ -14,7 +13,6 @@ class ChefPage extends StatelessWidget {
           Container(
             color: Colors.black,
             height: size.height * 0.17,
-            child: SvgPicture.asset("assets/svg/mask_group.svg"),
           ),
           SizedBox(
             height: size.height * 0.2,

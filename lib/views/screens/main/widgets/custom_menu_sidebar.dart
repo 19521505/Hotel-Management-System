@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/services/staff_info.dart';
+import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../../screens.dart';
 
 class CustomMenuBar extends StatelessWidget {
   final Staff staff;
@@ -7,6 +12,7 @@ class CustomMenuBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -16,7 +22,7 @@ class CustomMenuBar extends StatelessWidget {
               staff.fullName.toString(),
             ),
             accountEmail: Text(
-              _setUpRoleName().toUpperCase(),
+              StaffInfo.setUpRoleName(staff.role),
             ),
           ),
           ListTile(
@@ -37,37 +43,14 @@ class CustomMenuBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app, color: Colors.grey),
             title: Text("Log out"),
-            onTap: () {},
+            onTap: () {
+              authProvider.logout();
+              Navigator.pushNamedAndRemoveUntil(
+                  context, LoginPage.nameRoute, (route) => false);
+            },
           ),
         ],
       ),
     );
-  }
-
-  String _setUpRoleName() {
-    var roleName = "";
-    switch (staff.role) {
-      case 0:
-        roleName = "Manager";
-        break;
-      case 1:
-        roleName = "Accountant";
-        break;
-      case 2:
-        roleName = "Receiptist";
-        break;
-      case 3:
-        roleName = "Chef";
-        break;
-      case 4:
-        roleName = "Inventory";
-        break;
-      case 5:
-        roleName = "Waiter";
-        break;
-      default:
-        roleName = "";
-    }
-    return roleName;
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hotel_management_system/models/staff.dart';
 import 'package:hotel_management_system/services/authentication.dart';
-import 'package:hotel_management_system/views/screens/home/home_page.dart';
 import 'package:hotel_management_system/views/screens/login/login_page.dart';
+import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -15,7 +15,7 @@ class AuthProvider extends ChangeNotifier {
       dateOfBirth: '',
       fullName: '',
       phoneNum: null,
-      role: null,
+      role: 0,
       staffID: '');
 
   Future<bool> login(String name, String password) async {
@@ -48,7 +48,7 @@ class AuthProvider extends ChangeNotifier {
       route = LoginPage.nameRoute;
     } else {
       this.currentStaff = await AuthService.requestStaffInfo(token);
-      route = HomePage.nameRoute;
+      route = MainScreen.nameRoute;
     }
     return route;
   }

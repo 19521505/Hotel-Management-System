@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/services/staff_info.dart';
+import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/views/screens/main/chef/chefpage.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_appbar.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_menu_sidebar.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   static const String nameRoute = '/main';
@@ -22,21 +24,34 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: CustomMenuBar(
-        staff: Staff(
-            staffID: "123123",
-            account: "1212312",
-            role: 1,
-            fullName: "KhanNgu",
-            phoneNum: 1231231231,
-            dateOfBirth: "1/1/2001"),
+        staff: authProvider.currentStaff,
       ),
       appBar: CustomAppBar(
-        roleName: 'Main',
-      ),
-      body: ChefPage(),
+          roleName: StaffInfo.setUpRoleName(authProvider.currentStaff.role)),
+      body: _navigaToRolePage(authProvider.currentStaff.role),
     );
+  }
+
+  _navigaToRolePage(int role) {
+    switch (role) {
+      case 0:
+        return null;
+      case 1:
+        return null;
+      case 2:
+        return null;
+      case 3:
+        return ChefPage();
+      case 4:
+        return null;
+      case 5:
+        return null;
+      default:
+        return null;
+    }
   }
 }
