@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hotel_management_system/constrants/constrants.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/views/screens/login/widgets/login_background.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
@@ -76,6 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState!.validate()) {
                       loginSuccess = await authProvider.login(name, password);
                       if (loginSuccess) {
+                        authProvider.loading = false;
+                        authProvider.notifyListeners();
                         Navigator.pushNamedAndRemoveUntil(
                             context, MainScreen.nameRoute, (route) => false);
                       }
@@ -86,8 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 10),
                 Image.asset("assets/images/bottom_hotel_logo_icon.png"),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
+                authProvider.loading
+                    ? SpinKitFoldingCube(
+                        color: kPrimaryColor,
+                        size: 25.0,
+                      )
+                    : Container()
               ],
             ),
           ),
