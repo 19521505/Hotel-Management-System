@@ -9,9 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   var token;
-  bool isLogin = false;
+  bool isLogin = false, loading = false;
   Staff currentStaff = new Staff(
-      account: '',
+      name: '',
       dateOfBirth: '',
       fullName: '',
       phoneNum: null,
@@ -19,6 +19,8 @@ class AuthProvider extends ChangeNotifier {
       staffID: '');
 
   Future<bool> login(String name, String password) async {
+    loading = true;
+    notifyListeners();
     var val = await AuthService.login(name, password);
     if (val.data['success']) {
       token = val.data['token'];
