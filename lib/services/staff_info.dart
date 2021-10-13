@@ -2,22 +2,22 @@ class StaffInfo {
   static String setUpRoleName(int role) {
     var roleName = "";
     switch (role) {
-      case 0:
+      case 1:
         roleName = "Manager";
         break;
-      case 1:
+      case 2:
         roleName = "Accountant";
         break;
-      case 2:
+      case 3:
         roleName = "Receiptist";
         break;
-      case 3:
-        roleName = "Chef";
-        break;
       case 4:
-        roleName = "Inventory";
+        roleName = "Kitchen";
         break;
       case 5:
+        roleName = "Inventory";
+        break;
+      case 6:
         roleName = "Waiter";
         break;
       default:

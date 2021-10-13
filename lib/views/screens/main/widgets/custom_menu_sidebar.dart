@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/models/staff.dart';
-import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +21,7 @@ class CustomMenuBar extends StatelessWidget {
               staff.fullName.toString(),
             ),
             accountEmail: Text(
-              StaffInfo.setUpRoleName(staff.role),
+              staff.name,
             ),
           ),
           ListTile(

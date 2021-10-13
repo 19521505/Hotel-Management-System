@@ -26,7 +26,7 @@ class Staff {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['staffID'] = this.staffID;
-    data['account'] = this.name;
+    data['name'] = this.name;
     data['role'] = this.role;
     data['fullName'] = this.fullName;
     data['phoneNum'] = this.phoneNum;
