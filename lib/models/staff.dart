@@ -1,6 +1,6 @@
 class Staff {
   late String staffID;
-  late String account;
+  late String name;
   late int role;
   late String fullName;
   int? phoneNum;
@@ -8,7 +8,7 @@ class Staff {
 
   Staff(
       {required this.staffID,
-      required this.account,
+      required this.name,
       required this.role,
       required this.fullName,
       required this.phoneNum,
@@ -16,7 +16,7 @@ class Staff {
 
   Staff.fromJson(Map<String, dynamic> json) {
     staffID = json['_id'];
-    account = json['uid'];
+    name = json['name'];
     role = json['role'];
     fullName = json['fullName'];
     phoneNum = json['phoneNum'];
@@ -26,7 +26,7 @@ class Staff {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['staffID'] = this.staffID;
-    data['account'] = this.account;
+    data['name'] = this.name;
     data['role'] = this.role;
     data['fullName'] = this.fullName;
     data['phoneNum'] = this.phoneNum;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
-import 'package:hotel_management_system/views/screens/main/chef/chefpage.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_appbar.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_menu_sidebar.dart';
 import 'package:provider/provider.dart';
+
+import 'kitchen/kitchenpage.dart';
 
 class MainScreen extends StatefulWidget {
   static const String nameRoute = '/main';
@@ -45,9 +46,9 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return null;
       case 3:
-        return ChefPage();
-      case 4:
         return null;
+      case 4:
+        return KitchenPage();
       case 5:
         return null;
       default:
