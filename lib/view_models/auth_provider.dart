@@ -11,7 +11,7 @@ class AuthProvider extends ChangeNotifier {
   var token;
   bool isLogin = false;
   Staff currentStaff = new Staff(
-      account: '',
+      name: '',
       dateOfBirth: '',
       fullName: '',
       phoneNum: null,
