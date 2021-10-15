@@ -46,6 +46,6 @@ class _LandingPageState extends State<LandingPage> {
 
   final spinkit = SpinKitFoldingCube(
     color: kPrimaryColor,
-    size: 50.0,
+    size: 40.0,
   );
 }
