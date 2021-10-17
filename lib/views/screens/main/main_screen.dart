@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_appbar.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_menu_sidebar.dart';
 import 'package:provider/provider.dart';
-
 import 'kitchen/kitchenpage.dart';
 
 class MainScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
       case 1:
         return null;
       case 2:
-        return null;
+        return AccountantPage();
       case 3:
         return null;
       case 4:
