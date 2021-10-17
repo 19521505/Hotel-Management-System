@@ -9,7 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   var token;
-  bool isLogin = false;
+  bool isLogin = false, loading = false;
+  var authState;
   Staff currentStaff = new Staff(
       name: '',
       dateOfBirth: '',
@@ -19,23 +20,24 @@ class AuthProvider extends ChangeNotifier {
       staffID: '');
 
   Future<bool> login(String name, String password) async {
-    var val = await AuthService.login(name, password);
-    if (val.data['success']) {
-      token = val.data['token'];
-      Fluttertoast.showToast(
-          msg: 'Login Successfully',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.green[400],
-          textColor: Colors.white,
-          fontSize: 16.0);
+    loading = true;
+    notifyListeners();
+    authState = await AuthService.login(name, password);
+    if (authState.data['success'] == false) {
+      loading = false;
+      notifyListeners();
+    } else if (authState.data['success']) {
+      token = authState.data['token'];
       this.currentStaff = await AuthService.requestStaffInfo(token);
+      loading = false;
+      notifyListeners();
       isLogin = true;
     }
     return isLogin;
   }
 
   Future<void> logout() async {
+    isLogin = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("token");
   }
