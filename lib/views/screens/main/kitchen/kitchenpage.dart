@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/import_request/form_foods_request.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
 
 class KitchenPage extends StatelessWidget {
@@ -42,8 +42,8 @@ class KitchenPage extends StatelessWidget {
             ),
             // Create new form import request to warehouse department
             CustomCard(
-              title: 'New Import Request',
-              subTitle: 'Create a request sent to the warehouse daily',
+              title: 'New Request',
+              subTitle: 'Create a request send to the warehouse',
               press: () {
                 Navigator.pushNamed(context, FoodRequest.nameRoute);
               },

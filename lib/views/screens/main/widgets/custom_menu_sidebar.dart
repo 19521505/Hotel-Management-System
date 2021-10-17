@@ -19,9 +19,17 @@ class CustomMenuBar extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountName: Text(
               staff.fullName.toString(),
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+              ),
             ),
             accountEmail: Text(
               staff.name,
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
             ),
           ),
           ListTile(

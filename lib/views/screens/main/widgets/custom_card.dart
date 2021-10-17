@@ -21,50 +21,50 @@ class CustomCard extends StatelessWidget {
           left: size.height * 0.02,
           right: size.height * 0.02,
         ),
-        child: Container(
-          height: size.height * 0.2,
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: startButtonLinearColor,
-                width: 2.0,
+        child: InkWell(
+          onTap: press,
+          child: Container(
+            height: size.height * 0.2,
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: startButtonLinearColor,
+                  width: 2.0,
+                ),
+                borderRadius: BorderRadius.circular(10),
               ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 15),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            title,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: kPrimaryColor,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text(
+                              title,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryColor,
+                              ),
+                            ),
+                            subtitle: Text(
+                              subTitle,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                          subtitle: Text(
-                            subTitle,
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: InkWell(
-                      onTap: press,
+                  Expanded(
+                    child: Center(
                       child: Container(
                         height: double.infinity,
                         width: double.infinity,
@@ -76,8 +76,8 @@ class CustomCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));
