@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/import_request/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
@@ -21,6 +23,8 @@ class AppRoutes {
         return KitchenPage.route();
       case FoodRequest.nameRoute:
         return FoodRequest.route();
+      case RevenueReport.nameRoute:
+        return RevenueReport.route();
       default:
         return _errorRoute();
     }
