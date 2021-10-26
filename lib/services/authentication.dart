@@ -26,7 +26,8 @@ class AuthService {
 
   static requestStaffInfo(token) async {
     dio.options.headers['Authorization'] = 'Bearer ' + token;
-    var val = await dio.get('https://flutter-auth-khan.herokuapp.com/getinfo');
+    var val =
+        await dio.get('https://flutter-auth-khan.herokuapp.com/user/getinfo');
     Staff currentStaff = new Staff.fromJson(val.data);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("token", token);
