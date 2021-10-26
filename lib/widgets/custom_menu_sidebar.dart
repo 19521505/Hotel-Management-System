@@ -3,7 +3,7 @@ import 'package:hotel_management_system/models/staff.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../screens.dart';
+import '../views/screens/screens.dart';
 
 class CustomMenuBar extends StatelessWidget {
   final Staff staff;
