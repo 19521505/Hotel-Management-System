@@ -10,7 +10,7 @@ class AuthService {
   static login(name, password) async {
     try {
       var res = await dio.post(
-        'https://flutter-auth-khan.herokuapp.com/authenticate',
+        'https://flutter-auth-khan.herokuapp.com/user/authenticate',
         data: {
           "name": name,
           "password": password,
