@@ -31,7 +31,7 @@ class RoundedButton extends StatelessWidget {
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(29),
+        borderRadius: BorderRadius.circular(10),
         child: Material(
           child: TextButton(
             onPressed: press,
