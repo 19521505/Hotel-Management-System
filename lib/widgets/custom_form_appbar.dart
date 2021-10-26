@@ -16,16 +16,14 @@ class CustomFormAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Expanded(
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Text(
-            title,
-            style: TextStyle(
-                color: startLinearColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
-          ),
+      title: Align(
+        alignment: Alignment.centerRight,
+        child: Text(
+          title,
+          style: TextStyle(
+              color: startLinearColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
         ),
       ),
       backgroundColor: Colors.white,
