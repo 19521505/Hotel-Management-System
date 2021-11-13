@@ -30,7 +30,7 @@ class CustomCard extends StatelessWidget {
               elevation: 2,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
-                  color: startButtonLinearColor,
+                  color: kPrimaryColor,
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(10),
@@ -68,7 +68,7 @@ class CustomCard extends StatelessWidget {
                       child: Container(
                         height: double.infinity,
                         width: double.infinity,
-                        color: startButtonLinearColor,
+                        color: kPrimaryColor,
                         child: Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white,

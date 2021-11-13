@@ -15,23 +15,21 @@ class RoundedLinearButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.08,
-      width: size.width * 0.8,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          endButtonLinearColor,
-          startButtonLinearColor,
-        ]),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
+    return InkWell(
+      onTap: press,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            endButtonLinearColor,
+            startButtonLinearColor,
+          ]),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
-      ),
-      child: Center(
-        child: InkWell(
-          onTap: press,
+        child: Center(
           child: Text(
             text.toUpperCase(),
             style: TextStyle(

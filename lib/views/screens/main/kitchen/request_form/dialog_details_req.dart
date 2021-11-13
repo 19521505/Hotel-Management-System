@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
 import 'package:hotel_management_system/models/ingredient.dart';
+import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomDialog extends StatefulWidget {
   const CustomDialog({Key? key}) : super(key: key);
@@ -10,26 +12,28 @@ class CustomDialog extends StatefulWidget {
 }
 
 class _CustomDialogState extends State<CustomDialog> {
-  Ingredient? ingredient;
-  List<Ingredient> items = <Ingredient>[
-    Ingredient(ingreID: '01', ingreName: 'AAAAAAAA', ingrePrice: 100000),
-    Ingredient(ingreID: '01', ingreName: 'BBBBB', ingrePrice: 100000),
-    Ingredient(ingreID: '01', ingreName: 'CCCCC', ingrePrice: 100000),
-  ];
-
-  int _count = 0;
+  Ingredient? selectedIngredient;
+  int _quantity = 0;
+  RequestProvider? ingreProvider;
 
   void _addQuantity() {
     setState(() {
-      _count++;
+      _quantity++;
     });
   }
 
   void _removeQuantity() {
     setState(() {
-      if (_count == 0) return;
-      _count--;
+      if (_quantity == 0) return;
+      _quantity--;
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    ingreProvider = Provider.of<RequestProvider>(context, listen: false);
+    selectedIngredient = ingreProvider!.ingredients.first;
+    super.didChangeDependencies();
   }
 
   @override
@@ -60,37 +64,39 @@ class _CustomDialogState extends State<CustomDialog> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(
-              // border: Border.all(width: 2.0),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(color: Colors.black12, spreadRadius: 2),
-              ],
-              color: Colors.white,
-            ),
-            child: DropdownButton<Ingredient>(
-              underline: SizedBox(),
-              isExpanded: true,
-              value: ingredient,
-              onChanged: (Ingredient? val) {
-                setState(() {
-                  this.ingredient = val;
-                });
-              },
-              style: TextStyle(
-                color: Colors.black,
+            child: Container(
+              decoration: BoxDecoration(
+                // border: Border.all(width: 2.0),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(color: Colors.black12, spreadRadius: 2),
+                ],
+                color: Colors.white,
               ),
-              items: items.map((Ingredient ingre) {
-                return DropdownMenuItem<Ingredient>(
-                  value: ingre,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      ingre.ingreName,
+              child: DropdownButton<Ingredient>(
+                underline: SizedBox(),
+                isExpanded: true,
+                value: selectedIngredient,
+                onChanged: (Ingredient? val) {
+                  setState(() {
+                    selectedIngredient = val!;
+                  });
+                },
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                items: ingreProvider!.ingredients.map((Ingredient ingre) {
+                  return DropdownMenuItem<Ingredient>(
+                    value: ingre,
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        ingre.ingreName,
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
           ),
           Container(
@@ -125,7 +131,7 @@ class _CustomDialogState extends State<CustomDialog> {
                   ),
                 ),
                 Text(
-                  '$_count',
+                  '$_quantity',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -146,26 +152,28 @@ class _CustomDialogState extends State<CustomDialog> {
               ],
             ),
           ),
-          Container(
-            child: RichText(
-              text: TextSpan(
-                text: 'Unit: ',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontStyle: FontStyle.italic,
-                ),
-                children: <TextSpan>[
-                  TextSpan(text: 'Kilogram'),
-                ],
-              ),
-            ),
-          ),
+          // Container(
+          //   child: RichText(
+          //     text: TextSpan(
+          //       text: 'Unit: ',
+          //       style: TextStyle(
+          //         color: Colors.black,
+          //         fontSize: 18,
+          //         fontStyle: FontStyle.italic,
+          //       ),
+          //       children: <TextSpan>[
+          //         TextSpan(text: "KG"),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () => context
+              .read<RequestProvider>()
+              .addDetailIngre(selectedIngredient!, _quantity, context),
           child: Text(
             'Add',
             style: TextStyle(
