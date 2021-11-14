@@ -1,10 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
+import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
+import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
 class FoodRequest extends StatefulWidget {
@@ -26,16 +32,13 @@ class _FoodRequestState extends State<FoodRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Form Request',
-          style: TextStyle(color: startLinearColor),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: CustomBackButton(),
+      appBar: CustomFormAppBar(
+        title: 'Form Request',
       ),
-      body: BodyFormReq(),
+      body: ModalProgressHUD(
+        inAsyncCall: context.watch<RequestProvider>().isLoad,
+        child: BodyFormReq(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         heroTag: null,
@@ -66,20 +69,30 @@ class BodyFormReq extends StatefulWidget {
 }
 
 class _BodyFormReqState extends State<BodyFormReq> {
-  bool typeCheck = false;
-  int type = 1;
+  // Notify when send request successfully
+  void onSuccess() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return NotificationDialog(content: 'Submit request successfully');
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final authProvider = Provider.of<AuthProvider>(context);
+    final dateData = (DateTime.now().toIso8601String());
+    final dateDisplay = DateFormat('HH:MM dd/MM/yy').format(DateTime.now());
+    final nameRequest = '#ID' + DateFormat('HHMMddMMyy').format(DateTime.now());
     return SingleChildScrollView(
       child: Container(
         height: size.height,
         color: Colors.white,
         padding: EdgeInsets.only(
-          left: size.height * 0.01,
+          left: size.height * 0.02,
           top: size.height * 0.03,
-          right: size.height * 0.01,
+          right: size.height * 0.02,
           bottom: size.height * 0.03,
         ),
         child: Column(
@@ -91,12 +104,17 @@ class _BodyFormReqState extends State<BodyFormReq> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
-                  BoxShadow(color: Colors.black12, spreadRadius: 2),
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 2,
+                    offset: Offset(0, 3),
+                  ),
                 ],
               ),
               padding: const EdgeInsets.all(10.0),
               child: Column(
-                mainAxisSize: MainAxisSize.max,
+                // mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
                     children: [
@@ -106,7 +124,7 @@ class _BodyFormReqState extends State<BodyFormReq> {
                           'Type Request',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
                         ),
@@ -125,26 +143,33 @@ class _BodyFormReqState extends State<BodyFormReq> {
                                   spreadRadius: 2),
                             ],
                           ),
-                          child: DropdownButton<int>(
-                            dropdownColor: Colors.white,
-                            iconSize: 34,
-                            underline: SizedBox(),
-                            isExpanded: true,
-                            style: TextStyle(
-                              color: Colors.black,
-                              backgroundColor: Colors.white,
-                            ),
-                            onChanged: (val) {
-                              setState(() {
-                                this.type = val!;
-                              });
-                            },
-                            value: type,
-                            items: [
-                              DropdownMenuItem(child: Text('Import'), value: 1),
-                              DropdownMenuItem(child: Text('Export'), value: 2),
-                            ],
-                          ),
+                          child: Consumer<RequestProvider>(
+                              builder: (context, requestProvider, child) {
+                            return DropdownButton<RequestType>(
+                              dropdownColor: Colors.white,
+                              iconSize: 34,
+                              underline: SizedBox(),
+                              isExpanded: true,
+                              style: TextStyle(
+                                color: Colors.black,
+                                backgroundColor: Colors.white,
+                              ),
+                              onChanged: (RequestType? val) {
+                                setState(() {
+                                  requestProvider.setType(val);
+                                });
+                              },
+                              value: requestProvider.getType(),
+                              items: [
+                                DropdownMenuItem(
+                                    child: Text('Import'),
+                                    value: RequestType.Import),
+                                DropdownMenuItem(
+                                    child: Text('Export'),
+                                    value: RequestType.Export),
+                              ],
+                            );
+                          }),
                         ),
                       ),
                     ],
@@ -160,9 +185,7 @@ class _BodyFormReqState extends State<BodyFormReq> {
                   ),
                   _InfoForm1(
                     title: 'DateTime',
-                    content: DateFormat('yyyy-MM-dd hh:mm')
-                        .format(DateTime.now())
-                        .toString(),
+                    content: dateDisplay.toString(),
                   ),
                 ],
               ),
@@ -170,55 +193,53 @@ class _BodyFormReqState extends State<BodyFormReq> {
             SizedBox(
               height: size.height * 0.02,
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(color: Colors.black12, spreadRadius: 2),
-                ],
-              ),
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Ingredients List',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
+            Text(
+              'Ingredients List',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
             SizedBox(
-              height: size.height * 0.02,
+              height: size.height * 0.01,
             ),
-            Container(
-              // color: startButtonLinearColor,
-              height: size.height * 0.07,
-              child: OutlinedButton(
-                onPressed: () {},
-                child: Text(
-                  'SEND',
+            Consumer<RequestProvider>(
+              builder: (context, provider, child) {
+                return ReqDetailCard(listDetail: provider.detailIngredient);
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            Row(
+              children: [
+                Text(
+                  "Total Price: ",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                Text(
+                  context.read<RequestProvider>().totalPrice.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  backgroundColor:
-                      MaterialStateProperty.all(startButtonLinearColor),
-                ),
-              ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            RoundedLinearButton(
+              text: 'SEND',
+              press: () => context.read<RequestProvider>().sendRequest(dateData,
+                  authProvider.currentStaff.staffID, nameRequest, onSuccess),
+              textColor: Colors.white,
             ),
           ],
         ),
@@ -246,7 +267,7 @@ class _InfoForm1 extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
