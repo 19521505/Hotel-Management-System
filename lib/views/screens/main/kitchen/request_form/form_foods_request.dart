@@ -7,6 +7,7 @@ import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -68,6 +69,15 @@ class BodyFormReq extends StatefulWidget {
 }
 
 class _BodyFormReqState extends State<BodyFormReq> {
+  // Notify when send request successfully
+  void onSuccess() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return NotificationDialog(content: 'Submit request successfully');
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -227,8 +237,8 @@ class _BodyFormReqState extends State<BodyFormReq> {
             ),
             RoundedLinearButton(
               text: 'SEND',
-              press: () => context.read<RequestProvider>().sendRequest(
-                  dateData, authProvider.currentStaff.staffID, nameRequest),
+              press: () => context.read<RequestProvider>().sendRequest(dateData,
+                  authProvider.currentStaff.staffID, nameRequest, onSuccess),
               textColor: Colors.white,
             ),
           ],

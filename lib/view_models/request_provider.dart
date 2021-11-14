@@ -110,27 +110,29 @@ class RequestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future sendRequest(
-      String dateTime, String staffId, String nameRequest) async {
-    if (_requestDetail.isEmpty) {}
-    try {
-      await DataProvider().sendRequest(
-          requestType: _requestType,
-          nameRequest: nameRequest,
-          date: dateTime,
-          staffId: staffId,
-          status: 1,
-          ingredients: _requestDetail
-              .map((e) => {
-                    "quantity": e.quantity,
-                    "ingredients": e.ingredient.toJson(),
-                  })
-              .toList(),
-          total: totalPrice);
-    } on DioError catch (err) {
-      err.message;
+  Future sendRequest(String dateTime, String staffId, String nameRequest,
+      Function onSuccess) async {
+    if (_requestDetail.isNotEmpty) {
+      try {
+        await DataProvider().sendRequest(
+            requestType: _requestType,
+            nameRequest: nameRequest,
+            date: dateTime,
+            staffId: staffId,
+            status: 1,
+            ingredients: _requestDetail
+                .map((e) => {
+                      "quantity": e.quantity,
+                      "ingredients": e.ingredient.toJson(),
+                    })
+                .toList(),
+            total: totalPrice);
+      } on DioError catch (err) {
+        err.message;
+      }
+      onSuccess();
+      _requestDetail.clear();
+      notifyListeners();
     }
-    _requestDetail.clear();
-    notifyListeners();
   }
 }
