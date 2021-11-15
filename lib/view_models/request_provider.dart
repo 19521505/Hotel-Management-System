@@ -119,11 +119,15 @@ class RequestProvider extends ChangeNotifier {
             nameRequest: nameRequest,
             date: dateTime,
             staffId: staffId,
-            status: 1,
+            status: 2,
             ingredients: _requestDetail
                 .map((e) => {
                       "quantity": e.quantity,
-                      "ingredients": e.ingredient.toJson(),
+                      "ingredient": {
+                        "ingredientName": e.ingredient.ingreName,
+                        "unit": e.ingredient.unit,
+                        "price": e.ingredient.ingrePrice
+                      },
                     })
                 .toList(),
             total: totalPrice);

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/configs/app_configs.dart';
 import 'package:hotel_management_system/constrants/endpoints.dart';
+import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/models/ingredient.dart';
 
 class DataRepository {
@@ -44,5 +45,19 @@ class DataRepository {
     Response response =
         await _dio.post("$baseUrl${AppEndpoints.sendRequest}", data: data);
     return response;
+  }
+
+// get type of request
+  Future<Response> typeofRequest() async {
+    Dio _dio = new Dio();
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.getTypeofRequest}",
+      );
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
   }
 }

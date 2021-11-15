@@ -15,7 +15,7 @@ class StaffInfo {
         roleName = "Kitchen";
         break;
       case 5:
-        roleName = "Inventory";
+        roleName = "Warehouse";
         break;
       case 6:
         roleName = "Waiter";

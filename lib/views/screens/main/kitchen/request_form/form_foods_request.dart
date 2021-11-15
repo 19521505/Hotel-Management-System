@@ -8,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/kitchen/request_form/
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
 import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
+import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -35,10 +36,12 @@ class _FoodRequestState extends State<FoodRequest> {
       appBar: CustomFormAppBar(
         title: 'Form Request',
       ),
-      body: ModalProgressHUD(
-        inAsyncCall: context.watch<RequestProvider>().isLoad,
-        child: BodyFormReq(),
-      ),
+      body: Consumer<RequestProvider>(builder: (context, provider, child) {
+        return ModalProgressHUD(
+          inAsyncCall: provider.isLoad,
+          child: BodyFormReq(),
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         heroTag: null,
@@ -177,13 +180,13 @@ class _BodyFormReqState extends State<BodyFormReq> {
                   SizedBox(
                     height: size.height * 0.01,
                   ),
-                  _InfoForm1(
+                  InfoForm1(
                       title: 'Staff Name',
                       content: authProvider.currentStaff.fullName),
                   SizedBox(
                     height: size.height * 0.01,
                   ),
-                  _InfoForm1(
+                  InfoForm1(
                     title: 'DateTime',
                     content: dateDisplay.toString(),
                   ),
@@ -244,46 +247,6 @@ class _BodyFormReqState extends State<BodyFormReq> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _InfoForm1 extends StatelessWidget {
-  const _InfoForm1({
-    Key? key,
-    required this.title,
-    required this.content,
-  }) : super(key: key);
-
-  final String title, content;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            content,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
