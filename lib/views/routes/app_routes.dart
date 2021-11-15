@@ -7,6 +7,9 @@ import 'package:hotel_management_system/views/screens/main/kitchen/request_form/
 import 'package:hotel_management_system/views/screens/main/kitchen/res_others_list/res_others_list_page.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
 import 'package:hotel_management_system/views/screens/screens.dart';
 
 class AppRoutes {
@@ -32,6 +35,13 @@ class AppRoutes {
         return CashInflowPage.route();
       case CashOutflowPage.nameRoute:
         return CashOutflowPage.route();
+      // Warehouse Department
+      case WarehousePage.nameRoute:
+        return WarehousePage.route(settings);
+      case ListRequest.nameRoute:
+        return ListRequest.route(settings);
+      case DetailRequest.nameRoute:
+        return DetailRequest.route(settings);
       default:
         return _errorRoute();
     }

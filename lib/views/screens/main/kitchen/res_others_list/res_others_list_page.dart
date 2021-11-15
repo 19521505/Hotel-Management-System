@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/res_others_list/widgets/item_restaurant_other.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/widgets/request_card.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
 
 class ResOthersList extends StatefulWidget {
@@ -89,7 +89,15 @@ class _ResOthersListState extends State<ResOthersList> {
               SizedBox(
                 height: size.height * 0.02,
               ),
-              ItemRestaurantOther(),
+              WidgetRequestCard(
+                nameRequest: 'aaaaa',
+                nameStaff: 'aaaa',
+                date: 'aaaa',
+                time: 'aaaa',
+                status: 'aa',
+                color: Colors.black,
+                press: () {},
+              ),
             ],
           ),
         ),

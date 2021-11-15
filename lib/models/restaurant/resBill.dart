@@ -1,3 +1,4 @@
+import 'package:hotel_management_system/models/enum_status.dart';
 import 'package:hotel_management_system/models/restaurant/detailResBill.dart';
 import 'package:hotel_management_system/models/staff.dart';
 
@@ -43,18 +44,5 @@ class ResBill {
     }
     data['totalPrice'] = this.totalPrice;
     return data;
-  }
-}
-
-enum StatusType { Pending, Done, Cancel }
-
-extension StatusTypeExtension on StatusType {
-  int get value {
-    final values = {
-      StatusType.Pending: 1,
-      StatusType.Done: 2,
-      StatusType.Cancel: 3
-    };
-    return values[this]!;
   }
 }
