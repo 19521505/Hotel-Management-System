@@ -1,24 +1,28 @@
 class Ingredient {
   late String ingreID;
   late String ingreName;
-  late double ingrePrice;
+  late int ingrePrice;
+  late String unit;
 
   Ingredient(
       {required this.ingreID,
       required this.ingreName,
-      required this.ingrePrice});
+      required this.ingrePrice,
+      required this.unit});
 
   Ingredient.fromJson(Map<String, dynamic> json) {
-    ingreID = json['ingreID'];
-    ingreName = json['ingreName'];
-    ingrePrice = json['ingrePrice'];
+    ingreID = json['_id'];
+    ingreName = json['ingredientName'];
+    ingrePrice = json['price'];
+    unit = json['unit'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ingreID'] = this.ingreID;
-    data['ingreName'] = this.ingreName;
-    data['ingrePrice'] = this.ingrePrice;
+    data['_id'] = this.ingreID;
+    data['ingredientName'] = this.ingreName;
+    data['price'] = this.ingrePrice;
+    data['unit'] = this.unit;
     return data;
   }
 }

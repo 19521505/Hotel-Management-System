@@ -2,8 +2,11 @@ class Room {
   late String roomID;
   late String roomName;
   late double roomPrice;
-
-  Room({required this.roomID, required this.roomName, required this.roomPrice});
+  Room({
+    required this.roomID,
+    required this.roomName,
+    required this.roomPrice,
+  });
 
   Room.fromJson(Map<String, dynamic> json) {
     roomID = json['roomID'];
@@ -19,3 +22,6 @@ class Room {
     return data;
   }
 }
+
+
+  

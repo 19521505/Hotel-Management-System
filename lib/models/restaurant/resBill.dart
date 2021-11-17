@@ -1,8 +1,10 @@
+import 'package:hotel_management_system/models/enum_status.dart';
 import 'package:hotel_management_system/models/restaurant/detailResBill.dart';
 import 'package:hotel_management_system/models/staff.dart';
 
 class ResBill {
   late String resBillID;
+  late StatusType status;
   late String date;
   late List<DetailResBill> detailsResBill;
   late Staff staff;
@@ -10,6 +12,7 @@ class ResBill {
 
   ResBill(
       {required this.resBillID,
+      required this.status,
       required this.date,
       required this.detailsResBill,
       required this.staff,
@@ -17,6 +20,7 @@ class ResBill {
 
   ResBill.fromJson(Map<String, dynamic> json) {
     resBillID = json['resBillID'];
+    status = json['status'];
     date = json['date'];
     if (json['detailsResBill'] != null) {
       detailsResBill = <DetailResBill>[];
@@ -31,6 +35,7 @@ class ResBill {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['resBillID'] = this.resBillID;
+    data['status'] = this.status;
     data['date'] = this.date;
     data['detailsResBill'] =
         this.detailsResBill.map((v) => v.toJson()).toList();

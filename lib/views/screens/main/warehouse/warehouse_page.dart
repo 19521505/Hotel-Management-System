@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/res_others_list/res_others_list_page.dart';
+import 'package:hotel_management_system/models/form_request/request.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
 
-class KitchenPage extends StatelessWidget {
-  static const String nameRoute = '/kitchen';
-  static Route route() {
+class WarehousePage extends StatelessWidget {
+  static const String nameRoute = '/warehouse';
+  static Route route(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => KitchenPage(),
-      settings: RouteSettings(name: nameRoute),
+      builder: (context) => WarehousePage(),
+      settings: RouteSettings(
+        name: nameRoute,
+      ),
     );
   }
 
-  const KitchenPage({Key? key}) : super(key: key);
+  const WarehousePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +45,28 @@ class KitchenPage extends StatelessWidget {
             ),
             // Create new form import request to warehouse department
             CustomCard(
-              title: 'New Request',
-              subTitle: 'Create a request send to the Warehouse',
+              title: 'List of Import Requests',
+              subTitle: '...........',
               press: () {
-                Navigator.pushNamed(context, FoodRequest.nameRoute);
+                Navigator.pushNamed(
+                  context,
+                  ListRequest.nameRoute,
+                  arguments: RequestType.Import,
+                );
               },
             ),
             SizedBox(
               height: size.height * 0.01,
             ),
-            // View list of restaurant orders
             CustomCard(
-              title: 'Restaurant Orders List',
-              subTitle: 'List of order requests from the Waiter',
+              title: 'List of Export Requests',
+              subTitle: '...........',
               press: () {
-                Navigator.pushNamed(context, ResOthersList.nameRoute);
+                Navigator.pushNamed(
+                  context,
+                  ListRequest.nameRoute,
+                  arguments: RequestType.Export,
+                );
               },
             ),
           ],

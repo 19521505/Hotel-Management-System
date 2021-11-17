@@ -14,7 +14,7 @@ class CustomBackButton extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        color: startButtonLinearColor,
+        color: kPrimaryLightColor,
         textColor: Colors.white,
         child: Icon(
           Icons.arrow_back_ios,
