@@ -1,3 +1,8 @@
+
+import 'package:flutter/foundation.dart';
+import 'package:hotel_management_system/models/form_request/request.dart';
+import 'package:hotel_management_system/services/request_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +13,17 @@ import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/models/ingredient.dart';
 import 'package:hotel_management_system/services/data_provider.dart';
 import 'package:hotel_management_system/services/data_repository.dart';
+
+class RequestProvider extends ChangeNotifier {
+  List<Request> requestList = [];
+
+  Future<void> fetchRequestList(date) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    requestList = await RequestService.getRequestByDate(token, date);
+    notifyListeners();
+  }
+
 
 class RequestProvider extends ChangeNotifier {
   bool isLoad = true;

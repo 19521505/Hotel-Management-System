@@ -13,9 +13,7 @@ class AuthService {
           "password": password,
         },
       );
-      if (res != null) {
-        return res;
-      }
+      return res;
     } on DioError catch (e) {
       return e.response;
     }
