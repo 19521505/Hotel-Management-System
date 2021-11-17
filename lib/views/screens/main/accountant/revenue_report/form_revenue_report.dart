@@ -291,10 +291,7 @@ class FormBoxDescription extends StatelessWidget {
               child: Container(
                 child: GestureDetector(
                   onTap: () async {
-                    if (nameRoute == "/outflow") {
-                      await Provider.of<RequestProvider>(context, listen: false)
-                          .fetchRequestList("13/10/2001");
-                    }
+                    if (nameRoute == "/outflow") {}
                     Navigator.pushNamed(context, nameRoute);
                   },
                   child: Image.asset('assets/images/' + image),

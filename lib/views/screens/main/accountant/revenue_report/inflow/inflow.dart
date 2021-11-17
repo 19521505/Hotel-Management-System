@@ -29,9 +29,7 @@ class _CashInflowPageState extends State<CashInflowPage> {
               builder: (context, provider, listTile) {
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: Provider.of<RequestProvider>(context)
-                        .requestList
-                        .length,
+                    itemCount: 0,
                     itemBuilder: buildList,
                   ),
                 );
@@ -45,8 +43,6 @@ class _CashInflowPageState extends State<CashInflowPage> {
 
   Widget buildList(BuildContext context, int index) {
     return Container(
-      key: Key(
-          Provider.of<RequestProvider>(context).requestList[index].importID),
       margin: EdgeInsets.all(4),
       decoration: BoxDecoration(
           border: Border.all(
@@ -55,8 +51,7 @@ class _CashInflowPageState extends State<CashInflowPage> {
           ),
           borderRadius: BorderRadius.circular(10)),
       child: ListTile(
-        title: Text(
-            Provider.of<RequestProvider>(context).requestList[index].importID),
+        title: Text(""),
         trailing: Icon(Icons.keyboard_arrow_right),
       ),
     );
