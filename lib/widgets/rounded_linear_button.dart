@@ -5,6 +5,7 @@ class RoundedLinearButton extends StatelessWidget {
   final String text;
   final VoidCallback press;
   final Color color, textColor;
+
   const RoundedLinearButton({
     Key? key,
     required this.text,
@@ -15,11 +16,9 @@ class RoundedLinearButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.08,
-      width: size.width * 0.8,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [
           endButtonLinearColor,
