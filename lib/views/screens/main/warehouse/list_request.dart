@@ -29,7 +29,7 @@ class _ListRequestState extends State<ListRequest> {
   @override
   void didChangeDependencies() {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      context.read<WarehouseProvider>().requestType =
+      context.read<WarehouseProvider>().typeofRequest =
           ModalRoute.of(context)!.settings.arguments as RequestType;
     });
 
@@ -131,7 +131,7 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
                               child: Text('Pending'),
                               value: StatusType.Pending),
                           DropdownMenuItem(
-                              child: Text('Cancle'), value: StatusType.Cancle),
+                              child: Text('Cancle'), value: StatusType.Cancel),
                         ],
                       );
                     }),
