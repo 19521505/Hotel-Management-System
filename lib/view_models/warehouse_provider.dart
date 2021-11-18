@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hotel_management_system/models/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
@@ -17,18 +18,18 @@ class WarehouseProvider extends ChangeNotifier {
   void set(status) {
     _statusType = status;
     if (status == StatusType.All && _requestType == RequestType.Import) {
-      loadImportRequest(RequestType.Import, status);
+      loadTypeofRequest(RequestType.Import, status);
     } else if (status == StatusType.All && _requestType == RequestType.Export) {
-      loadImportRequest(RequestType.Export, status);
+      loadTypeofRequest(RequestType.Export, status);
     } else
-      loadImportRequest(_requestType, status);
+      loadTypeofRequest(_requestType, status);
 
     isLoad = false;
     notifyListeners();
   }
 
-// set type of request
-  void set requestType(type) {
+  // set type of request
+  void set typeofRequest(type) {
     isLoad = true;
     _requestType = type;
     set(StatusType.All);
@@ -42,15 +43,15 @@ class WarehouseProvider extends ChangeNotifier {
     loadListRequest();
   }
 
-// load all request from api
+  // load all request from api
   void loadListRequest() async {
     _listTypeofRequest = await DataProvider().typeofRequest();
     isLoad = false;
     notifyListeners();
   }
 
-// load each request -> using filter
-  void loadImportRequest(RequestType requestType, StatusType statusType) {
+  // load each request -> using filter
+  void loadTypeofRequest(RequestType requestType, StatusType statusType) {
     _listFilterRequest.clear();
     if (statusType == StatusType.All) {
       _listFilterRequest.addAll(
@@ -62,11 +63,26 @@ class WarehouseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Request> get typeofRequest {
-    return _listTypeofRequest;
+  // List<Request> get typeofRequest {
+  //   return _listTypeofRequest;
+  // }
+
+  // get list filter of request
+  List<Request> get listFilterRequest {
+    return _listFilterRequest.reversed.toList();
   }
 
-  List<Request> get listFilterRequest {
-    return _listFilterRequest;
+  // update status request
+  Future updateStatusRequest(
+      String id, int status, Function onUpdateSuccess) async {
+    try {
+      await DataProvider().updateStatusRequest(id: id, status: status);
+      _listTypeofRequest.clear();
+    } on DioError catch (err) {
+      err.message;
+    }
+    loadListRequest();
+    onUpdateSuccess();
+    notifyListeners();
   }
 }

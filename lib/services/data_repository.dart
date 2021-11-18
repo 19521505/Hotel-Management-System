@@ -60,4 +60,20 @@ class DataRepository {
       throw Exception("Exception occured: $e stackTrace: $stacktrace");
     }
   }
+
+  // update status of request
+  Future<Response> updateStatusRequest({
+    required String id,
+    required int status,
+  }) async {
+    Dio _dio = new Dio();
+    final data = {"status": status};
+    try {
+      Response response = await _dio
+          .patch("$baseUrl${AppEndpoints.getTypeofRequest}$id", data: data);
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e trackTrace: $stacktrace");
+    }
+  }
 }
