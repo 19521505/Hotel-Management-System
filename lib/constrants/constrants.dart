@@ -8,3 +8,6 @@ const startButtonLinearColor = Color(0xFF549EF8);
 const endButtonLinearColor = Color(0xFF2071B4);
 const iconPrimaryColor = Color(0xFF2071B4);
 const backgroundButton = Color(0xFF3E61FB);
+
+const blackColor = Colors.black;
+const whiteColor = Colors.white;
