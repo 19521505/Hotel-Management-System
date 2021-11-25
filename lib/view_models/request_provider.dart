@@ -6,8 +6,10 @@ import 'package:hotel_management_system/constrants/constrants.dart';
 import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/models/ingredient.dart';
-import 'package:hotel_management_system/services/data_provider.dart';
-import 'package:hotel_management_system/services/data_repository.dart';
+import 'package:hotel_management_system/services/data_provider/warehouse_data_provider.dart';
+import 'package:hotel_management_system/services/data_provider/kitchen_data_provider.dart';
+import 'package:hotel_management_system/services/data_repository/warehouse_data_repository.dart';
+import 'package:hotel_management_system/services/data_repository/kitchen_data_repository.dart';
 
 class RequestProvider extends ChangeNotifier {
   bool isLoad = true;
@@ -39,7 +41,7 @@ class RequestProvider extends ChangeNotifier {
   }
 
   void loadIngredient() async {
-    _ingredients = await DataRepository.getAllIngre();
+    _ingredients = await KitchenDataRepository.getAllIngre();
     isLoad = false;
     notifyListeners();
   }
@@ -100,6 +102,7 @@ class RequestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // get detail of request
   List<DetailsReq> get detailIngredient {
     return _requestDetail;
   }
@@ -114,7 +117,7 @@ class RequestProvider extends ChangeNotifier {
       Function onSuccess) async {
     if (_requestDetail.isNotEmpty) {
       try {
-        await DataProvider().sendRequest(
+        await KitchenDataProvider().sendRequest(
             requestType: _requestType,
             nameRequest: nameRequest,
             date: dateTime,

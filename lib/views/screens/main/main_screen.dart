@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/widgets/custom_appbar.dart';
 import 'package:hotel_management_system/widgets/custom_menu_sidebar.dart';
@@ -47,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return AccountantPage();
       case 3:
-        return null;
+        return ReceptionistPage();
       case 4:
         return KitchenPage();
       case 5:
