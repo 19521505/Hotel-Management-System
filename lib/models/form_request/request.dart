@@ -4,7 +4,7 @@ import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 import '../staff.dart';
 
 class Request {
-  late String importID;
+  late String id;
   late String nameRequest;
   late RequestType type;
   late DateTime date;
@@ -14,7 +14,7 @@ class Request {
   late int totalPrice;
 
   Request(
-      {required this.importID,
+      {required this.id,
       required this.nameRequest,
       required this.type,
       required this.date,
@@ -24,7 +24,7 @@ class Request {
       required this.totalPrice});
 
   Request.fromJson(Map<String, dynamic> json) {
-    importID = json['_id'];
+    id = json['_id'];
     nameRequest = json['nameRequest'];
     type = RequestTypeExtension.fromInt(json['type']);
     date = DateTime.parse(json['date']);
@@ -43,7 +43,7 @@ class Request {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.importID;
+    data['_id'] = this.id;
     data['nameRequest'] = this.nameRequest;
     data['type'] = this.type;
     data['date'] = this.date;

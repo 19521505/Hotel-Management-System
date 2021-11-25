@@ -30,4 +30,10 @@ class DataProvider {
         (response.data as List).map((e) => Request.fromJson(e)).toList();
     return listTypeofRequest;
   }
+
+  // update status of request
+  Future<void> updateStatusRequest(
+      {required String id, required int status}) async {
+    await DataRepository().updateStatusRequest(id: id, status: status);
+  }
 }

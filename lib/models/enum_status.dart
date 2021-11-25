@@ -1,4 +1,4 @@
-enum StatusType { All, Done, Pending, Cancle }
+enum StatusType { All, Done, Pending, Cancel }
 
 extension StatusTypeExtension on StatusType {
   int get value {
@@ -6,7 +6,7 @@ extension StatusTypeExtension on StatusType {
       StatusType.All: 0,
       StatusType.Done: 1,
       StatusType.Pending: 2,
-      StatusType.Cancle: 3,
+      StatusType.Cancel: 3,
     };
 
     return values[this]!;
@@ -17,7 +17,7 @@ extension StatusTypeExtension on StatusType {
       0: StatusType.All,
       1: StatusType.Done,
       2: StatusType.Pending,
-      3: StatusType.Cancle,
+      3: StatusType.Cancel,
     };
 
     return values[value]!;
