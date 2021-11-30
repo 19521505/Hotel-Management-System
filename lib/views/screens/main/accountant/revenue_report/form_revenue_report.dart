@@ -252,22 +252,14 @@ class BodyRevenueReport extends StatelessWidget {
                   text: "Create Report",
                   press: () {},
                   textColor: Colors.white,
+                  startColor: startButtonLinearColor,
+                  endColor: endButtonLinearColor,
                 )
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: RoundedLinearButton(
-                text: "Create Report",
-                press: () {},
-                textColor: Colors.white,
-                endColor: endButtonLinearColor,
-                startColor: startButtonLinearColor,
-              ),
-            )
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
