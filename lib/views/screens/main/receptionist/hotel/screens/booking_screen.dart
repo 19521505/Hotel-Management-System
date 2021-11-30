@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
-import 'package:hotel_management_system/view_models/hotel/hotel_provider.dart';
+import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/room_widget.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
@@ -201,6 +201,8 @@ class _BodyBookingScreenState extends State<BodyBookingScreen> {
                 text: 'Find',
                 press: () {},
                 textColor: Colors.white,
+                endColor: endButtonLinearColor,
+                startColor: startButtonLinearColor,
               ),
             ],
           ),

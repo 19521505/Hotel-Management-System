@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 
 class NotificationDialog extends StatelessWidget {
   final String content;
@@ -9,19 +9,27 @@ class NotificationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'Nofitication',
+        content,
         style: TextStyle(
           color: kPrimaryColor,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
       ),
-      content: Text(
-        content,
-        style: TextStyle(
-          fontSize: 16,
-        ),
-      ),
+      // content: Column(
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   children: [
+      //     Text(
+      //       content,
+      //       style: TextStyle(
+      //         fontSize: 16,
+      //       ),
+      //     ),
+      //     Divider(
+      //       thickness: 2,
+      //     ),
+      //   ],
+      // ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),

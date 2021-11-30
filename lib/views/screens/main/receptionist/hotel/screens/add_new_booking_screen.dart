@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
-import 'package:hotel_management_system/view_models/hotel/hotel_provider.dart';
+import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
@@ -312,6 +312,8 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                       ),
                     ),
                 textColor: whiteColor,
+                endColor: endButtonLinearColor,
+                startColor: startButtonLinearColor,
               ),
             ],
           ),

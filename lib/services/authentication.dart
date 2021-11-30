@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {

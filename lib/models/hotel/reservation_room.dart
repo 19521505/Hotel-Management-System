@@ -1,8 +1,10 @@
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/hotel/room.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 
 class ReservationRoom {
   late String id;
   late Staff staffId;
+  late Room room;
   late DateTime dateCreate;
   late String customerName;
   late String customerPhone;
@@ -26,6 +28,7 @@ class ReservationRoom {
   ReservationRoom.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     staffId = Staff.fromJson(json['staffId']);
+    room = Room.fromJson(json['room']);
     dateCreate = DateTime.parse(json['dateCreate']);
     customerName = json['customerName'];
     customerPhone = json['customerPhone'];
@@ -39,6 +42,7 @@ class ReservationRoom {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.id;
     data['staff'] = this.staffId.toJson();
+    data['room'] = this.room.toJson();
     data['dateCreate'] = this.dateCreate;
     data['customerName'] = this.customerName;
     data['customerPhone'] = this.customerPhone;

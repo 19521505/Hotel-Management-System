@@ -1,4 +1,4 @@
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 
 class OtherBill {
   late String otherBillID;

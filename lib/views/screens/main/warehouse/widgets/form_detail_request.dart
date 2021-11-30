@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
-import 'package:hotel_management_system/models/enum_status.dart';
+import 'package:hotel_management_system/models/form_request/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
@@ -66,11 +67,16 @@ class DetailRequest extends StatelessWidget {
                       content: request.type
                           .toString()
                           .replaceAll("RequestType.", ""),
+                      sizeText: 18,
                     ),
                     SizedBox(
                       height: size.height * 0.015,
                     ),
-                    InfoForm1(title: 'Staff', content: request.staff.fullName),
+                    InfoForm1(
+                      title: 'Staff',
+                      content: request.staff.fullName,
+                      sizeText: 18,
+                    ),
                     SizedBox(
                       height: size.height * 0.015,
                     ),
@@ -79,6 +85,7 @@ class DetailRequest extends StatelessWidget {
                       content: FormatDateTime.formatterDateTime
                           .format(request.date)
                           .toString(),
+                      sizeText: 18,
                     )
                   ],
                 ),
@@ -97,8 +104,25 @@ class DetailRequest extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              ReqDetailCard(
-                listDetail: request.ingredientDetail,
+              ListView.separated(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final eachItem = request.ingredientDetail[index];
+                  final price =
+                      eachItem.ingredient.ingrePrice * eachItem.quantity;
+                  return ReqDetailCard(
+                    deleteDetailRequest: () => null,
+                    ingreName: eachItem.ingredient.ingreName,
+                    price: price.toString(),
+                    quantity: eachItem.quantity.toString(),
+                    unit: eachItem.ingredient.unit.toString(),
+                  );
+                },
+                itemCount: request.ingredientDetail.length,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: size.height * 0.02,
+                ),
               ),
               SizedBox(
                 height: size.height * 0.03,
@@ -125,6 +149,8 @@ class DetailRequest extends StatelessWidget {
                                   MainScreen.nameRoute),
                             ),
                         textColor: Colors.white,
+                        endColor: endButtonLinearColor,
+                        startColor: startButtonLinearColor,
                       ),
                       // SizedBox(
                       //   height: size.height * 0.03,
@@ -142,6 +168,8 @@ class DetailRequest extends StatelessWidget {
                                   MainScreen.nameRoute),
                             ),
                         textColor: Colors.white,
+                        endColor: endCancelButtonLinearColor,
+                        startColor: startCancleButtonLinearColor,
                       ),
                     ],
                   ),

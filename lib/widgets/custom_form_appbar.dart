@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
 
 class CustomFormAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,6 +28,7 @@ class CustomFormAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.white,
       leading: CustomBackButton(),
+      elevation: 1,
     );
   }
 }

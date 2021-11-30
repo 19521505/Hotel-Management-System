@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
@@ -274,6 +274,8 @@ class BodyRevenueReport extends StatelessWidget {
                 text: "Create Report",
                 press: () {},
                 textColor: Colors.white,
+                endColor: endButtonLinearColor,
+                startColor: startButtonLinearColor,
               ),
             )
           ],

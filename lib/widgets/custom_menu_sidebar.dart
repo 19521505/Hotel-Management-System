@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:provider/provider.dart';
 
