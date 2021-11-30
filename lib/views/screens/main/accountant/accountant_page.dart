@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
+import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class AccountantPage extends StatefulWidget {
   const AccountantPage({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _AccountantPageState extends State<AccountantPage> {
               height: size.height * 0.03,
             ),
             // Create new revenue report
-            CustomCard(
+            CustomMainCard(
               title: 'New Revenue Report',
               subTitle:
                   'Create a revenue daily report about the profit of the company',
@@ -50,7 +50,7 @@ class _AccountantPageState extends State<AccountantPage> {
               height: size.height * 0.01,
             ),
             //View payment history
-            CustomCard(
+            CustomMainCard(
               title: 'Payment History',
               subTitle: 'List of invoices for purchase ingredients',
               press: () {},
@@ -59,7 +59,7 @@ class _AccountantPageState extends State<AccountantPage> {
               height: size.height * 0.01,
             ),
             // View list of bills history
-            CustomCard(
+            CustomMainCard(
               title: 'Bills History',
               subTitle: 'List of bills from hotel services and restaurant',
               press: () {},
@@ -68,7 +68,7 @@ class _AccountantPageState extends State<AccountantPage> {
               height: size.height * 0.01,
             ),
             // View list of payment request
-            CustomCard(
+            CustomMainCard(
               title: 'Payment Request',
               subTitle: 'List of payment request from the warehouse department',
               press: () {},

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/res_others_list_page.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
+import 'package:hotel_management_system/widgets/custom_main_card.dart';
+import 'package:provider/provider.dart';
 
 class KitchenPage extends StatelessWidget {
   static const String nameRoute = '/kitchen';
@@ -42,10 +44,11 @@ class KitchenPage extends StatelessWidget {
               height: size.height * 0.03,
             ),
             // Create new form import request to warehouse department
-            CustomCard(
+            CustomMainCard(
               title: 'New Request',
               subTitle: 'Create a request send to the Warehouse',
               press: () {
+                context.read<RequestProvider>().detailIngredient.clear();
                 Navigator.pushNamed(context, FoodRequest.nameRoute);
               },
             ),
@@ -53,7 +56,7 @@ class KitchenPage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             // View list of restaurant orders
-            CustomCard(
+            CustomMainCard(
               title: 'Restaurant Orders List',
               subTitle: 'List of order requests from the Waiter',
               press: () {

@@ -4,21 +4,18 @@ import 'package:hotel_management_system/widgets/info_form1.dart';
 
 class EntertainmentDetail extends StatelessWidget {
   final String entertainName, quantity, totalPrice, typeName;
-  final VoidCallback deleteItem;
   const EntertainmentDetail({
     Key? key,
     required this.entertainName,
     required this.quantity,
     required this.totalPrice,
     required this.typeName,
-    required this.deleteItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onLongPress: deleteItem,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,

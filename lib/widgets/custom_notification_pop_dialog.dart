@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 
-class NotificationDialog extends StatelessWidget {
+class NotificationPopDialog extends StatelessWidget {
   final String content;
-  const NotificationDialog({Key? key, required this.content}) : super(key: key);
+  const NotificationPopDialog({Key? key, required this.content})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +17,6 @@ class NotificationDialog extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      // content: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     Text(
-      //       content,
-      //       style: TextStyle(
-      //         fontSize: 16,
-      //       ),
-      //     ),
-      //     Divider(
-      //       thickness: 2,
-      //     ),
-      //   ],
-      // ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),

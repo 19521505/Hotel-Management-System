@@ -49,9 +49,13 @@ class ReceptionistDataProvider {
 
   // update paid status of each booking
   Future<void> updatePaidStatus(
-      {required String reservationId, required int paidStatus}) async {
-    await ReceptionistDataRepository()
-        .updatePaidStatus(reservationId: reservationId, paidStatus: paidStatus);
+      {required String reservationId,
+      required int paidStatus,
+      required String dateCreate}) async {
+    await ReceptionistDataRepository().updatePaidStatus(
+        reservationId: reservationId,
+        paidStatus: paidStatus,
+        dateCreate: dateCreate);
   }
 
   /* Receptionist Department - Entertainment Service */

@@ -6,7 +6,7 @@ import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
@@ -41,7 +41,9 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
     final dateCreate = DateTime.now();
 
     return Scaffold(
-      appBar: CustomFormAppBar(title: 'Add New Booking'),
+      appBar: CustomAppbarTitleRight(
+        title: 'Add New Booking',
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
@@ -310,6 +312,8 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                         'Booking successfully',
                         RoomDetail.nameRoute,
                       ),
+                      () => DialogSuccessNotify().onFail(
+                          context, "Customer information is incomplete!"),
                     ),
                 textColor: whiteColor,
                 endColor: endButtonLinearColor,

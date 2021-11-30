@@ -3,7 +3,7 @@ import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
-import 'package:hotel_management_system/widgets/custom_appbar.dart';
+import 'package:hotel_management_system/widgets/main_appbar.dart';
 import 'package:hotel_management_system/widgets/custom_menu_sidebar.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +30,10 @@ class _MainScreenState extends State<MainScreen> {
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: CustomMenuBar(
+      drawer: CustomMenuSidebar(
         staff: authProvider.currentStaff,
       ),
-      appBar: CustomAppBar(
+      appBar: MainAppbar(
           roleName: StaffInfo.setUpRoleName(authProvider.currentStaff.role)),
       body: _navigaToRolePage(authProvider.currentStaff.role),
     );

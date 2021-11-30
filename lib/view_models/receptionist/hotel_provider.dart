@@ -35,33 +35,40 @@ class HotelProvider extends ChangeNotifier {
     String checkOut,
     int totalPrice,
     Function onBookingSuccess,
+    Function onBookingFail,
   ) async {
-    try {
-      await ReceptionistDataProvider().addBooking(
-        roomId: roomId,
-        staffId: staffId,
-        dateCreate: dateCreate,
-        customerName: customerName.text,
-        customerPhone: customerPhone.text,
-        checkIn: checkIn,
-        checkOut: checkOut,
-        paidStatus: 2,
-        totalPrice: totalPrice,
-      );
-      loadAllRoom();
-      onBookingSuccess();
-      notifyListeners();
-    } on DioError catch (err) {
-      err.message;
+    if (customerPhone.text.isEmpty || customerName.text.isEmpty) {
+      onBookingFail();
+    } else {
+      try {
+        await ReceptionistDataProvider().addBooking(
+          roomId: roomId,
+          staffId: staffId,
+          dateCreate: dateCreate,
+          customerName: customerName.text,
+          customerPhone: customerPhone.text,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          paidStatus: 2,
+          totalPrice: totalPrice,
+        );
+        loadAllRoom();
+        onBookingSuccess();
+        notifyListeners();
+      } on DioError catch (err) {
+        err.message;
+      }
     }
   }
 
   // // update paid status of each booking
-  Future updatePaidStatus(
-      String reservationId, int paidStatus, Function onUpdateSuccess) async {
+  Future updatePaidStatus(String reservationId, int paidStatus,
+      Function onUpdateSuccess, String dateCreate) async {
     try {
       await ReceptionistDataProvider().updatePaidStatus(
-          reservationId: reservationId, paidStatus: paidStatus);
+          reservationId: reservationId,
+          paidStatus: paidStatus,
+          dateCreate: dateCreate);
       onUpdateSuccess();
     } on DioError catch (err) {
       err.message;

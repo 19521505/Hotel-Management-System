@@ -3,7 +3,7 @@ import 'package:hotel_management_system/view_models/receptionist/entertainment_p
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/widgets/entertainment_widget.dart';
 
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +41,9 @@ class _EntertainmentScreenState extends State<EntertainmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomFormAppBar(title: 'List of Entertainment Service'),
+      appBar: CustomAppbarTitleRight(
+        title: 'List of Entertainment Service',
+      ),
       body:
           Consumer<EntertainmentProvider>(builder: (context, provider, child) {
         return ModalProgressHUD(

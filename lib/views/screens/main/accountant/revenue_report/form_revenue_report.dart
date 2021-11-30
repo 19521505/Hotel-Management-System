@@ -8,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_box_description.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
@@ -38,7 +39,9 @@ class _RevenueReportState extends State<RevenueReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomFormAppBar(title: "New Revenue Report"),
+      appBar: CustomAppbarTitleRight(
+        title: "New Revenue Report",
+      ),
       body: BodyRevenueReport(),
     );
   }

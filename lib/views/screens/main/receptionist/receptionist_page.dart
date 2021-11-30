@@ -3,7 +3,7 @@ import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
+import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class ReceptionistPage extends StatelessWidget {
   static const String nameRoute = '/receptionist';
@@ -45,7 +45,7 @@ class ReceptionistPage extends StatelessWidget {
               height: size.height * 0.03,
             ),
             // Create new form import request to warehouse department
-            CustomCard(
+            CustomMainCard(
               title: 'Hotel',
               subTitle: '.....',
               press: () {
@@ -56,7 +56,7 @@ class ReceptionistPage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             // View list of restaurant orders
-            CustomCard(
+            CustomMainCard(
               title: 'Entertainment Service',
               subTitle: '.....',
               press: () {

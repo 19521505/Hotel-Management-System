@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_main_card.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 
 class HotelPage extends StatelessWidget {
   static const String nameRoute = '/hotel';
@@ -21,7 +21,9 @@ class HotelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomFormAppBar(title: 'Hotel'),
+      appBar: CustomAppbarTitleRight(
+        title: 'Hotel',
+      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -46,7 +48,7 @@ class HotelPage extends StatelessWidget {
                 height: size.height * 0.03,
               ),
               // Create new form import request to warehouse department
-              CustomCard(
+              CustomMainCard(
                 title: 'Booking Room',
                 subTitle: '.....',
                 press: () {
@@ -57,7 +59,7 @@ class HotelPage extends StatelessWidget {
                 height: size.height * 0.01,
               ),
               // View list of restaurant orders
-              CustomCard(
+              CustomMainCard(
                 title: 'List of Hotel Bill',
                 subTitle: '.....',
                 press: () {},

@@ -38,8 +38,7 @@ class DialogSuccessNotify {
         });
   }
 
-  void onDeleteItem(BuildContext context, String content, Function function,
-      dynamic detailFunction) {
+  void onFail(BuildContext context, String content) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -50,36 +49,19 @@ class DialogSuccessNotify {
             title: Text(
               content,
               style: TextStyle(
-                fontSize: 16,
-                color: kPrimaryColor,
+                fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
             ),
             actions: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Column(
                 children: [
                   TextButton(
-                    onPressed: () async {
-                      await function(detailFunction);
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                     child: Text(
                       'OK',
                       style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: startButtonLinearColor,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                         color: startButtonLinearColor,
                       ),
                     ),

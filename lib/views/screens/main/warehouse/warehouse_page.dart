@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
+import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class WarehousePage extends StatelessWidget {
   static const String nameRoute = '/warehouse';
@@ -44,7 +44,7 @@ class WarehousePage extends StatelessWidget {
               height: size.height * 0.03,
             ),
             // Create new form import request to warehouse department
-            CustomCard(
+            CustomMainCard(
               title: 'List of Import Requests',
               subTitle: '...........',
               press: () {
@@ -58,7 +58,7 @@ class WarehousePage extends StatelessWidget {
             SizedBox(
               height: size.height * 0.01,
             ),
-            CustomCard(
+            CustomMainCard(
               title: 'List of Export Requests',
               subTitle: '...........',
               press: () {
