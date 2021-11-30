@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';

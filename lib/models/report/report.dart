@@ -1,4 +1,4 @@
-import '../staff.dart';
+import '../staff/staff.dart';
 
 class Report {
   late String reportID;

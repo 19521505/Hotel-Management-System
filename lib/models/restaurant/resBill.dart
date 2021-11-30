@@ -1,11 +1,11 @@
-import 'package:hotel_management_system/models/enum_status.dart';
+import 'package:hotel_management_system/models/form_request/enum_status.dart';
 import 'package:hotel_management_system/models/restaurant/detailResBill.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 
 class ResBill {
   late String resBillID;
   late StatusType status;
-  late String date;
+  late DateTime date;
   late List<DetailResBill> detailsResBill;
   late Staff staff;
   late double totalPrice;

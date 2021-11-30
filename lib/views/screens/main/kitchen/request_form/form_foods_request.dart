@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
@@ -8,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/kitchen/request_form/
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
 import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
+import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
@@ -115,7 +116,7 @@ class _BodyFormReqState extends State<BodyFormReq> {
                   ),
                 ],
               ),
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(size.height * 0.01),
               child: Column(
                 // mainAxisSize: MainAxisSize.max,
                 children: [
@@ -181,14 +182,17 @@ class _BodyFormReqState extends State<BodyFormReq> {
                     height: size.height * 0.01,
                   ),
                   InfoForm1(
-                      title: 'Staff Name',
-                      content: authProvider.currentStaff.fullName),
+                    title: 'Staff Name',
+                    content: authProvider.currentStaff.fullName,
+                    sizeText: 18,
+                  ),
                   SizedBox(
                     height: size.height * 0.01,
                   ),
                   InfoForm1(
                     title: 'DateTime',
                     content: dateDisplay.toString(),
+                    sizeText: 18,
                   ),
                 ],
               ),
@@ -209,7 +213,34 @@ class _BodyFormReqState extends State<BodyFormReq> {
             ),
             Consumer<RequestProvider>(
               builder: (context, provider, child) {
-                return ReqDetailCard(listDetail: provider.detailIngredient);
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: provider.detailIngredient.length,
+                  itemBuilder: (context, index) {
+                    final eachItem = provider.detailIngredient[index];
+                    final price =
+                        eachItem.ingredient.ingrePrice * eachItem.quantity;
+                    return ReqDetailCard(
+                      deleteDetailRequest: () {
+                        DialogSuccessNotify().onDeleteItem(
+                          context,
+                          'Do delete this Ingredient?',
+                          provider.deleteDetailIngre,
+                          provider.detailIngredient[index],
+                        );
+                      },
+                      ingreName: eachItem.ingredient.ingreName,
+                      price: price.toString(),
+                      quantity: eachItem.quantity.toString(),
+                      unit: eachItem.ingredient.unit.toString(),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                );
               },
             ),
             SizedBox(
@@ -243,6 +274,8 @@ class _BodyFormReqState extends State<BodyFormReq> {
               press: () => context.read<RequestProvider>().sendRequest(dateData,
                   authProvider.currentStaff.staffID, nameRequest, onSuccess),
               textColor: Colors.white,
+              startColor: startButtonLinearColor,
+              endColor: endButtonLinearColor,
             ),
           ],
         ),

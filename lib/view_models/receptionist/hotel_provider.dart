@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
-import 'package:hotel_management_system/services/data_provider/receptiontist_data_provider.dart';
+import 'package:hotel_management_system/services/data_provider/receptionist_data_provider.dart';
 
 class HotelProvider extends ChangeNotifier {
   bool isLoad = true;
@@ -18,7 +17,7 @@ class HotelProvider extends ChangeNotifier {
   }
 
   void loadAllRoom() async {
-    _listAllRoom = await ReceptiontistDataProvider().getAllRoom();
+    _listAllRoom = await ReceptionistDataProvider().getAllRoom();
     isLoad = false;
     notifyListeners();
   }
@@ -38,7 +37,7 @@ class HotelProvider extends ChangeNotifier {
     Function onBookingSuccess,
   ) async {
     try {
-      await ReceptiontistDataProvider().addBooking(
+      await ReceptionistDataProvider().addBooking(
         roomId: roomId,
         staffId: staffId,
         dateCreate: dateCreate,
@@ -49,12 +48,24 @@ class HotelProvider extends ChangeNotifier {
         paidStatus: 2,
         totalPrice: totalPrice,
       );
+      loadAllRoom();
+      onBookingSuccess();
+      notifyListeners();
     } on DioError catch (err) {
       err.message;
     }
+  }
 
-    loadAllRoom();
-    onBookingSuccess();
+  // // update paid status of each booking
+  Future updatePaidStatus(
+      String reservationId, int paidStatus, Function onUpdateSuccess) async {
+    try {
+      await ReceptionistDataProvider().updatePaidStatus(
+          reservationId: reservationId, paidStatus: paidStatus);
+      onUpdateSuccess();
+    } on DioError catch (err) {
+      err.message;
+    }
     notifyListeners();
   }
 }

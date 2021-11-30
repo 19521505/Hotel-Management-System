@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
-import 'package:hotel_management_system/view_models/hotel/room_provider.dart';
+import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_payment_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/booking_card.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
@@ -74,31 +75,36 @@ class _RoomDetailState extends State<RoomDetail> {
           return ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               return BookingCard(
-                customerName:
-                    provider.selectedRoom.bookings[index].customerName,
-                customerPhone:
-                    provider.selectedRoom.bookings[index].customerPhone,
+                customerName: provider.listRoomDetal[index].customerName,
+                customerPhone: provider.listRoomDetal[index].customerPhone,
                 checkIn: FormatDateTime.formatterDay
-                    .format(provider.selectedRoom.bookings[index].checkIn),
+                    .format(provider.listRoomDetal[index].checkIn),
                 checkOut: FormatDateTime.formatterDay
-                    .format(provider.selectedRoom.bookings[index].checkOut),
+                    .format(provider.listRoomDetal[index].checkOut),
                 dateCreate: FormatDateTime.formatterDay
-                    .format(provider.selectedRoom.bookings[index].dateCreate),
+                    .format(provider.listRoomDetal[index].dateCreate),
                 timeCreate: FormatDateTime.formatterTime
-                    .format(provider.selectedRoom.bookings[index].dateCreate),
-                paidStatus: provider.selectedRoom.bookings[index].paidStatus
+                    .format(provider.listRoomDetal[index].dateCreate),
+                paidStatus: provider.listRoomDetal[index].paidStatus
                     .toString()
                     .replaceAll("PaidStatus.", ""),
-                color: provider.selectedRoom.bookings[index].paidStatus ==
-                        PaidStatus.Paid
-                    ? Colors.green
-                    : Colors.yellow,
+                color:
+                    provider.listRoomDetal[index].paidStatus == PaidStatus.Paid
+                        ? Colors.green
+                        : Colors.yellow,
+                press: () {
+                  Navigator.pushNamed(
+                    context,
+                    BookingPaymentDetail.nameRoute,
+                    arguments: provider.listRoomDetal[index],
+                  );
+                },
               );
             },
             separatorBuilder: (BuildContext context, int index) => SizedBox(
               height: size.height * 0.01,
             ),
-            itemCount: provider.selectedRoom.bookings.length,
+            itemCount: provider.listRoomDetal.length,
           );
         }),
       ),

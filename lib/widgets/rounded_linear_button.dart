@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import '../constrants/constrants.dart';
+import '../constrants/appColors.dart';
 
 class RoundedLinearButton extends StatelessWidget {
   final String text;
   final VoidCallback press;
+  final Color color, textColor, startColor, endColor;
   final Color color, textColor;
-
   const RoundedLinearButton({
     Key? key,
     required this.text,
     required this.press(),
     this.color = kPrimaryColor,
     required this.textColor,
+    required this.startColor,
+    required this.endColor,
   }) : super(key: key);
 
   @override
@@ -23,8 +25,8 @@ class RoundedLinearButton extends StatelessWidget {
         // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            endButtonLinearColor,
-            startButtonLinearColor,
+            endColor,
+            startColor,
           ]),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),

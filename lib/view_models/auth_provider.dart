@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 import 'package:hotel_management_system/services/authentication.dart';
 import 'package:hotel_management_system/views/screens/login/login_page.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';

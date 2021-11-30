@@ -13,7 +13,7 @@ class ReceptionistDataRepository {
   ReceptionistDataRepository._internal();
   static final baseUrl = AppConfigs.apiUrl;
 
-  /* Receptionist Department */
+  /* Hotel Department */
   // get all room in hotel
   Future<Response> getAllRoom() async {
     Dio _dio = new Dio();
@@ -32,8 +32,9 @@ class ReceptionistDataRepository {
   Future<Response> getRoomDetail({required String roomId}) async {
     Dio _dio = new Dio();
     try {
+      String a = "$baseUrl${AppEndpoints.roomDetail}$roomId";
       Response response = await _dio.get(
-        "$baseUrl${AppEndpoints.roomDetail}$roomId",
+        a,
       );
 
       return response;
@@ -72,5 +73,57 @@ class ReceptionistDataRepository {
     } catch (e, stacktrace) {
       throw Exception("Exception occured: $e stackTrace: $stacktrace");
     }
+  }
+
+  // paid hotel bill
+  Future<Response> updatePaidStatus({
+    required String reservationId,
+    required int paidStatus,
+  }) async {
+    final data = {"paidStatus": paidStatus};
+    Dio _dio = new Dio();
+    try {
+      Response response = await _dio.patch(
+          "$baseUrl${AppEndpoints.updatePaidStatus}$reservationId",
+          data: data);
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e trackTrace: $stacktrace");
+    }
+  }
+
+  /* Entertainment Service Department */
+  Future<Response> getAllEntertainment() async {
+    Dio _dio = new Dio();
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.entertainment}",
+      );
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // add entertainment bill
+  Future<Response> addEntertainmentBill({
+    required String staff,
+    required String dateCreate,
+    required List<Map<String, dynamic>> entertainBillDetail,
+    required int totalPrice,
+  }) async {
+    Dio _dio = new Dio();
+
+    final data = {
+      "staff": staff,
+      "dateCreate": dateCreate,
+      "entertainBillDetail": entertainBillDetail,
+      "totalPrice": totalPrice,
+    };
+
+    Response response =
+        await _dio.post("$baseUrl${AppEndpoints.addEntertainBill}", data: data);
+    return response;
   }
 }

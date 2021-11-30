@@ -1,6 +1,6 @@
 import 'package:hotel_management_system/models/hotel/room.dart';
 
-import '../staff.dart';
+import '../staff/staff.dart';
 
 class RoomBill {
   late String roomBillID;

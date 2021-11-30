@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/constrants.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/widgets/custom_card.dart';
 
 class ReceptionistPage extends StatelessWidget {
@@ -47,7 +49,7 @@ class ReceptionistPage extends StatelessWidget {
               title: 'Hotel',
               subTitle: '.....',
               press: () {
-                Navigator.pushNamed(context, HotelPage.nameRoute);
+                Navigator.pushNamed(context, BookingScreen.nameRoute);
               },
             ),
             SizedBox(
@@ -57,7 +59,9 @@ class ReceptionistPage extends StatelessWidget {
             CustomCard(
               title: 'Entertainment Service',
               subTitle: '.....',
-              press: () {},
+              press: () {
+                Navigator.pushNamed(context, EntertainmentScreen.nameRoute);
+              },
             ),
           ],
         ),

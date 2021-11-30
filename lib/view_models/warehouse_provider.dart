@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hotel_management_system/models/enum_status.dart';
+import 'package:hotel_management_system/models/form_request/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/services/data_provider/warehouse_data_provider.dart';
 

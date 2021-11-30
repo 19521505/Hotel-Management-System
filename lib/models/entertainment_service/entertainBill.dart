@@ -1,9 +1,9 @@
 import 'package:hotel_management_system/models/entertainment_service/detailEnteBill.dart';
-import 'package:hotel_management_system/models/staff.dart';
+import 'package:hotel_management_system/models/staff/staff.dart';
 
 class EntertainBill {
   late String enBillID;
-  late String date;
+  late DateTime date;
   late List<DetailEnterBill> entertainBillDetail;
   late Staff staff;
   late double totalPrice;
@@ -16,7 +16,7 @@ class EntertainBill {
       required this.totalPrice});
 
   EntertainBill.fromJson(Map<String, dynamic> json) {
-    enBillID = json['enBillID'];
+    enBillID = json['_id'];
     date = json['date'];
     if (json['entertainBillDetail'] != null) {
       entertainBillDetail = <DetailEnterBill>[];
@@ -30,7 +30,7 @@ class EntertainBill {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['enBillID'] = this.enBillID;
+    data['_id'] = this.enBillID;
     data['date'] = this.date;
 
     data['entertainBillDetail'] =

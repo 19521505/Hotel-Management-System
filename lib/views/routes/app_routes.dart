@@ -4,10 +4,13 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/res_others_list/res_others_list_page.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/res_others_list_page.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_payment_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
@@ -26,30 +29,39 @@ class AppRoutes {
         return MainScreen.route();
       case LandingPage.nameRoute:
         return LandingPage.route();
-      // Kitchen Department
+      /**
+        * Kitchen Department 
+      */
       case KitchenPage.nameRoute:
         return KitchenPage.route();
       case FoodRequest.nameRoute:
         return FoodRequest.route();
       case ResOthersList.nameRoute:
         return ResOthersList.route();
-      // Accountant
+      /**
+        * Accountant Department 
+      */
       case RevenueReport.nameRoute:
         return RevenueReport.route();
       case CashInflowPage.nameRoute:
         return CashInflowPage.route();
       case CashOutflowPage.nameRoute:
         return CashOutflowPage.route();
-      // Warehouse Department
+      /**
+        * Warehouse Department 
+      */
       case WarehousePage.nameRoute:
         return WarehousePage.route(settings);
       case ListRequest.nameRoute:
         return ListRequest.route(settings);
       case DetailRequest.nameRoute:
         return DetailRequest.route(settings);
-      //Reception Department
+      /**
+        * Receptionist Department 
+      */
       case ReceptionistPage.nameRoute:
         return ReceptionistPage.route();
+      // Hotel
       case HotelPage.nameRoute:
         return HotelPage.route();
       case BookingScreen.nameRoute:
@@ -58,6 +70,16 @@ class AppRoutes {
         return RoomDetail.route(settings);
       case AddBookingScreen.nameRoute:
         return AddBookingScreen.route(settings);
+      case BookingPaymentDetail.nameRoute:
+        return BookingPaymentDetail.route(settings);
+      // Entertainment
+      case EntertainmentScreen.nameRoute:
+        return EntertainmentScreen.route();
+      case InvoiceEntertainment.nameRoute:
+        return InvoiceEntertainment.route(settings);
+      /**
+        * Default 
+      */
       default:
         return _errorRoute();
     }
