@@ -5,6 +5,7 @@ class RoundedLinearButton extends StatelessWidget {
   final String text;
   final VoidCallback press;
   final Color color, textColor, startColor, endColor;
+  final Color color, textColor;
   const RoundedLinearButton({
     Key? key,
     required this.text,

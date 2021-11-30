@@ -42,7 +42,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final authProvider = Provider.of<AuthProvider>(context);
     return Stack(children: <Widget>[
       Scaffold(
