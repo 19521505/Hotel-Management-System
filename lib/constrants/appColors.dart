@@ -11,5 +11,6 @@ const endCancelButtonLinearColor = Color(0xFFEA5252);
 const iconPrimaryColor = Color(0xFF2071B4);
 const backgroundButton = Color(0xFF3E61FB);
 
+const deleteItemColor = Color(0xFFF36C6C);
 const blackColor = Colors.black;
 const whiteColor = Colors.white;
