@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
@@ -255,19 +254,9 @@ class BodyRevenueReport extends StatelessWidget {
                 )
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: RoundedLinearButton(
-                text: "Create Report",
-                press: () {},
-                textColor: Colors.white,
-                endColor: endButtonLinearColor,
-                startColor: startButtonLinearColor,
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        )
+      ],
     );
   }
 }

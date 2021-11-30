@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hotel_management_system/models/enum_status.dart';
+import 'package:hotel_management_system/models/form_request/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
-import 'package:hotel_management_system/services/data_provider.dart';
+import 'package:hotel_management_system/services/data_provider/warehouse_data_provider.dart';
 
 class AccountantProvider extends ChangeNotifier {
   bool isLoad = true;
@@ -20,7 +20,7 @@ class AccountantProvider extends ChangeNotifier {
 
   // load all request from api
   void loadListRequest() async {
-    _listTypeofRequest = await DataProvider().typeofRequest();
+    _listTypeofRequest = await WarehouseDataProvider().typeofRequest();
     isLoad = false;
     notifyListeners();
   }
@@ -57,7 +57,7 @@ class AccountantProvider extends ChangeNotifier {
   Future updateStatusRequest(
       String id, int status, Function onUpdateSuccess) async {
     try {
-      await DataProvider().updateStatusRequest(id: id, status: status);
+      await WarehouseDataProvider().updateStatusRequest(id: id, status: status);
       _listTypeofRequest.clear();
     } on DioError catch (err) {
       err.message;
