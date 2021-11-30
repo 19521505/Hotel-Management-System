@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/constrants/format_date.dart';
+import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
+import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
@@ -73,14 +76,17 @@ class BodyRevenueReport extends StatelessWidget {
                             children: [
                               FormRow(
                                 firstText: 'Staff Name',
-                                secondText: 'Tran Quoc Khanh',
+                                secondText: context
+                                    .read<AuthProvider>()
+                                    .currentStaff
+                                    .fullName,
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               FormRow(
                                 firstText: "Date",
-                                secondText: "12/10/2021",
+                                secondText: DateTime.now().toString(),
                               ),
                             ],
                           ),
@@ -160,7 +166,10 @@ class BodyRevenueReport extends StatelessWidget {
                               ),
                               FormRow(
                                 firstText: "Amount:",
-                                secondText: "500.000.000",
+                                secondText: context
+                                    .read<AccountantProvider>()
+                                    .getTotalOutflow()
+                                    .toString(),
                                 secondTextColor: Colors.red,
                               ),
                               SizedBox(
@@ -175,7 +184,11 @@ class BodyRevenueReport extends StatelessWidget {
                               ),
                               FormRow(
                                 firstText: "Number of bill:",
-                                secondText: "209",
+                                secondText: context
+                                    .read<AccountantProvider>()
+                                    .listFilterRequest
+                                    .length
+                                    .toString(),
                               ),
                             ],
                           ),

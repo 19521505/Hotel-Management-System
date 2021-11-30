@@ -2,6 +2,8 @@ import 'package:hotel_management_system/models/form_request/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 import 'package:hotel_management_system/models/staff/staff.dart';
 
+import '../staff.dart';
+
 class Request {
   late String id;
   late String nameRequest;

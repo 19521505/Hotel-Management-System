@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
@@ -25,6 +26,11 @@ class HotelManagerSystem extends StatelessWidget {
           create: (context) => WarehouseProvider(),
           lazy: false,
         ),
+        ChangeNotifierProvider<AccountantProvider>(
+          create: (context) => AccountantProvider(),
+          lazy: false,
+        ),
+      ],
         ChangeNotifierProvider<HotelProvider>(
           create: (context) => HotelProvider(),
           lazy: false,
