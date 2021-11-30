@@ -5,7 +5,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 
 class OutFlowItemDetail extends StatefulWidget {
   const OutFlowItemDetail({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
     final payment = (ModalRoute.of(context)!.settings.arguments as Request);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: 'Payment Detail',
       ),
       body: SingleChildScrollView(
@@ -94,7 +94,6 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
                   final price =
                       eachItem.ingredient.ingrePrice * eachItem.quantity;
                   return ReqDetailCard(
-                    deleteDetailRequest: () => null,
                     ingreName: eachItem.ingredient.ingreName,
                     price: price.toString(),
                     quantity: eachItem.quantity.toString(),
