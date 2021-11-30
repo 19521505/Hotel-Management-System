@@ -5,6 +5,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/widgets/custom_back_button.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 import 'package:provider/provider.dart';
 
 class CashOutflowPage extends StatefulWidget {
