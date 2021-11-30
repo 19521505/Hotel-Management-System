@@ -4,7 +4,7 @@ class AppEndpoints {
   // send a new request
   static const sendRequest = "/request/add";
   // get list typr of request and update status request
-  static const getTypeofRequest = "/request/";
+  static const request = "/request/";
 
   //get all room in hotel
   static const room = "/room/";

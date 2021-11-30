@@ -6,8 +6,11 @@ import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_box_description.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
+import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +29,13 @@ class RevenueReport extends StatefulWidget {
 }
 
 class _RevenueReportState extends State<RevenueReport> {
+  @override
+  void didChangeDependencies() {
+    Provider.of<AccountantProvider>(context)
+        .getDataFromApi(FormatDateTime.formatterDay.format(DateTime.now()));
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +98,8 @@ class BodyRevenueReport extends StatelessWidget {
                               ),
                               FormRow(
                                 firstText: "Date",
-                                secondText: DateTime.now().toString(),
+                                secondText: FormatDateTime.formatterDay
+                                    .format(DateTime.now()),
                               ),
                             ],
                           ),
@@ -258,122 +269,6 @@ class BodyRevenueReport extends StatelessWidget {
                   endColor: endButtonLinearColor,
                 )
               ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FormBoxDescription extends StatelessWidget {
-  const FormBoxDescription(
-      {Key? key,
-      required this.child,
-      this.hasIcon = false,
-      this.nameRoute = "",
-      this.image = "right_arrow_view_icon.png"})
-      : super(key: key);
-
-  final Widget child;
-  final bool hasIcon;
-  final String nameRoute;
-  final String image;
-  @override
-  Widget build(BuildContext context) {
-    return hasIcon
-        ? Stack(clipBehavior: Clip.hardEdge, children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 2,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: child,
-            ),
-            Positioned(
-              top: 15,
-              right: 10,
-              child: Container(
-                child: GestureDetector(
-                  onTap: () async {
-                    if (nameRoute == "/outflow") {}
-                    Navigator.pushNamed(context, nameRoute);
-                  },
-                  child: Image.asset('assets/images/' + image),
-                ),
-              ),
-            ),
-          ])
-        : Stack(clipBehavior: Clip.hardEdge, children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 2,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: child,
-            ),
-          ]);
-  }
-}
-
-class FormRow extends StatelessWidget {
-  const FormRow({
-    Key? key,
-    required this.firstText,
-    required this.secondText,
-    this.secondTextColor = Colors.black,
-  }) : super(key: key);
-
-  final String firstText, secondText;
-  final Color secondTextColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Text(
-            firstText,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            secondText,
-            style: TextStyle(
-              fontSize: 16,
-              color: secondTextColor,
             ),
           ),
         ),
