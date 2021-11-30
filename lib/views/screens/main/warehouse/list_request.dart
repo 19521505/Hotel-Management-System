@@ -68,10 +68,7 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
     final type = ModalRoute.of(context)!.settings.arguments as RequestType;
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
       child: Container(
-        height: size.height,
-        color: Colors.white,
         padding: EdgeInsets.only(
           left: size.height * 0.02,
           top: size.height * 0.03,
@@ -79,7 +76,7 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
           bottom: size.height * 0.03,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(

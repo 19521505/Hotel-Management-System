@@ -22,18 +22,9 @@ class DeleteItemWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(
-            CupertinoIcons.delete,
-            color: whiteColor,
-          ),
-          Icon(
-            CupertinoIcons.delete,
-            color: whiteColor,
-          ),
-        ],
+      child: Icon(
+        CupertinoIcons.delete,
+        color: whiteColor,
       ),
     );
   }

@@ -92,8 +92,6 @@ class _BodyFormReqState extends State<BodyFormReq> {
     final nameRequest = '#ID' + DateFormat('HHMMddMMyy').format(DateTime.now());
     return SingleChildScrollView(
       child: Container(
-        height: size.height,
-        color: Colors.white,
         padding: EdgeInsets.only(
           left: size.height * 0.02,
           top: size.height * 0.03,

@@ -64,7 +64,6 @@ class _BodyBookingScreenState extends State<BodyBookingScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: double.infinity,
       padding: EdgeInsets.only(
         left: size.height * 0.02,
         right: size.height * 0.02,
