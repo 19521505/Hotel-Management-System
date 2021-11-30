@@ -1,27 +1,37 @@
+import 'package:hotel_management_system/models/hotel/reservation_room.dart';
+
 class Room {
-  late String roomID;
+  late String roomId;
   late String roomName;
-  late double roomPrice;
-  Room({
-    required this.roomID,
-    required this.roomName,
-    required this.roomPrice,
-  });
+  late int roomPrice;
+  late List<ReservationRoom> bookings;
+
+  Room(
+      {required this.roomId,
+      required this.roomName,
+      required this.roomPrice,
+      required this.bookings});
 
   Room.fromJson(Map<String, dynamic> json) {
-    roomID = json['roomID'];
+    roomId = json['_id'];
     roomName = json['roomName'];
     roomPrice = json['roomPrice'];
+    if (json['bookings'] != null) {
+      bookings = <ReservationRoom>[];
+      json['bookings'].forEach((v) {
+        bookings.add(new ReservationRoom.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['roomID'] = this.roomID;
+    data['_id'] = this.roomId;
     data['roomName'] = this.roomName;
     data['roomPrice'] = this.roomPrice;
+    if (this.bookings != null) {
+      data['bookings'] = this.bookings.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
-
-
-  

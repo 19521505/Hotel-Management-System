@@ -6,8 +6,9 @@ import 'package:hotel_management_system/models/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
+import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
-import 'package:hotel_management_system/widgets/dialog_update_success.dart';
+import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:provider/provider.dart';
@@ -118,8 +119,10 @@ class DetailRequest extends StatelessWidget {
                             .updateStatusRequest(
                               request.id,
                               1,
-                              () => UpdateSuccess().onUpdateSucces(
-                                  context, "Request has been Done!"),
+                              () => DialogSuccessNotify().onUpdateSucces(
+                                  context,
+                                  "Request has been Done!",
+                                  MainScreen.nameRoute),
                             ),
                         textColor: Colors.white,
                       ),
@@ -133,8 +136,10 @@ class DetailRequest extends StatelessWidget {
                             .updateStatusRequest(
                               request.id,
                               3,
-                              () => UpdateSuccess().onUpdateSucces(
-                                  context, "Request has been Cancel!"),
+                              () => DialogSuccessNotify().onUpdateSucces(
+                                  context,
+                                  "Request has been Cancel!",
+                                  MainScreen.nameRoute),
                             ),
                         textColor: Colors.white,
                       ),

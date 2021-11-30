@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/constrants.dart';
-import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 
-class UpdateSuccess {
-  void onUpdateSucces(BuildContext context, String content) {
+class DialogSuccessNotify {
+  void onUpdateSucces(BuildContext context, String content, String routeName) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -17,8 +16,8 @@ class UpdateSuccess {
             ),
             actions: [
               TextButton(
-                onPressed: () =>
-                    Navigator.popAndPushNamed(context, MainScreen.nameRoute),
+                onPressed: () => Navigator.popUntil(
+                    context, (route) => route.settings.name == routeName),
                 child: Text(
                   'OK',
                   style: TextStyle(

@@ -7,6 +7,11 @@ import 'package:hotel_management_system/views/screens/main/kitchen/request_form/
 import 'package:hotel_management_system/views/screens/main/kitchen/res_others_list/res_others_list_page.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
@@ -42,6 +47,17 @@ class AppRoutes {
         return ListRequest.route(settings);
       case DetailRequest.nameRoute:
         return DetailRequest.route(settings);
+      //Reception Department
+      case ReceptionistPage.nameRoute:
+        return ReceptionistPage.route();
+      case HotelPage.nameRoute:
+        return HotelPage.route();
+      case BookingScreen.nameRoute:
+        return BookingScreen.route(settings);
+      case RoomDetail.nameRoute:
+        return RoomDetail.route(settings);
+      case AddBookingScreen.nameRoute:
+        return AddBookingScreen.route(settings);
       default:
         return _errorRoute();
     }

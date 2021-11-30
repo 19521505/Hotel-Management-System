@@ -9,7 +9,7 @@ class StaffInfo {
         roleName = "Accountant";
         break;
       case 3:
-        roleName = "Receiptist";
+        roleName = "Receptiontist";
         break;
       case 4:
         roleName = "Kitchen";
