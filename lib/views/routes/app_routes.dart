@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow_item_detail.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/res_others_list_page.dart';
@@ -47,6 +48,8 @@ class AppRoutes {
         return CashInflowPage.route();
       case CashOutflowPage.nameRoute:
         return CashOutflowPage.route();
+      case OutFlowItemDetail.nameRoute:
+        return OutFlowItemDetail.route(settings);
       /**
         * Warehouse Department 
       */

@@ -20,7 +20,7 @@ class WarehouseDataRepository {
     Dio _dio = new Dio();
     try {
       Response response = await _dio.get(
-        "$baseUrl${AppEndpoints.getTypeofRequest}",
+        "$baseUrl${AppEndpoints.request}",
       );
 
       return response;
@@ -37,8 +37,8 @@ class WarehouseDataRepository {
     Dio _dio = new Dio();
     final data = {"status": status};
     try {
-      Response response = await _dio
-          .patch("$baseUrl${AppEndpoints.getTypeofRequest}$id", data: data);
+      Response response =
+          await _dio.patch("$baseUrl${AppEndpoints.request}$id", data: data);
       return response;
     } catch (e, stacktrace) {
       throw Exception("Exception occured: $e trackTrace: $stacktrace");
