@@ -79,8 +79,9 @@ class ReceptionistDataRepository {
   Future<Response> updatePaidStatus({
     required String reservationId,
     required int paidStatus,
+    required String dateCreate,
   }) async {
-    final data = {"paidStatus": paidStatus};
+    final data = {"paidStatus": paidStatus, "dateCreate": dateCreate,};
     Dio _dio = new Dio();
     try {
       Response response = await _dio.patch(

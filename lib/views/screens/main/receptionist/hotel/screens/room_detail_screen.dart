@@ -8,7 +8,7 @@ import 'package:hotel_management_system/view_models/receptionist/room_provider.d
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_payment_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/booking_card.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
+import 'package:hotel_management_system/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
 class RoomDetail extends StatefulWidget {

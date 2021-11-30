@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/request_card.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 
 class ResOthersList extends StatefulWidget {
   static const String nameRoute = '/resotherslist';
@@ -24,7 +24,7 @@ class _ResOthersListState extends State<ResOthersList> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: 'Restaurant Orders List',
       ),
       body: SingleChildScrollView(

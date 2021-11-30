@@ -5,7 +5,7 @@ import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
@@ -28,7 +28,7 @@ class BookingPaymentDetail extends StatelessWidget {
     final reservation =
         (ModalRoute.of(context)!.settings.arguments as ReservationRoom);
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: 'Room ' + reservation.room.roomName,
       ),
       body: SingleChildScrollView(
@@ -225,6 +225,7 @@ class BookingPaymentDetail extends StatelessWidget {
                             1,
                             () => DialogSuccessNotify().onUpdateSucces(
                                 context, "Pay success!", RoomDetail.nameRoute),
+                            DateTime.now().toIso8601String(),
                           ),
                       textColor: whiteColor,
                       endColor: endButtonLinearColor,

@@ -8,7 +8,7 @@ import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/room_widget.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
+import 'package:hotel_management_system/widgets/custom_back_button.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';

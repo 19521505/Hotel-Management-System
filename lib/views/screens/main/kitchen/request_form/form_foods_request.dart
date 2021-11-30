@@ -6,8 +6,9 @@ import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
-import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/custom_notification_pop_dialog.dart';
+import 'package:hotel_management_system/widgets/delete_item_widget.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
@@ -34,7 +35,7 @@ class _FoodRequestState extends State<FoodRequest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: 'Form Request',
       ),
       body: Consumer<RequestProvider>(builder: (context, provider, child) {
@@ -78,7 +79,7 @@ class _BodyFormReqState extends State<BodyFormReq> {
     showDialog(
         context: context,
         builder: (context) {
-          return NotificationDialog(content: 'Submit request successfully');
+          return NotificationPopDialog(content: 'Submit request successfully');
         });
   }
 
@@ -221,19 +222,23 @@ class _BodyFormReqState extends State<BodyFormReq> {
                     final eachItem = provider.detailIngredient[index];
                     final price =
                         eachItem.ingredient.ingrePrice * eachItem.quantity;
-                    return ReqDetailCard(
-                      deleteDetailRequest: () {
-                        DialogSuccessNotify().onDeleteItem(
-                          context,
-                          'Do delete this Ingredient?',
-                          provider.deleteDetailIngre,
-                          provider.detailIngredient[index],
-                        );
+                    return Dismissible(
+                      key: ValueKey<int>(
+                          provider.detailIngredient[index].hashCode),
+                      onDismissed: (DismissDirection direction) {
+                        setState(() {
+                          {
+                            provider.detailIngredient.removeAt(index);
+                          }
+                        });
                       },
-                      ingreName: eachItem.ingredient.ingreName,
-                      price: price.toString(),
-                      quantity: eachItem.quantity.toString(),
-                      unit: eachItem.ingredient.unit.toString(),
+                      background: DeleteItemWidget(),
+                      child: ReqDetailCard(
+                        ingreName: eachItem.ingredient.ingreName,
+                        price: price.toString(),
+                        quantity: eachItem.quantity.toString(),
+                        unit: eachItem.ingredient.unit.toString(),
+                      ),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) =>

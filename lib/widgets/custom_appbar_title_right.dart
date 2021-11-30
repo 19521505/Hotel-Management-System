@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
+import 'package:hotel_management_system/widgets/custom_back_button.dart';
 
-class CustomFormAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomFormAppBar({
+class CustomAppbarTitleRight extends StatelessWidget
+    implements PreferredSizeWidget {
+  const CustomAppbarTitleRight({
     Key? key,
     required this.title,
   }) : super(key: key);

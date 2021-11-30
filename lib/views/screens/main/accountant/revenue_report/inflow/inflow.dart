@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:provider/provider.dart';
 
 class CashInflowPage extends StatefulWidget {
@@ -21,7 +21,9 @@ class _CashInflowPageState extends State<CashInflowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomFormAppBar(title: "Cash Inflow"),
+      appBar: CustomAppbarTitleRight(
+        title: "Cash Inflow",
+      ),
       body: Container(
         child: Column(
           children: [

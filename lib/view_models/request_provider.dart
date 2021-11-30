@@ -107,12 +107,6 @@ class RequestProvider extends ChangeNotifier {
     return _requestDetail;
   }
 
-  void deleteDetailIngre(DetailsReq detailsReq) {
-    _requestDetail
-        .removeWhere((element) => element.ingredient == element.ingredient);
-    notifyListeners();
-  }
-
   Future sendRequest(String dateTime, String staffId, String nameRequest,
       Function onSuccess) async {
     if (_requestDetail.isNotEmpty) {

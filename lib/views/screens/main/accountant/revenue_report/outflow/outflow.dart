@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
-import 'package:hotel_management_system/views/screens/main/widgets/custom_back_button.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_back_button.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:provider/provider.dart';
 
 class CashOutflowPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: 'Cash Outflow',
       ),
       body: SingleChildScrollView(

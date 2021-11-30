@@ -72,13 +72,6 @@ class EntertainmentProvider extends ChangeNotifier {
           .map((e) => e.totalPrice)
           .reduce((value, element) => value + element);
 
-  Future deleteDetailEntertainment(DetailEnterBill detailEnterBill) async {
-    // ignore: unrelated_type_equality_checks
-    _listDetailEntertainment
-        .removeWhere((element) => element == detailEnterBill);
-    notifyListeners();
-  }
-
   // add entertainment bill
   Future addEntertainBill(
       String dateCreate, String staff, Function onSuccess) async {

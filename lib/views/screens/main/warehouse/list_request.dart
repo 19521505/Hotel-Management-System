@@ -6,7 +6,7 @@ import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/request_card.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +40,7 @@ class _ListRequestState extends State<ListRequest> {
   Widget build(BuildContext context) {
     final type = ModalRoute.of(context)!.settings.arguments as RequestType;
     return Scaffold(
-      appBar: CustomFormAppBar(
+      appBar: CustomAppbarTitleRight(
         title: type == RequestType.Import ? 'Import Request' : 'Export Request',
       ),
       body: Consumer<WarehouseProvider>(builder: (context, provider, child) {

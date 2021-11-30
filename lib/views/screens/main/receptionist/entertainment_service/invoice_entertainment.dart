@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
@@ -6,8 +7,9 @@ import 'package:hotel_management_system/models/entertainment_service/typeTicket.
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/entertainment_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/widgets/entertainment_detail_widget.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
-import 'package:hotel_management_system/widgets/custom_notification_dialog.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/custom_notification_pop_dialog.dart';
+import 'package:hotel_management_system/widgets/delete_item_widget.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
@@ -61,7 +63,7 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
     showDialog(
         context: context,
         builder: (context) {
-          return NotificationDialog(content: 'Submit Bill successfully');
+          return NotificationPopDialog(content: 'Submit Bill successfully');
         });
   }
 
@@ -73,7 +75,9 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
     final entertainment = args.entertainment;
     final staff = context.read<AuthProvider>().currentStaff;
     return Scaffold(
-      appBar: CustomFormAppBar(title: entertainment.entertainName),
+      appBar: CustomAppbarTitleRight(
+        title: entertainment.entertainName,
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
@@ -332,23 +336,28 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
                 return ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return EntertainmentDetail(
-                      entertainName: provider.listDetailEntertainment[index]
-                          .entertainment.entertainName,
-                      quantity: provider.listDetailEntertainment[index].quantity
-                          .toString(),
-                      totalPrice: provider
-                          .listDetailEntertainment[index].totalPrice
-                          .toString(),
-                      typeName: provider.listDetailEntertainment[index].type,
-                      deleteItem: () async {
-                        DialogSuccessNotify().onDeleteItem(
-                          context,
-                          'Do delete this Entertainment?',
-                          provider.deleteDetailEntertainment,
-                          provider.listDetailEntertainment[index],
-                        );
+                    return Dismissible(
+                      key: ValueKey<int>(
+                          provider.listDetailEntertainment[index].hashCode),
+                      onDismissed: (DismissDirection direction) {
+                        setState(() {
+                          {
+                            provider.listDetailEntertainment.removeAt(index);
+                          }
+                        });
                       },
+                      background: DeleteItemWidget(),
+                      child: EntertainmentDetail(
+                        entertainName: provider.listDetailEntertainment[index]
+                            .entertainment.entertainName,
+                        quantity: provider
+                            .listDetailEntertainment[index].quantity
+                            .toString(),
+                        totalPrice: provider
+                            .listDetailEntertainment[index].totalPrice
+                            .toString(),
+                        typeName: provider.listDetailEntertainment[index].type,
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) => SizedBox(

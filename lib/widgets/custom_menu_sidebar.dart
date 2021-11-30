@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../views/screens/screens.dart';
 
-class CustomMenuBar extends StatelessWidget {
+class CustomMenuSidebar extends StatelessWidget {
   final Staff staff;
-  const CustomMenuBar({Key? key, required this.staff}) : super(key: key);
+  const CustomMenuSidebar({Key? key, required this.staff}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
@@ -8,7 +9,7 @@ import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
-import 'package:hotel_management_system/widgets/custom_form_appbar.dart';
+import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
@@ -31,7 +32,9 @@ class DetailRequest extends StatelessWidget {
     final request =
         (ModalRoute.of(context)!.settings.arguments as List<Request>)[0];
     return Scaffold(
-      appBar: CustomFormAppBar(title: "Detail Request " + request.nameRequest),
+      appBar: CustomAppbarTitleRight(
+        title: "Detail Request " + request.nameRequest,
+      ),
       body: SingleChildScrollView(
         child: Container(
           height: size.height,
@@ -112,7 +115,6 @@ class DetailRequest extends StatelessWidget {
                   final price =
                       eachItem.ingredient.ingrePrice * eachItem.quantity;
                   return ReqDetailCard(
-                    deleteDetailRequest: () => null,
                     ingreName: eachItem.ingredient.ingreName,
                     price: price.toString(),
                     quantity: eachItem.quantity.toString(),

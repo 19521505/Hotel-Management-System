@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({
+class CustomMainCard extends StatelessWidget {
+  const CustomMainCard({
     Key? key,
     required this.title,
     required this.subTitle,
