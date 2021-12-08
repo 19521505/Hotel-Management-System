@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:hotel_management_system/models/form_request/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/services/data_provider/warehouse_data_provider.dart';
 
@@ -39,12 +40,10 @@ class WarehouseProvider extends ChangeNotifier {
     return _statusType;
   }
 
-  WarehouseProvider() {
-    loadListRequest();
-  }
+  WarehouseProvider() {}
 
   // load all request from api
-  void loadListRequest() async {
+  Future loadListRequest() async {
     _listTypeofRequest = await WarehouseDataProvider().typeofRequest();
     isLoad = false;
     notifyListeners();

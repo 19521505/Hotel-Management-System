@@ -3,6 +3,7 @@ import 'package:hotel_management_system/view_models/accountant/accountant_provid
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:hotel_management_system/view_models/restaurant/restaurant_bill_provider.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/routes/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -22,16 +23,20 @@ class HotelManagerSystem extends StatelessWidget {
           create: (context) => RequestProvider(),
           lazy: false,
         ),
-        ChangeNotifierProvider<WarehouseProvider>(
-          create: (context) => WarehouseProvider(),
-          lazy: false,
-        ),
+        // ChangeNotifierProvider<WarehouseProvider>(
+        //   create: (context) => WarehouseProvider(),
+        //   lazy: false,
+        // ),
         ChangeNotifierProvider<AccountantProvider>(
           create: (context) => AccountantProvider(),
           lazy: false,
         ),
         ChangeNotifierProvider<HotelProvider>(
           create: (context) => HotelProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider<RestaunrantBillProvider>(
+          create: (context) => RestaunrantBillProvider(),
           lazy: false,
         ),
       ],

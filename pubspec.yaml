@@ -37,6 +37,7 @@ dependencies:
   flutter_native_splash: ^1.2.4
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   flutter_slidable: ^1.1.0
+  another_flushbar: ^1.10.26
 flutter_native_splash:
   color: "#606CD3"
   image: assets/images/app_logo.png

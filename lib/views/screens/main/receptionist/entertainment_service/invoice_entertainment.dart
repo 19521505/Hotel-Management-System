@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/entertainment_service/entertainment.dart';
 import 'package:hotel_management_system/models/entertainment_service/typeTicket.dart';
@@ -13,6 +14,7 @@ import 'package:hotel_management_system/widgets/delete_item_widget.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
+import 'package:hotel_management_system/widgets/total_price_widget.dart';
 import 'package:provider/provider.dart';
 
 class InvoiceEntertainment extends StatefulWidget {
@@ -235,9 +237,9 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
                         builder: (context, provider, child) {
                       return InfoForm1(
                         title: "Price",
-                        content:
-                            (provider.getType().price * _quantity).toString() +
-                                " VND",
+                        content: FormatCurrency.currencyFormat
+                                .format(provider.getType().price * _quantity) +
+                            " VND",
                         sizeText: 16,
                       );
                     }),
@@ -353,9 +355,8 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
                         quantity: provider
                             .listDetailEntertainment[index].quantity
                             .toString(),
-                        totalPrice: provider
-                            .listDetailEntertainment[index].totalPrice
-                            .toString(),
+                        totalPrice: FormatCurrency.currencyFormat.format(
+                            provider.listDetailEntertainment[index].totalPrice),
                         typeName: provider.listDetailEntertainment[index].type,
                       ),
                     );
@@ -369,29 +370,11 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
               SizedBox(
                 height: size.height * 0.02,
               ),
-              Row(
-                children: [
-                  Text(
-                    "Total Price: ",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Consumer<EntertainmentProvider>(
-                      builder: (context, providerTotalPrice, child) {
-                    return Text(
-                      providerTotalPrice.totalPrice.toString(),
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: blackColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  })
-                ],
-              ),
+              Consumer<EntertainmentProvider>(
+                  builder: (context, providerTotalPrice, child) {
+                return TotalPriceWidget(
+                    totalPrice: providerTotalPrice.totalPrice);
+              }),
               SizedBox(
                 height: size.height * 0.02,
               ),

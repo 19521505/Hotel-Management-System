@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
-import 'package:hotel_management_system/models/enum/enum_type.dart';
-import 'package:hotel_management_system/models/form_request/request.dart';
-import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/form_res_bill_screen.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/pending_res_bills.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
-class WarehousePage extends StatelessWidget {
-  static const String nameRoute = '/warehouse';
-  static Route route(RouteSettings settings) {
+class WaiterPage extends StatelessWidget {
+  static const String nameRoute = '/waiter';
+  static Route route() {
     return MaterialPageRoute(
-      builder: (context) => WarehousePage(),
+      builder: (context) => WaiterPage(),
       settings: RouteSettings(
         name: nameRoute,
       ),
     );
   }
 
-  const WarehousePage({Key? key}) : super(key: key);
+  const WaiterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +45,20 @@ class WarehousePage extends StatelessWidget {
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
-              title: 'List of Import Requests',
-              subTitle: '...........',
+              title: 'New Restaurant Bill',
+              subTitle: '.....',
               press: () {
-                Navigator.pushNamed(
-                  context,
-                  ListRequest.nameRoute,
-                  arguments: RequestType.Import,
-                );
+                Navigator.pushNamed(context, FormRestaurantBill.nameRoute);
               },
             ),
             SizedBox(
               height: size.height * 0.01,
             ),
             CustomMainCard(
-              title: 'List of Export Requests',
-              subTitle: '...........',
+              title: 'Pay The Restaurant Bill',
+              subTitle: '.....',
               press: () {
-                Navigator.pushNamed(
-                  context,
-                  ListRequest.nameRoute,
-                  arguments: RequestType.Export,
-                );
+                Navigator.pushNamed(context, PendingResBills.nameRoute);
               },
             ),
           ],

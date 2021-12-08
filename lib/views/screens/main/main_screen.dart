@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/services/staff_info.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/waiter_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/widgets/main_appbar.dart';
 import 'package:hotel_management_system/widgets/custom_menu_sidebar.dart';
@@ -41,8 +42,6 @@ class _MainScreenState extends State<MainScreen> {
 
   _navigaToRolePage(int role) {
     switch (role) {
-      case 0:
-        return null;
       case 1:
         return null;
       case 2:
@@ -53,6 +52,8 @@ class _MainScreenState extends State<MainScreen> {
         return KitchenPage();
       case 5:
         return WarehousePage();
+      case 6:
+        return WaiterPage();
       default:
         return null;
     }

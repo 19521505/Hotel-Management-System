@@ -52,8 +52,8 @@ class EntertainmentDetail extends StatelessWidget {
               height: size.height * 0.01,
             ),
             InfoForm1(
-              title: "Total Price",
-              content: totalPrice + 'VND',
+              title: "Price",
+              content: totalPrice +' VND',
               sizeText: 16,
             ),
           ],

@@ -1,4 +1,5 @@
 import 'package:hotel_management_system/models/hotel/room.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/staff/staff.dart';
 
 class ReservationRoom {
@@ -51,27 +52,5 @@ class ReservationRoom {
     data['paidStatus'] = this.paidStatus;
     data['totalPrice'] = this.totalPrice;
     return data;
-  }
-}
-
-enum PaidStatus { Paid, Unpaid }
-
-extension PaidStautsExtension on PaidStatus {
-  int get value {
-    final values = {
-      PaidStatus.Paid: 1,
-      PaidStatus.Unpaid: 2,
-    };
-
-    return values[this]!;
-  }
-
-  static PaidStatus fromInt(int value) {
-    final values = {
-      1: PaidStatus.Paid,
-      2: PaidStatus.Unpaid,
-    };
-
-    return values[value]!;
   }
 }
