@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
-import 'package:hotel_management_system/models/form_request/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
@@ -13,6 +13,7 @@ import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
+import 'package:hotel_management_system/widgets/total_price_widget.dart';
 import 'package:provider/provider.dart';
 
 class DetailRequest extends StatelessWidget {
@@ -177,6 +178,10 @@ class DetailRequest extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              TotalPriceWidget(totalPrice: request.totalPrice),
             ],
           ),
         ),

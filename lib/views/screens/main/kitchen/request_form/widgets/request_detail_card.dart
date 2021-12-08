@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 
 class ReqDetailCard extends StatelessWidget {
@@ -34,56 +36,43 @@ class ReqDetailCard extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Text(
-                  'Name: ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
+              RichText(
+                text: TextSpan(
+                    text: 'Name: ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: blackColor,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ingreName,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: redLightColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ]),
               ),
-              Expanded(
-                child: Text(
-                  ingreName,
-                  maxLines: 2,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
+              RichText(
+                text: TextSpan(
+                    text: 'Unit: ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: blackColor,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: unit,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: redLightColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ]),
               ),
-              Expanded(
-                child: Text(
-                  'Unit: ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  unit,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              // Expanded(
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     icon: Icon(
-              //       CupertinoIcons.multiply,
-              //       color: Colors.black,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           SizedBox(
@@ -91,46 +80,42 @@ class ReqDetailCard extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
-                child: Text(
-                  'Total Price: ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
+              RichText(
+                text: TextSpan(
+                    text: 'Quantity: ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: blackColor,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: quantity,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: redLightColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ]),
               ),
-              Expanded(
-                child: Text(
-                  price,
-                  maxLines: 2,
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  'Amount: ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  quantity,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
+              RichText(
+                text: TextSpan(
+                    text: 'Price: ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: blackColor,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: price + ' VND',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: redLightColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ]),
               ),
             ],
           ),

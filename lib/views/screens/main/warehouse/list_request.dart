@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
-import 'package:hotel_management_system/models/form_request/enum_status.dart';
-import 'package:hotel_management_system/models/form_request/request.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/request_card.dart';
@@ -12,9 +12,12 @@ import 'package:provider/provider.dart';
 
 class ListRequest extends StatefulWidget {
   static const String nameRoute = '/listrequest';
-  static Route route(RouteSettings settings) {
+  static Route route(settings) {
     return MaterialPageRoute(
-      builder: (context) => ListRequest(),
+      builder: (_) => ChangeNotifierProvider<WarehouseProvider>(
+        create: (_) => WarehouseProvider(),
+        child: ListRequest(),
+      ),
       settings: settings,
     );
   }
@@ -27,12 +30,17 @@ class ListRequest extends StatefulWidget {
 
 class _ListRequestState extends State<ListRequest> {
   @override
-  void didChangeDependencies() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await context.read<WarehouseProvider>().loadListRequest();
       context.read<WarehouseProvider>().typeofRequest =
           ModalRoute.of(context)!.settings.arguments as RequestType;
     });
+  }
 
+  @override
+  void didChangeDependencies() {
     super.didChangeDependencies();
   }
 
@@ -174,7 +182,7 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(
-                  height: size.height * 0.025,
+                  height: size.height * 0.02,
                 ),
               );
             }),

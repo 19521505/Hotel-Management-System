@@ -16,6 +16,12 @@ import 'package:hotel_management_system/views/screens/main/receptionist/hotel/sc
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/add_detail_dish.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/add_food_screen.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/detail_res_bill.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/form_res_bill_screen.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/pending_res_bills.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/waiter_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
@@ -80,6 +86,19 @@ class AppRoutes {
         return EntertainmentScreen.route();
       case InvoiceEntertainment.nameRoute:
         return InvoiceEntertainment.route(settings);
+      /**
+        * Waiter Department 
+      */
+      case WaiterPage.nameRoute:
+        return WaiterPage.route();
+      case FormRestaurantBill.nameRoute:
+        return FormRestaurantBill.route();
+      case AddFoodScreen.nameRoute:
+        return AddFoodScreen.route();
+      case PendingResBills.nameRoute:
+        return PendingResBills.route(settings);
+      case ResBillDetail.nameRoute:
+        return ResBillDetail.route(settings);
       /**
         * Default 
       */

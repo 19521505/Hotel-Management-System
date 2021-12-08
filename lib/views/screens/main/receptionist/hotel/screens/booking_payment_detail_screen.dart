@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
@@ -93,7 +95,9 @@ class BookingPaymentDetail extends StatelessWidget {
                     ),
                     InfoForm1(
                       title: "Room " + reservation.room.roomName,
-                      content: reservation.room.roomPrice.toString() + " VND",
+                      content: FormatCurrency.currencyFormat
+                              .format(reservation.room.roomPrice) +
+                          " VND/Day",
                       sizeText: 18,
                     ),
                     SizedBox(
@@ -121,7 +125,9 @@ class BookingPaymentDetail extends StatelessWidget {
                     ),
                     InfoForm1(
                       title: "Total Price ",
-                      content: reservation.totalPrice.toString() + " VND",
+                      content: FormatCurrency.currencyFormat
+                              .format(reservation.totalPrice) +
+                          " VND",
                       sizeText: 18,
                     ),
                     Divider(
