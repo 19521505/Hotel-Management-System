@@ -23,10 +23,10 @@ class HotelManagerSystem extends StatelessWidget {
           create: (context) => RequestProvider(),
           lazy: false,
         ),
-        // ChangeNotifierProvider<WarehouseProvider>(
-        //   create: (context) => WarehouseProvider(),
-        //   lazy: false,
-        // ),
+        ChangeNotifierProvider<WarehouseProvider>(
+          create: (context) => WarehouseProvider(),
+          lazy: false,
+        ),
         ChangeNotifierProvider<AccountantProvider>(
           create: (context) => AccountantProvider(),
           lazy: false,

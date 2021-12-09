@@ -14,10 +14,7 @@ class ListRequest extends StatefulWidget {
   static const String nameRoute = '/listrequest';
   static Route route(settings) {
     return MaterialPageRoute(
-      builder: (_) => ChangeNotifierProvider<WarehouseProvider>(
-        create: (_) => WarehouseProvider(),
-        child: ListRequest(),
-      ),
+      builder: (_) => ListRequest(),
       settings: settings,
     );
   }
@@ -32,15 +29,15 @@ class _ListRequestState extends State<ListRequest> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       await context.read<WarehouseProvider>().loadListRequest();
       context.read<WarehouseProvider>().typeofRequest =
           ModalRoute.of(context)!.settings.arguments as RequestType;
     });
-  }
-
-  @override
-  void didChangeDependencies() {
     super.didChangeDependencies();
   }
 
