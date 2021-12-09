@@ -17,7 +17,7 @@ class EntertainBill {
 
   EntertainBill.fromJson(Map<String, dynamic> json) {
     enBillID = json['_id'];
-    date = json['date'];
+    date = DateTime.parse(json['date']);
     if (json['entertainBillDetail'] != null) {
       entertainBillDetail = <DetailEnterBill>[];
       json['entertainBillDetail'].forEach((v) {

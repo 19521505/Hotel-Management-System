@@ -1,46 +1,52 @@
-import 'package:hotel_management_system/models/form_request/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/restaurant/detailResBill.dart';
 import 'package:hotel_management_system/models/staff/staff.dart';
 
 class ResBill {
-  late String resBillID;
+  late String resBillId;
   late StatusType status;
+  late PaidStatus paidStatus;
   late DateTime date;
-  late List<DetailResBill> detailsResBill;
+  late List<DetailResBill> resBillDetail;
   late Staff staff;
-  late double totalPrice;
+  late int totalPrice;
 
-  ResBill(
-      {required this.resBillID,
-      required this.status,
-      required this.date,
-      required this.detailsResBill,
-      required this.staff,
-      required this.totalPrice});
+  ResBill({
+    required this.resBillId,
+    required this.status,
+    required this.paidStatus,
+    required this.date,
+    required this.resBillDetail,
+    required this.staff,
+    required this.totalPrice,
+  });
 
   ResBill.fromJson(Map<String, dynamic> json) {
-    resBillID = json['resBillID'];
-    status = json['status'];
-    date = json['date'];
-    if (json['detailsResBill'] != null) {
-      detailsResBill = <DetailResBill>[];
-      json['detailsResBill'].forEach((v) {
-        detailsResBill.add(new DetailResBill.fromJson(v));
+    resBillId = json['_id'];
+    status = StatusTypeExtension.fromInt(json['status']);
+    paidStatus = PaidStautsExtension.fromInt(json['paidStatus']);
+    date = DateTime.parse(json['date']);
+    if (json['resBillDetail'] != null) {
+      resBillDetail = <DetailResBill>[];
+      json['resBillDetail'].forEach((v) {
+        resBillDetail.add(new DetailResBill.fromJson(v));
       });
     }
-    staff = (json['staff'] != null ? new Staff.fromJson(json['staff']) : null)!;
+    staff =
+        (json['staffId'] != null ? new Staff.fromJson(json['staffId']) : null)!;
     totalPrice = json['totalPrice'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['resBillID'] = this.resBillID;
+    data['_id'] = this.resBillId;
     data['status'] = this.status;
+    data['paidStatus'] = this.paidStatus;
     data['date'] = this.date;
-    data['detailsResBill'] =
-        this.detailsResBill.map((v) => v.toJson()).toList();
+    data['resBillDetail'] = this.resBillDetail.map((v) => v.toJson()).toList();
     if (this.staff != null) {
-      data['staff'] = this.staff.toJson();
+      data['staffId'] = this.staff.toJson();
     }
     data['totalPrice'] = this.totalPrice;
     return data;

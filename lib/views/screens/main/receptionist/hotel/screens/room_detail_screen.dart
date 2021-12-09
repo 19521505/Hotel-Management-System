@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
 import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';

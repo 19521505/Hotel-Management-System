@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';

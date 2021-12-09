@@ -11,7 +11,7 @@ class DeleteItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: deleteItemColor,
+        color: redLightColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(

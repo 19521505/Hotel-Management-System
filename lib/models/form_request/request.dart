@@ -1,4 +1,5 @@
-import 'package:hotel_management_system/models/form_request/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/detailsReq.dart';
 import 'package:hotel_management_system/models/staff/staff.dart';
 
@@ -52,27 +53,5 @@ class Request {
         this.ingredientDetail.map((v) => v.toJson()).toList();
     data['total'] = this.totalPrice;
     return data;
-  }
-}
-
-enum RequestType { Import, Export }
-
-extension RequestTypeExtension on RequestType {
-  int get value {
-    final values = {
-      RequestType.Import: 1,
-      RequestType.Export: 2,
-    };
-
-    return values[this]!;
-  }
-
-  static RequestType fromInt(int value) {
-    final values = {
-      1: RequestType.Import,
-      2: RequestType.Export,
-    };
-
-    return values[value]!;
   }
 }
