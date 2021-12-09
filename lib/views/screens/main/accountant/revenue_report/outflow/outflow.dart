@@ -69,45 +69,48 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                             ),
                           ],
                         ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                        'assets/images/ic_pin_staff.png'),
-                                    Text(
-                                      provider.listFilterRequest[index].staff
-                                          .fullName,
-                                      style: TextStyle(
-                                        fontSize: 16,
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                          'assets/images/ic_pin_staff.png'),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        provider.listFilterRequest[index].staff
+                                            .fullName,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, OutFlowItemDetail.nameRoute,
-                                          arguments: provider
-                                              .listFilterRequest[index]);
-                                    },
-                                    child: RightCircularBlackArrow(size: size),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Row(
+                                  Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(context,
+                                            OutFlowItemDetail.nameRoute,
+                                            arguments: provider
+                                                .listFilterRequest[index]);
+                                      },
+                                      child:
+                                          RightCircularBlackArrow(size: size),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,14 +136,10 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                       ))
                                 ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Row(
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,9 +175,9 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                     ],
                                   )
                                 ],
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },

@@ -70,6 +70,9 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
                               secondText: FormatDateTime.formatterDay
                                   .format(payment.date),
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
                             FormRow(
                               firstText: "Status",
                               secondText: "PAID",
