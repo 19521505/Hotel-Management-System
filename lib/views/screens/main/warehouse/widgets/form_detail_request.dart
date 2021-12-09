@@ -130,6 +130,10 @@ class DetailRequest extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.03,
               ),
+              TotalPriceWidget(totalPrice: request.totalPrice),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
               Container(
                 child: Visibility(
                   visible: request.status == StatusType.Done ||
@@ -140,7 +144,7 @@ class DetailRequest extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RoundedLinearButton(
-                        text: ' Acept ',
+                        text: 'Accept',
                         press: () => context
                             .read<WarehouseProvider>()
                             .updateStatusRequest(
@@ -178,10 +182,6 @@ class DetailRequest extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
-              TotalPriceWidget(totalPrice: request.totalPrice),
             ],
           ),
         ),
