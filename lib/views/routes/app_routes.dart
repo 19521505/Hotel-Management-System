@@ -5,7 +5,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow_item_detail.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/res_others_list_page.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/pending_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
@@ -20,7 +20,7 @@ import 'package:hotel_management_system/views/screens/main/waiter/screens/add_de
 import 'package:hotel_management_system/views/screens/main/waiter/screens/add_food_screen.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/detail_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/form_res_bill_screen.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/pending_res_bills.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_res_bills.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/waiter_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
@@ -43,8 +43,8 @@ class AppRoutes {
         return KitchenPage.route();
       case FoodRequest.nameRoute:
         return FoodRequest.route();
-      case ResOthersList.nameRoute:
-        return ResOthersList.route();
+      case PendingResList.nameRoute:
+        return PendingResList.route();
       /**
         * Accountant Department 
       */
@@ -95,8 +95,8 @@ class AppRoutes {
         return FormRestaurantBill.route();
       case AddFoodScreen.nameRoute:
         return AddFoodScreen.route();
-      case PendingResBills.nameRoute:
-        return PendingResBills.route(settings);
+      case PayResBills.nameRoute:
+        return PayResBills.route(settings);
       case ResBillDetail.nameRoute:
         return ResBillDetail.route(settings);
       /**

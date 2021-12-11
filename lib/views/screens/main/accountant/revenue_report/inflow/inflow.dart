@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:hotel_management_system/view_models/kitchen/request_provider.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:provider/provider.dart';
 

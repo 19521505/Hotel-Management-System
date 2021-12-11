@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
-import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:hotel_management_system/view_models/kitchen/request_provider.dart';
 import 'package:hotel_management_system/view_models/restaurant/restaurant_bill_provider.dart';
 import 'package:hotel_management_system/view_models/warehouse_provider.dart';
 import 'package:hotel_management_system/views/routes/app_routes.dart';
