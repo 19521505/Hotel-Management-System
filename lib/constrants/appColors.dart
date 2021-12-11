@@ -17,3 +17,6 @@ const blackColor = Colors.black;
 const whiteColor = Colors.white;
 const backgroundTotalPriceColor = Color(0xFFBEFFC1);
 const textTotalPriceColor = Color(0xFF3DCD43);
+
+const colorTextGrey = Color(0xFFAFAFAE);
+const colorYesButton = Color(0xFF34B638);

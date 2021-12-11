@@ -23,4 +23,8 @@ class AppEndpoints {
   static const addRestaunrantBill = "/resbill/add";
 
   static const paidResBill = "/resbill/paid";
+
+  static const statusResBill = "/resbill/status";
+
+  static const restaurantBill = '/resbill/';
 }

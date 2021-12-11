@@ -66,7 +66,7 @@ class _BodyResBillState extends State<BodyResBill> {
     showDialog(
         context: context,
         builder: (context) {
-          return NotificationPopDialog(content: 'Submit Bill successfully');
+          return NotificationPopDialog(content: 'Submit Bill successfully!');
         });
   }
 

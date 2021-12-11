@@ -36,4 +36,28 @@ class RestaurantDataProvider {
         (response.data as List).map((e) => ResBill.fromJson(e)).toList();
     return listBill;
   }
+
+  Future<void> updatePaidResBill(
+      {required String id, required int paidStatus}) async {
+    await RestaurantDataRepository()
+        .updatePaidResBill(id: id, paidStatus: paidStatus);
+  }
+
+  Future<void> deleteResBill({required String id}) async {
+    await RestaurantDataRepository().deleteResBill(id: id);
+  }
+
+  Future<List<ResBill>> getResBillPending({required int status}) async {
+    final response =
+        await RestaurantDataRepository().getResBillPending(status: status);
+    var listBill =
+        (response.data as List).map((e) => ResBill.fromJson(e)).toList();
+    return listBill;
+  }
+
+  Future<void> updateStatusResBill(
+      {required String id, required int status}) async {
+    await RestaurantDataRepository()
+        .updateStatusResBill(id: id, status: status);
+  }
 }
