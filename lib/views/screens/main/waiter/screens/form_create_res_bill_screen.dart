@@ -14,24 +14,25 @@ import 'package:hotel_management_system/widgets/total_price_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class FormRestaurantBill extends StatefulWidget {
+class FormCreateRestaurantBill extends StatefulWidget {
   static const String nameRoute = '/form_restaurant_bill';
   static Route route() {
     return MaterialPageRoute(
-      builder: (_) => FormRestaurantBill(),
+      builder: (_) => FormCreateRestaurantBill(),
       settings: RouteSettings(
         name: nameRoute,
       ),
     );
   }
 
-  const FormRestaurantBill({Key? key}) : super(key: key);
+  const FormCreateRestaurantBill({Key? key}) : super(key: key);
 
   @override
-  _FormRestaurantBillState createState() => _FormRestaurantBillState();
+  _FormCreateRestaurantBillState createState() =>
+      _FormCreateRestaurantBillState();
 }
 
-class _FormRestaurantBillState extends State<FormRestaurantBill> {
+class _FormCreateRestaurantBillState extends State<FormCreateRestaurantBill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

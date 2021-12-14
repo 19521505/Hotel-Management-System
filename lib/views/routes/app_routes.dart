@@ -18,11 +18,12 @@ import 'package:hotel_management_system/views/screens/main/receptionist/hotel/sc
 import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/add_detail_dish.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/add_food_screen.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/detail_res_bill.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/form_res_bill_screen.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_detail_res_bill.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/form_create_res_bill_screen.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_res_bills.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/waiter_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/manage_ingredient_screen.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
 import 'package:hotel_management_system/views/screens/screens.dart';
@@ -65,6 +66,8 @@ class AppRoutes {
         return ListRequest.route(settings);
       case DetailRequest.nameRoute:
         return DetailRequest.route(settings);
+      case ManageIngredientScreen.nameRoute:
+        return ManageIngredientScreen.route();
       /**
         * Receptionist Department 
       */
@@ -91,14 +94,14 @@ class AppRoutes {
       */
       case WaiterPage.nameRoute:
         return WaiterPage.route();
-      case FormRestaurantBill.nameRoute:
-        return FormRestaurantBill.route();
+      case FormCreateRestaurantBill.nameRoute:
+        return FormCreateRestaurantBill.route();
       case AddFoodScreen.nameRoute:
         return AddFoodScreen.route();
       case PayResBills.nameRoute:
         return PayResBills.route(settings);
-      case ResBillDetail.nameRoute:
-        return ResBillDetail.route(settings);
+      case PayResBillDetail.nameRoute:
+        return PayResBillDetail.route(settings);
       /**
         * Default 
       */

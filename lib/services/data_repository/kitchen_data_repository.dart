@@ -18,7 +18,7 @@ class KitchenDataRepository {
   static getAllIngre() async {
     Dio _dio = new Dio();
     try {
-      Response response = await _dio.get("$baseUrl${AppEndpoints.getAllIngre}");
+      Response response = await _dio.get("$baseUrl${AppEndpoints.ingredient}");
       var listIngre =
           (response.data as List).map((e) => Ingredient.fromJson(e)).toList();
       return listIngre;

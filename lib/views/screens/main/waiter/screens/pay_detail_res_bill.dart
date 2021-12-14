@@ -16,20 +16,20 @@ import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:hotel_management_system/widgets/total_price_widget.dart';
 import 'package:provider/provider.dart';
 
-class ResBillDetail extends StatelessWidget {
+class PayResBillDetail extends StatelessWidget {
   static const String nameRoute = '/detail_res_bill';
   static Route route(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (context) => ChangeNotifierProvider<PaidResBillProvider>.value(
         value: PaidResBillProvider(),
         // lazy: false,
-        child: ResBillDetail(),
+        child: PayResBillDetail(),
       ),
       settings: settings,
     );
   }
 
-  const ResBillDetail({Key? key}) : super(key: key);
+  const PayResBillDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class ResBillDetail extends StatelessWidget {
                                             .onUpdateSucces(
                                                 context,
                                                 "Bill has been Deleted!",
-                                                MainScreen.nameRoute),
+                                                PayResBills.nameRoute),
                                       ),
                                 );
                               },

@@ -25,6 +25,51 @@ class RestaurantDataRepository {
     }
   }
 
+  Future<Response> addFood({
+    required String foodName,
+    required int foodPrice,
+    required int foodType,
+  }) async {
+    Dio _dio = new Dio();
+    final data = {
+      "foodName": foodName,
+      "foodPrice": foodPrice,
+      "foodType": foodType
+    };
+    try {
+      Response response =
+          await _dio.post("$baseUrl${AppEndpoints.food}add", data: data);
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  Future<Response> updateFood(
+      {required String foodID, required int foodPrice}) async {
+    Dio _dio = new Dio();
+    final data = {"foodPrice": foodPrice};
+    try {
+      Response response =
+          await _dio.patch("$baseUrl${AppEndpoints.food}$foodID", data: data);
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  Future<Response> deleteFood({required String foodID}) async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response =
+          await _dio.delete("$baseUrl${AppEndpoints.food}$foodID");
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
   Future<Response> addRestaunrantBill({
     required int status,
     required String date,
