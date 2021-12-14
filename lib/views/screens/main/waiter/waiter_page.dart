@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/form_res_bill_screen.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/form_create_res_bill_screen.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_res_bills.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
@@ -48,7 +48,8 @@ class WaiterPage extends StatelessWidget {
               title: 'New Restaurant Bill',
               subTitle: '.....',
               press: () {
-                Navigator.pushNamed(context, FormRestaurantBill.nameRoute);
+                Navigator.pushNamed(
+                    context, FormCreateRestaurantBill.nameRoute);
               },
             ),
             SizedBox(

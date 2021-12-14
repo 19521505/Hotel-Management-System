@@ -15,7 +15,7 @@ class NotificationPopDialog extends StatelessWidget {
       title: Text(
         content,
         style: TextStyle(
-          color: kPrimaryColor,
+          color: blackColor,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

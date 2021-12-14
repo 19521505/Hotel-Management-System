@@ -3,6 +3,7 @@ import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/manage_ingredient_screen.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class WarehousePage extends StatelessWidget {
@@ -67,6 +68,19 @@ class WarehousePage extends StatelessWidget {
                   context,
                   ListRequest.nameRoute,
                   arguments: RequestType.Export,
+                );
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            CustomMainCard(
+              title: 'Manage Ingredients',
+              subTitle: '...........',
+              press: () {
+                Navigator.pushNamed(
+                  context,
+                  ManageIngredientScreen.nameRoute,
                 );
               },
             ),

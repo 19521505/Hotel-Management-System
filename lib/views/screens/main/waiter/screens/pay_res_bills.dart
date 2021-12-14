@@ -4,7 +4,7 @@ import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/enum_status.dart';
 import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/view_models/restaurant/paid_res_bill_provider.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/detail_res_bill.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_detail_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/widgets/restaurant_bill_widget.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -80,10 +80,13 @@ class _PayResBillsState extends State<PayResBills> {
                                 : item.status == StatusType.Pending
                                     ? Colors.yellow
                                     : Colors.red,
-                            press: () {
-                              Navigator.pushNamed(
-                                  context, ResBillDetail.nameRoute,
+                            press: () async {
+                              await Navigator.pushNamed(
+                                  context, PayResBillDetail.nameRoute,
                                   arguments: item);
+                              context
+                                  .read<PaidResBillProvider>()
+                                  .loadUnpaidResBills();
                             },
                           );
                         },
