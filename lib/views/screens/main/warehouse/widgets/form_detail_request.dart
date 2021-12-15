@@ -6,7 +6,7 @@ import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/enum_status.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
-import 'package:hotel_management_system/view_models/warehouse_provider.dart';
+import 'package:hotel_management_system/view_models/warehouse/warehouse_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
@@ -130,6 +130,10 @@ class DetailRequest extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.03,
               ),
+              TotalPriceWidget(totalPrice: request.totalPrice),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
               Container(
                 child: Visibility(
                   visible: request.status == StatusType.Done ||
@@ -140,7 +144,7 @@ class DetailRequest extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RoundedLinearButton(
-                        text: ' Acept ',
+                        text: 'Accept',
                         press: () => context
                             .read<WarehouseProvider>()
                             .updateStatusRequest(
@@ -178,10 +182,6 @@ class DetailRequest extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
-              TotalPriceWidget(totalPrice: request.totalPrice),
             ],
           ),
         ),

@@ -9,10 +9,13 @@ class NotificationPopDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       title: Text(
         content,
         style: TextStyle(
-          color: kPrimaryColor,
+          color: blackColor,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

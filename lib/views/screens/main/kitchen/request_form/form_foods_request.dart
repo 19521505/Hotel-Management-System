@@ -5,7 +5,7 @@ import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
-import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:hotel_management_system/view_models/kitchen/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/widgets/request_detail_card.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';

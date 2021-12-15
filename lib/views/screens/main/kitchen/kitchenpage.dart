@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
-import 'package:hotel_management_system/view_models/request_provider.dart';
+import 'package:hotel_management_system/view_models/kitchen/request_provider.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
-import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/res_others_list_page.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/pending_res_bill.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 import 'package:provider/provider.dart';
 
@@ -60,7 +60,7 @@ class KitchenPage extends StatelessWidget {
               title: 'Restaurant Orders List',
               subTitle: 'List of order requests from the Waiter',
               press: () {
-                Navigator.pushNamed(context, ResOthersList.nameRoute);
+                Navigator.pushNamed(context, PendingResList.nameRoute);
               },
             ),
           ],

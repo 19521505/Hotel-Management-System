@@ -18,4 +18,22 @@ class WarehouseDataProvider {
       {required String id, required int status}) async {
     await WarehouseDataRepository().updateStatusRequest(id: id, status: status);
   }
+
+  Future<void> addIngredient(
+      {required String ingreName,
+      required int ingrePrice,
+      required String unit}) async {
+    final response = await WarehouseDataRepository().addIngredient(
+        ingreName: ingreName, ingrePrice: ingrePrice, unit: unit);
+  }
+
+  Future<void> updateIngredient(
+      {required String ingreID, required int newPrice}) async {
+    final response = await WarehouseDataRepository()
+        .updateIngredient(ingreID: ingreID, newPrice: newPrice);
+  }
+
+  Future<void> deleteIngredient({required String ingreID}) async {
+    await WarehouseDataRepository().deleteIngredient(ingreID: ingreID);
+  }
 }

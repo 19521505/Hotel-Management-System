@@ -16,13 +16,13 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: whiteColor,
-      iconTheme: IconThemeData(color: backgroundButton),
+      iconTheme: IconThemeData(color: kPrimaryColor),
       centerTitle: true,
       title: Container(
         height: MediaQuery.of(context).size.height * 0.055,
         width: MediaQuery.of(context).size.width * 0.6,
         decoration: BoxDecoration(
-          color: backgroundButton,
+          color: kPrimaryColor,
           borderRadius: BorderRadius.all(
             Radius.circular(8.0),
           ),

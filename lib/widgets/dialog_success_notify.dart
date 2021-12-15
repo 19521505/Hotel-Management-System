@@ -72,4 +72,52 @@ class DialogSuccessNotify {
           );
         });
   }
+
+  Future<bool> confirmDialog(
+      BuildContext context, String content, VoidCallback onConfirm) async {
+    return await showDialog<bool?>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                title: Text(
+                  content,
+                  style: TextStyle(
+                    color: kPrimaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+
+                      onConfirm();
+                    },
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorYesButton,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: redLightColor,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }) ??
+        false;
+  }
 }

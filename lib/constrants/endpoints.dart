@@ -1,6 +1,6 @@
 class AppEndpoints {
   // get all ingredients
-  static const getAllIngre = "/ingredient";
+  static const ingredient = "/ingredient";
   // send a new request
   static const sendRequest = "/request/add";
   // get list typr of request and update status request
@@ -20,7 +20,13 @@ class AppEndpoints {
   // get all food
   static const getByFoodType = "/food/type";
 
+  static const food = "/food/";
+
   static const addRestaunrantBill = "/resbill/add";
 
   static const paidResBill = "/resbill/paid";
+
+  static const statusResBill = "/resbill/status";
+
+  static const restaurantBill = '/resbill/';
 }

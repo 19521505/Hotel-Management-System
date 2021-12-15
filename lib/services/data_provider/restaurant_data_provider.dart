@@ -14,6 +14,24 @@ class RestaurantDataProvider {
     return listFood;
   }
 
+  Future<void> addFood({
+    required String foodName,
+    required int foodPrice,
+    required int foodType,
+  }) async {
+    final response = await RestaurantDataRepository()
+        .addFood(foodName: foodName, foodPrice: foodPrice, foodType: foodType);
+  }
+
+  Future<void> updateFood({required String foodID, required foodPrice}) async {
+    await RestaurantDataRepository()
+        .updateFood(foodID: foodID, foodPrice: foodPrice);
+  }
+
+  Future<void> deleteFood({required String foodID}) async {
+    await RestaurantDataRepository().deleteFood(foodID: foodID);
+  }
+
   Future<void> addRestaunrantBill({
     required int status,
     required String date,
@@ -35,5 +53,29 @@ class RestaurantDataProvider {
     var listBill =
         (response.data as List).map((e) => ResBill.fromJson(e)).toList();
     return listBill;
+  }
+
+  Future<void> updatePaidResBill(
+      {required String id, required int paidStatus}) async {
+    await RestaurantDataRepository()
+        .updatePaidResBill(id: id, paidStatus: paidStatus);
+  }
+
+  Future<void> deleteResBill({required String id}) async {
+    await RestaurantDataRepository().deleteResBill(id: id);
+  }
+
+  Future<List<ResBill>> getResBillPending({required int status}) async {
+    final response =
+        await RestaurantDataRepository().getResBillPending(status: status);
+    var listBill =
+        (response.data as List).map((e) => ResBill.fromJson(e)).toList();
+    return listBill;
+  }
+
+  Future<void> updateStatusResBill(
+      {required String id, required int status}) async {
+    await RestaurantDataRepository()
+        .updateStatusResBill(id: id, status: status);
   }
 }
