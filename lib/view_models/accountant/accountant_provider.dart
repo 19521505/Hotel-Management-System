@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/entertainment_service/entertainBill.dart';
 import 'package:hotel_management_system/models/enum/enum_status.dart';
 import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
+import 'package:hotel_management_system/models/hotel/roomBill.dart';
 import 'package:hotel_management_system/services/data_provider/accountant_data_provider.dart';
 
 class AccountantProvider extends ChangeNotifier {
@@ -18,15 +20,16 @@ class AccountantProvider extends ChangeNotifier {
   StatusType _statusType = StatusType.All;
   RequestType _requestType = RequestType.Import;
 
-  // load all data from api
-  void getDataFromApi(String datetime) async {
-    var date = datetime.split("/");
-    String day = date[0];
-    String month = date[1];
-    String year = date[2];
+  AccountantProvider() {
+    getDataFromApi();
+  }
 
-    _listTypeofRequest = await AccountantDataProvider()
-        .getRequestBillByDate(year: year, month: month, day: day);
+  // load all data from api
+  Future getDataFromApi() async {
+    _listTypeofRequest = await AccountantDataProvider().getRequestBillByDate();
+    _listEntertainmentBill =
+        await AccountantDataProvider().getEntertainmentBillByDate();
+    _listRoomBill = await AccountantDataProvider().getRoomBillByDate();
     isLoad = false;
     notifyListeners();
   }
@@ -41,7 +44,6 @@ class AccountantProvider extends ChangeNotifier {
       _listFilterRequest.addAll(_listTypeofRequest.where((element) =>
           element.type == requestType && element.status == statusType));
     }
-    //notifyListeners();
   }
 
   // get total outflow
@@ -54,8 +56,31 @@ class AccountantProvider extends ChangeNotifier {
     return totalOutFlow;
   }
 
+  double getTotalInFlow() {
+    double totalInFlow = 0.0;
+    for (EntertainBill entertainBill in _listEntertainmentBill) {
+      totalInFlow += entertainBill.totalPrice;
+    }
+    for (ReservationRoom roomBill in _listRoomBill) {
+      totalInFlow += roomBill.totalPrice;
+    }
+    return totalInFlow;
+  }
+
+  int getInflowBillCount() {
+    return _listEntertainmentBill.length + _listRoomBill.length;
+  }
+
   // get list filter of request
   List<Request> get listFilterRequest {
-    return _listFilterRequest.reversed.toList();
+    return _listFilterRequest;
+  }
+
+  List<EntertainBill> get listEntertainmentBill {
+    return _listEntertainmentBill;
+  }
+
+  List<ReservationRoom> get listRoomBill {
+    return _listRoomBill;
   }
 }
