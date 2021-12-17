@@ -6,13 +6,8 @@ import 'package:hotel_management_system/services/data_repository/accountant_data
 
 class AccountantDataProvider {
   // get all request by date
-  Future<List<Request>> getRequestBillByDate({
-    required String year,
-    required String month,
-    required String day,
-  }) async {
-    final response = await AccountantRepository()
-        .getRequestBillByDay(day: day, month: month, year: year);
+  Future<List<Request>> getRequestBillByDate() async {
+    final response = await AccountantRepository().getRequestBillByDay();
     final requestList = (response.data as List)
         .map((request) => Request.fromJson(request))
         .toList();
@@ -20,13 +15,8 @@ class AccountantDataProvider {
   }
 
   // get all room bill by date
-  Future<List<ReservationRoom>> getRoomBillByDate({
-    required String year,
-    required String month,
-    required String day,
-  }) async {
-    final response = await AccountantRepository()
-        .getRoomBillByDay(day: day, month: month, year: year);
+  Future<List<ReservationRoom>> getRoomBillByDate() async {
+    final response = await AccountantRepository().getRoomBillByDay();
     final roomBillList = (response.data as List)
         .map((roomBill) => ReservationRoom.fromJson(roomBill))
         .toList();
@@ -34,13 +24,8 @@ class AccountantDataProvider {
   }
 
   // get all entertainment bill by date
-  Future<List<EntertainBill>> getEntertainmentBillByDate({
-    required String year,
-    required String month,
-    required String day,
-  }) async {
-    final response = await AccountantRepository()
-        .getEntertainmentBillByDay(day: day, month: month, year: year);
+  Future<List<EntertainBill>> getEntertainmentBillByDate() async {
+    final response = await AccountantRepository().getEntertainmentBillByDay();
     final entertainmentBillList = (response.data as List)
         .map((roomBill) => EntertainBill.fromJson(roomBill))
         .toList();

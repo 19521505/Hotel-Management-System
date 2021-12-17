@@ -28,13 +28,6 @@ class RevenueReport extends StatefulWidget {
 
 class _RevenueReportState extends State<RevenueReport> {
   @override
-  void didChangeDependencies() {
-    Provider.of<AccountantProvider>(context)
-        .getDataFromApi(FormatDateTime.formatterDay.format(DateTime.now()));
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbarTitleRight(
@@ -109,104 +102,111 @@ class BodyRevenueReport extends StatelessWidget {
                 FormHeader(headerText: "Fund Information"),
                 //
                 //Inflow Container
-                FormBoxDescription(
-                  nameRoute: CashInflowPage.nameRoute,
-                  hasIcon: true,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              FormRow(
-                                firstText: 'Type:',
-                                secondText: 'Cash Inflow',
+                Consumer<AccountantProvider>(
+                  builder: (context, provider, child) {
+                    return FormBoxDescription(
+                      nameRoute: CashInflowPage.nameRoute,
+                      hasIcon: true,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FormRow(
+                                    firstText: 'Type:',
+                                    secondText: 'Cash Inflow',
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Amount:",
+                                    secondText:
+                                        provider.getTotalInFlow().toString(),
+                                    secondTextColor: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Currency:",
+                                    secondText: "VND",
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Number of bill:",
+                                    secondText: provider
+                                        .getInflowBillCount()
+                                        .toString(),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Amount:",
-                                secondText: "1.000.000.000",
-                                secondTextColor: Colors.green,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Currency:",
-                                secondText: "VND",
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Number of bill:",
-                                secondText: "1210",
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
                 //
                 //Outflow Container
-                FormBoxDescription(
-                  nameRoute: CashOutflowPage.nameRoute,
-                  hasIcon: true,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              FormRow(
-                                firstText: 'Type:',
-                                secondText: 'Cash Outflow',
+                Consumer<AccountantProvider>(
+                  builder: (context, provider, child) {
+                    return FormBoxDescription(
+                      nameRoute: CashOutflowPage.nameRoute,
+                      hasIcon: true,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FormRow(
+                                    firstText: 'Type:',
+                                    secondText: 'Cash Outflow',
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Amount:",
+                                    secondText:
+                                        provider.getTotalOutflow().toString(),
+                                    secondTextColor: Colors.red,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Currency:",
+                                    secondText: "VND",
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FormRow(
+                                    firstText: "Number of bill:",
+                                    secondText: provider
+                                        .listFilterRequest.length
+                                        .toString(),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Amount:",
-                                secondText: context
-                                    .read<AccountantProvider>()
-                                    .getTotalOutflow()
-                                    .toString(),
-                                secondTextColor: Colors.red,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Currency:",
-                                secondText: "VND",
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FormRow(
-                                firstText: "Number of bill:",
-                                secondText: context
-                                    .read<AccountantProvider>()
-                                    .listFilterRequest
-                                    .length
-                                    .toString(),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
                 //
                 // Total

@@ -14,17 +14,15 @@ class AccountantRepository {
   static final baseUrl = AppConfigs.apiUrl;
 
   // get all room bill by day
-  Future<Response> getRoomBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getRoomBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.room}/find_room_bills",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.room}/paid_bills",
+      );
+
+      print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -33,17 +31,15 @@ class AccountantRepository {
   }
 
   // get all entertainment bill by day
-  Future<Response> getEntertainmentBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getEntertainmentBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.entertainment}/find_entertainment_bills_by_date",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.entertainment}/bill/",
+      );
+
+      print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -52,17 +48,13 @@ class AccountantRepository {
   }
 
   // get all request bill by day
-  Future<Response> getRequestBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getRequestBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.request}/find_request_bills_by_date",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.request}/",
+      );
 
       return response;
     } catch (e, stacktrace) {
