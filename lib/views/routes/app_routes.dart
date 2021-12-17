@@ -8,6 +8,9 @@ import 'package:hotel_management_system/views/screens/main/kitchen/request_form/
 import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/pending_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
+import 'package:hotel_management_system/views/screens/main/manager/manager_home_page.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
@@ -102,6 +105,15 @@ class AppRoutes {
         return PayResBills.route(settings);
       case PayResBillDetail.nameRoute:
         return PayResBillDetail.route(settings);
+      /**
+        * Manager Department 
+      */
+      case ManagerHomePage.nameRoute:
+        return ManagerHomePage.route();
+      case FoodManagementScreen.nameRoute:
+        return FoodManagementScreen.route();
+      case HotelManagementScreen.nameRoute:
+        return HotelManagementScreen.route();
       /**
         * Default 
       */

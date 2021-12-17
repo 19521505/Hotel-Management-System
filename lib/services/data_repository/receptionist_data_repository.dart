@@ -28,6 +28,24 @@ class ReceptionistDataRepository {
     }
   }
 
+  Future<Response> addNewRoom(
+      {required String roomName, required int roomPrice}) async {
+    Dio _dio = new Dio();
+    final data = {"roomName": roomName, "roomPrice": roomPrice};
+    Response response =
+        await _dio.post("$baseUrl${AppEndpoints.room}", data: data);
+    return response;
+  }
+
+  Future<Response> updateRoom(
+      {required String roomId, required int newPrice}) async {
+    Dio _dio = new Dio();
+    final data = {"roomPrice": newPrice};
+    Response response =
+        await _dio.patch("$baseUrl${AppEndpoints.room}$roomId", data: data);
+    return response;
+  }
+
   // get a room detail
   Future<Response> getRoomDetail({required String roomId}) async {
     Dio _dio = new Dio();
@@ -81,7 +99,10 @@ class ReceptionistDataRepository {
     required int paidStatus,
     required String dateCreate,
   }) async {
-    final data = {"paidStatus": paidStatus, "dateCreate": dateCreate,};
+    final data = {
+      "paidStatus": paidStatus,
+      "dateCreate": dateCreate,
+    };
     Dio _dio = new Dio();
     try {
       Response response = await _dio.patch(
@@ -91,6 +112,13 @@ class ReceptionistDataRepository {
     } catch (e, stacktrace) {
       throw Exception("Exception occured: $e trackTrace: $stacktrace");
     }
+  }
+
+  Future<Response> deleteBooking({required String reservationId}) async {
+    Dio _dio = new Dio();
+    Response response =
+        await _dio.delete("$baseUrl${AppEndpoints.roomDetail}$reservationId");
+    return response;
   }
 
   /* Entertainment Service Department */

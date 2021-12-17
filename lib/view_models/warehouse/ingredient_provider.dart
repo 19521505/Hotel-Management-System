@@ -5,7 +5,7 @@ import 'package:hotel_management_system/services/data_provider/warehouse_data_pr
 import 'package:hotel_management_system/services/data_repository/kitchen_data_repository.dart';
 
 class IngredientProvider extends ChangeNotifier {
-  bool isLoad = true;
+  bool _isLoad = true;
   List<Ingredient> _listIngredient = [];
   TextEditingController ingreNameText = TextEditingController();
   TextEditingController ingrePriceText = TextEditingController();
@@ -17,6 +17,13 @@ class IngredientProvider extends ChangeNotifier {
     loadAllIngredient();
   }
 
+  bool get isLoad => _isLoad;
+
+  set isLoad(value) {
+    _isLoad = value;
+    notifyListeners();
+  }
+
   List<Ingredient> get listIngredient {
     return _listIngredient;
   }
@@ -24,7 +31,6 @@ class IngredientProvider extends ChangeNotifier {
   void loadAllIngredient() async {
     _listIngredient = await KitchenDataRepository.getAllIngre();
     isLoad = false;
-    notifyListeners();
   }
 
   void clearTextAddIngre() {
@@ -38,6 +44,7 @@ class IngredientProvider extends ChangeNotifier {
         ingrePriceText.text.isNotEmpty &&
         unitText.text.isNotEmpty) {
       try {
+        isLoad = true;
         await WarehouseDataProvider().addIngredient(
             ingreName: ingreNameText.text,
             ingrePrice: int.parse(ingrePriceText.text),
@@ -45,7 +52,6 @@ class IngredientProvider extends ChangeNotifier {
         onSuccess();
         loadAllIngredient();
         clearTextAddIngre();
-        notifyListeners();
       } on DioError catch (err) {
         err.message;
       }
@@ -57,11 +63,12 @@ class IngredientProvider extends ChangeNotifier {
       Function onSuccess, Function onFail, String ingreID) async {
     if (ingreNewPriceText.text.isNotEmpty) {
       try {
+        isLoad = true;
         await WarehouseDataProvider().updateIngredient(
             ingreID: ingreID, newPrice: int.parse(ingreNewPriceText.text));
         onSuccess();
+        ingreNewPriceText.clear();
         loadAllIngredient();
-        notifyListeners();
       } on DioError catch (err) {
         err.message;
       }

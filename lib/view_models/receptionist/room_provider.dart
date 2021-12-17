@@ -14,7 +14,7 @@ class RoomProvider extends ChangeNotifier {
     loadRoomDetail();
   }
 
-  void loadRoomDetail() async {
+  Future<void> loadRoomDetail() async {
     _roomDetail = await ReceptionistDataProvider()
         .getRoomDetail(roomId: selectedRoom.roomId);
     isLoad = false;

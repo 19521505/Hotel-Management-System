@@ -8,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/waiter/widgets/res_bi
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/custom_notification_pop_dialog.dart';
 import 'package:hotel_management_system/widgets/delete_item_widget.dart';
+import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:hotel_management_system/widgets/total_price_widget.dart';
@@ -182,7 +183,7 @@ class _BodyResBillState extends State<BodyResBill> {
               text: 'SEND',
               press: () {
                 context.read<RestaunrantBillProvider>().addRestaurantBill(
-                    DateTime.now().toIso8601String(), staff.staffID, onSuccess);
+                    DateTimeExtension.getUtc, staff.staffID, onSuccess);
               },
               textColor: whiteColor,
               startColor: startButtonLinearColor,

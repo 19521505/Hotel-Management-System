@@ -12,6 +12,7 @@ import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/custom_notification_pop_dialog.dart';
 import 'package:hotel_management_system/widgets/delete_item_widget.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
+import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:hotel_management_system/widgets/total_price_widget.dart';
@@ -382,7 +383,7 @@ class _InvoiceEntertainmentState extends State<InvoiceEntertainment> {
                 text: 'Pay',
                 press: () {
                   context.read<EntertainmentProvider>().addEntertainBill(
-                      dateCreate.toIso8601String(), staff.staffID, onSuccess);
+                      DateTimeExtension.getUtc, staff.staffID, onSuccess);
                 },
                 textColor: whiteColor,
                 startColor: startButtonLinearColor,

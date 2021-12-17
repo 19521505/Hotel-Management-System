@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/paid_status.dart';
-import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
 import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_payment_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/booking_card.dart';
 import 'package:hotel_management_system/widgets/custom_back_button.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
 class RoomDetail extends StatefulWidget {
   static const String nameRoute = '/room_detail';
   static Route route(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => ChangeNotifierProvider<RoomProvider>.value(
-        value: RoomProvider(settings.arguments as Room),
+      builder: (context) => ChangeNotifierProvider<RoomProvider>(
+        create: (_) => RoomProvider(settings.arguments as Room),
         // lazy: false,
         child: RoomDetail(),
       ),
@@ -68,47 +68,53 @@ class _RoomDetailState extends State<RoomDetail> {
         ],
         elevation: 1,
       ),
-      body: Container(
-        padding: EdgeInsets.all(
-          size.height * 0.02,
-        ),
-        child: Consumer<RoomProvider>(builder: (context, provider, child) {
-          return ListView.separated(
-            itemBuilder: (BuildContext context, int index) {
-              return BookingCard(
-                customerName: provider.listRoomDetal[index].customerName,
-                customerPhone: provider.listRoomDetal[index].customerPhone,
-                checkIn: FormatDateTime.formatterDay
-                    .format(provider.listRoomDetal[index].checkIn),
-                checkOut: FormatDateTime.formatterDay
-                    .format(provider.listRoomDetal[index].checkOut),
-                dateCreate: FormatDateTime.formatterDay
-                    .format(provider.listRoomDetal[index].dateCreate),
-                timeCreate: FormatDateTime.formatterTime
-                    .format(provider.listRoomDetal[index].dateCreate),
-                paidStatus: provider.listRoomDetal[index].paidStatus
-                    .toString()
-                    .replaceAll("PaidStatus.", ""),
-                color:
-                    provider.listRoomDetal[index].paidStatus == PaidStatus.Paid
+      body: Consumer<RoomProvider>(builder: (context, provider, child) {
+        return ModalProgressHUD(
+          inAsyncCall: provider.isLoad,
+          child: Container(
+            padding: EdgeInsets.all(
+              size.height * 0.02,
+            ),
+            child: RefreshIndicator(
+              onRefresh: () => provider.loadRoomDetail(),
+              child: ListView.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  return BookingCard(
+                    customerName: provider.listRoomDetal[index].customerName,
+                    customerPhone: provider.listRoomDetal[index].customerPhone,
+                    checkIn: FormatDateTime.formatterDay
+                        .format(provider.listRoomDetal[index].checkIn),
+                    checkOut: FormatDateTime.formatterDay
+                        .format(provider.listRoomDetal[index].checkOut),
+                    dateCreate: FormatDateTime.formatterDay
+                        .format(provider.listRoomDetal[index].dateCreate),
+                    timeCreate: FormatDateTime.formatterTime
+                        .format(provider.listRoomDetal[index].dateCreate),
+                    paidStatus: provider.listRoomDetal[index].paidStatus
+                        .toString()
+                        .replaceAll("PaidStatus.", ""),
+                    color: provider.listRoomDetal[index].paidStatus ==
+                            PaidStatus.Paid
                         ? Colors.green
                         : Colors.yellow,
-                press: () {
-                  Navigator.pushNamed(
-                    context,
-                    BookingPaymentDetail.nameRoute,
-                    arguments: provider.listRoomDetal[index],
+                    press: () {
+                      Navigator.pushNamed(
+                        context,
+                        BookingPaymentDetail.nameRoute,
+                        arguments: provider.listRoomDetal[index],
+                      );
+                    },
                   );
                 },
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) => SizedBox(
-              height: size.height * 0.01,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: size.height * 0.01,
+                ),
+                itemCount: provider.listRoomDetal.length,
+              ),
             ),
-            itemCount: provider.listRoomDetal.length,
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -5,13 +5,13 @@ import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
-import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
+import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class BookingPaymentDetail extends StatelessWidget {
   static const String nameRoute = '/booking_payment_detail';
@@ -223,7 +223,7 @@ class BookingPaymentDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     RoundedLinearButton(
-                      text: "Pay",
+                      text: "   Pay   ",
                       press: () => context
                           .read<HotelProvider>()
                           .updatePaidStatus(
@@ -231,17 +231,30 @@ class BookingPaymentDetail extends StatelessWidget {
                             1,
                             () => DialogSuccessNotify().onUpdateSucces(
                                 context, "Pay success!", RoomDetail.nameRoute),
-                            DateTime.now().toIso8601String(),
+                            DateTimeExtension.getUtc,
                           ),
                       textColor: whiteColor,
                       endColor: endButtonLinearColor,
                       startColor: startButtonLinearColor,
                     ),
-                    // RoundedLinearButton(
-                    //   text: "Cancel",
-                    //   press: () {},
-                    //   textColor: whiteColor,
-                    // )
+                    RoundedLinearButton(
+                      text: "Cancel",
+                      press: () {
+                        DialogSuccessNotify().confirmDialog(
+                            context, "Do you wanto delete this Booking?", () {
+                          context
+                              .read<HotelProvider>()
+                              .deleteBooking(reservation.id);
+                          Navigator.popUntil(
+                              context,
+                              (route) =>
+                                  route.settings.name == RoomDetail.nameRoute);
+                        });
+                      },
+                      textColor: whiteColor,
+                      endColor: endCancelButtonLinearColor,
+                      startColor: startCancleButtonLinearColor,
+                    )
                   ],
                 ),
               ),

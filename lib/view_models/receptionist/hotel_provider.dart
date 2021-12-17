@@ -54,6 +54,8 @@ class HotelProvider extends ChangeNotifier {
         );
         loadAllRoom();
         onBookingSuccess();
+        customerName.clear();
+        customerPhone.clear();
         notifyListeners();
       } on DioError catch (err) {
         err.message;
@@ -70,6 +72,16 @@ class HotelProvider extends ChangeNotifier {
           paidStatus: paidStatus,
           dateCreate: dateCreate);
       onUpdateSuccess();
+    } on DioError catch (err) {
+      err.message;
+    }
+    notifyListeners();
+  }
+
+  Future deleteBooking(String reservationId) async {
+    try {
+      await ReceptionistDataProvider()
+          .deleteBooking(reservationId: reservationId);
     } on DioError catch (err) {
       err.message;
     }

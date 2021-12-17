@@ -5,10 +5,12 @@ class Dish extends Food {
     required foodID,
     required foodName,
     required foodPrice,
+    required image,
   }) : super(
           foodID: foodID,
           foodName: foodName,
           foodPrice: foodPrice,
+          image: image,
         );
 
   Dish.fromJson(Map<String, dynamic> json) : super.fromJson(json);

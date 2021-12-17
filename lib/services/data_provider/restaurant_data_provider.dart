@@ -18,14 +18,21 @@ class RestaurantDataProvider {
     required String foodName,
     required int foodPrice,
     required int foodType,
+    required String image,
   }) async {
-    final response = await RestaurantDataRepository()
-        .addFood(foodName: foodName, foodPrice: foodPrice, foodType: foodType);
+    final response = await RestaurantDataRepository().addFood(
+        foodName: foodName,
+        foodPrice: foodPrice,
+        foodType: foodType,
+        image: image);
   }
 
-  Future<void> updateFood({required String foodID, required foodPrice}) async {
+  Future<void> updateFood(
+      {required String foodID,
+      required int foodPrice,
+      required String foodName}) async {
     await RestaurantDataRepository()
-        .updateFood(foodID: foodID, foodPrice: foodPrice);
+        .updateFood(foodID: foodID, foodPrice: foodPrice, foodName: foodName);
   }
 
   Future<void> deleteFood({required String foodID}) async {

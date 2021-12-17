@@ -1,5 +1,5 @@
 import 'dart:collection';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hotel_management_system/models/restaurant/food.dart';
 import 'package:hotel_management_system/services/data_provider/restaurant_data_provider.dart';
@@ -9,17 +9,20 @@ class FoodProvider extends ChangeNotifier {
   List<Food> _listFood = [];
   String _searchString = "";
 
+  TextEditingController newPriceText = TextEditingController();
+  TextEditingController newNameText = TextEditingController();
+
   FoodProvider(int foodType) {
     loadFood(foodType);
   }
 
-  void loadFood(int foodType) async {
+  Future<void> loadFood(int foodType) async {
     _listFood = await RestaurantDataProvider().getAllFood(foodType: foodType);
     isLoad = false;
     notifyListeners();
   }
 
-  // sort listview
+  // sort listview for search
 
   UnmodifiableListView<Food> get listFood => _searchString.isEmpty
       ? UnmodifiableListView(_listFood)
@@ -31,7 +34,38 @@ class FoodProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // List<Food> get listFood {
-  //   return _listFood;
-  // }
+  void clearAllText() {
+    newNameText.clear();
+    newPriceText.clear();
+  }
+
+  Future deleteFood(String foodID, int foodType) async {
+    try {
+      await RestaurantDataProvider().deleteFood(foodID: foodID);
+      await loadFood(foodType);
+      notifyListeners();
+    } on DioError catch (err) {
+      err.message;
+    }
+  }
+
+  Future updateFood(
+      String foodID, Function onSuccess, Function onFail, int foodType) async {
+    if (newPriceText.text.isNotEmpty && newNameText.text.isNotEmpty) {
+      try {
+        await RestaurantDataProvider().updateFood(
+            foodID: foodID,
+            foodPrice: int.parse(newPriceText.text),
+            foodName: newNameText.text);
+        onSuccess();
+        clearAllText();
+        loadFood(foodType);
+        notifyListeners();
+      } on DioError catch (err) {
+        err.message;
+      }
+    } else {
+      onFail();
+    }
+  }
 }

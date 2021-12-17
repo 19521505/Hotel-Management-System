@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
-import 'package:hotel_management_system/models/enum/enum_type.dart';
-import 'package:hotel_management_system/models/form_request/request.dart';
-import 'package:hotel_management_system/views/screens/main/warehouse/list_request.dart';
-import 'package:hotel_management_system/views/screens/main/warehouse/manage_ingredient_screen.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
-class WarehousePage extends StatelessWidget {
-  static const String nameRoute = '/warehouse';
-  static Route route(RouteSettings settings) {
+class ManagerHomePage extends StatelessWidget {
+  static const String nameRoute = '/manager';
+  static Route route() {
     return MaterialPageRoute(
-      builder: (context) => WarehousePage(),
+      builder: (context) => ManagerHomePage(),
       settings: RouteSettings(
         name: nameRoute,
       ),
     );
   }
 
-  const WarehousePage({Key? key}) : super(key: key);
+  const ManagerHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,41 +45,31 @@ class WarehousePage extends StatelessWidget {
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
-              title: 'List of Import Requests',
-              subTitle: '...........',
+              title: 'Watch Report',
+              subTitle: 'Report Daily from Accountant',
               press: () {
-                Navigator.pushNamed(
-                  context,
-                  ListRequest.nameRoute,
-                  arguments: RequestType.Import,
-                );
+                // Navigator.pushNamed(
+                //     context, FormCreateRestaurantBill.nameRoute);
               },
             ),
             SizedBox(
               height: size.height * 0.01,
             ),
             CustomMainCard(
-              title: 'List of Export Requests',
-              subTitle: '...........',
+              title: 'Food Management',
+              subTitle: 'Add, Edit, Delete Food',
               press: () {
-                Navigator.pushNamed(
-                  context,
-                  ListRequest.nameRoute,
-                  arguments: RequestType.Export,
-                );
+                Navigator.pushNamed(context, FoodManagementScreen.nameRoute);
               },
             ),
             SizedBox(
               height: size.height * 0.01,
             ),
             CustomMainCard(
-              title: 'Ingredients Management',
-              subTitle: '...........',
+              title: 'Hotel Management',
+              subTitle: 'Add, Edit Room',
               press: () {
-                Navigator.pushNamed(
-                  context,
-                  ManageIngredientScreen.nameRoute,
-                );
+                Navigator.pushNamed(context, HotelManagementScreen.nameRoute);
               },
             ),
           ],
