@@ -22,7 +22,7 @@ class AccountantRepository {
         "$baseUrl${AppEndpoints.room}/paid_bills",
       );
 
-      print(response);
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -39,7 +39,7 @@ class AccountantRepository {
         "$baseUrl${AppEndpoints.entertainment}/bill/",
       );
 
-      print(response);
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -55,6 +55,25 @@ class AccountantRepository {
       Response response = await _dio.get(
         "$baseUrl${AppEndpoints.request}/",
       );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all restaurant bill by day
+  Future<Response> getRestaurantBillByDay() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.request}/",
+      );
+
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
