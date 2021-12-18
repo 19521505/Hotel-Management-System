@@ -3,15 +3,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/models/ingredient.dart';
-import 'package:hotel_management_system/widgets/custom_bottom_sheet.dart';
+import 'package:hotel_management_system/views/screens/main/warehouse/widgets/bottom_sheet_mangement_ingre.dart';
 
 class IngredientCard extends StatelessWidget {
   const IngredientCard({
     Key? key,
     required this.ingredient,
+    required this.press,
   }) : super(key: key);
 
   final Ingredient ingredient;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class IngredientCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  CustomBottomSheet().showBottomUpdate(context, ingredient);
+                  press();
                 },
                 child: SvgPicture.asset(
                   'assets/svg/ic_edit.svg',

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/restaurant/food_provider.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/widgets/food_card.dart';
+import 'package:hotel_management_system/views/screens/main/manager/widgets/food_manage_card.dart';
+import 'package:hotel_management_system/widgets/delete_item_widget.dart';
+import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
-class AddDetailDrink extends StatelessWidget {
+class DishManagamentScreen extends StatelessWidget {
   static Widget get instance {
     return ChangeNotifierProvider<FoodProvider>(
-      create: (_) => FoodProvider(2),
+      create: (_) => FoodProvider(1),
       // lazy: false,
-      child: AddDetailDrink(),
+      child: DishManagamentScreen(),
     );
   }
 
-  const AddDetailDrink({Key? key}) : super(key: key);
+  const DishManagamentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class AddDetailDrink extends StatelessWidget {
         builder: (context, provider, child) {
           return ModalProgressHUD(
             inAsyncCall: provider.isLoad,
-            child: BodyDetailDrink(),
+            child: _BodyDishManagement(),
           );
         },
       ),
@@ -31,16 +33,14 @@ class AddDetailDrink extends StatelessWidget {
   }
 }
 
-class BodyDetailDrink extends StatefulWidget {
-  const BodyDetailDrink({
-    Key? key,
-  }) : super(key: key);
+class _BodyDishManagement extends StatefulWidget {
+  const _BodyDishManagement({Key? key}) : super(key: key);
 
   @override
-  State<BodyDetailDrink> createState() => _BodyDetailDrinkState();
+  _BodyDishManagementState createState() => _BodyDishManagementState();
 }
 
-class _BodyDetailDrinkState extends State<BodyDetailDrink> {
+class _BodyDishManagementState extends State<_BodyDishManagement> {
   final TextEditingController _searchFoodController = TextEditingController();
   String _searchText = "";
   @override
@@ -62,7 +62,6 @@ class _BodyDetailDrinkState extends State<BodyDetailDrink> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.only(
@@ -116,17 +115,32 @@ class _BodyDetailDrinkState extends State<BodyDetailDrink> {
               height: size.height * 0.02,
             ),
             Consumer<FoodProvider>(builder: (context, provider, child) {
-              return ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  return FoodCard(
-                    food: provider.listFood[index],
-                  );
-                },
-                separatorBuilder: (context, index) => SizedBox(
-                  height: size.height * 0.01,
+              return RefreshIndicator(
+                onRefresh: () => provider.loadFood(1),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    final dish = provider.listFood[index];
+                    return Dismissible(
+                      key: ValueKey<int>(dish.hashCode),
+                      confirmDismiss: (DismissDirection direction) {
+                        return DialogSuccessNotify().confirmDialog(
+                            context, "Do you want to delete this Dish?", () {
+                          provider.deleteFood(dish.foodID, 1);
+                        });
+                      },
+                      background: DeleteItemWidget(),
+                      child: FoodMangeCard(
+                        food: dish,
+                        foodType: 1,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: size.height * 0.01,
+                  ),
+                  itemCount: provider.listFood.length,
                 ),
-                itemCount: provider.listFood.length,
               );
             }),
           ],

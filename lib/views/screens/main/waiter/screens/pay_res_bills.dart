@@ -34,7 +34,7 @@ class _PayResBillsState extends State<PayResBills> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppbarTitleRight(
-        title: 'List of Pending Restaurant Bills',
+        title: 'List of Unpaid Restaurant Bills',
       ),
       body: Consumer<PaidResBillProvider>(
         builder: (context, provider, child) {

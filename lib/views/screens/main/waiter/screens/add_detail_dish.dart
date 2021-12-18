@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/restaurant/food_provider.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/widgets/food_widget.dart';
+import 'package:hotel_management_system/views/screens/main/waiter/widgets/food_card.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -124,7 +124,7 @@ class _BodyDetailDishState extends State<BodyDetailDish> {
               return ListView.separated(
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return FoodWigdet(
+                  return FoodCard(
                     food: provider.listFood[index],
                   );
                 },

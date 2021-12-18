@@ -8,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/receptionist/hotel/sc
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
+import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -32,13 +33,14 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   DateTime checkOutDate = DateTime.now();
 
+  DateTime dateCreate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final room = (ModalRoute.of(context)!.settings.arguments as Room);
     final authProvider = Provider.of<AuthProvider>(context);
     final booking = Provider.of<HotelProvider>(context);
-    final dateCreate = DateTime.now();
 
     return Scaffold(
       appBar: CustomAppbarTitleRight(
@@ -300,9 +302,9 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                 press: () => context.read<HotelProvider>().addBooking(
                       room.roomId,
                       authProvider.currentStaff.staffID,
-                      dateCreate.toIso8601String(),
-                      checkInDate.toIso8601String(),
-                      checkOutDate.toIso8601String(),
+                      DateTimeExtension.getUtc,
+                      checkInDate.stringUtc,
+                      checkOutDate.stringUtc,
                       //count date stay in hotel and get total price
 
                       ((checkOutDate.difference(checkInDate).inDays) + 1) *

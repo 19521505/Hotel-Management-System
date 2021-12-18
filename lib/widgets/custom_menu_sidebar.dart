@@ -17,18 +17,25 @@ class CustomMenuSidebar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/thumnail.png'),
+              ),
+            ),
             accountName: Text(
               staff.fullName.toString(),
               style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
               ),
             ),
             accountEmail: Text(
               staff.name,
               style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                fontStyle: FontStyle.italic,
               ),
             ),
           ),

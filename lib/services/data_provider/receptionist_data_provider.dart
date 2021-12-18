@@ -12,6 +12,18 @@ class ReceptionistDataProvider {
     return listAllRoom;
   }
 
+  Future<void> addNewRoom(
+      {required String roomName, required int roomPrice}) async {
+    await ReceptionistDataRepository()
+        .addNewRoom(roomName: roomName, roomPrice: roomPrice);
+  }
+
+  Future<void> updateRoom(
+      {required String roomId, required int newPrice}) async {
+    await ReceptionistDataRepository()
+        .updateRoom(roomId: roomId, newPrice: newPrice);
+  }
+
   // get a room detail
   Future<List<ReservationRoom>> getRoomDetail({required String roomId}) async {
     final response =
@@ -56,6 +68,11 @@ class ReceptionistDataProvider {
         reservationId: reservationId,
         paidStatus: paidStatus,
         dateCreate: dateCreate);
+  }
+
+  Future<void> deleteBooking({required String reservationId}) async {
+    await ReceptionistDataRepository()
+        .deleteBooking(reservationId: reservationId);
   }
 
   /* Receptionist Department - Entertainment Service */

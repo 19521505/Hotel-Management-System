@@ -94,7 +94,6 @@ class DialogSuccessNotify {
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context, true);
-
                       onConfirm();
                     },
                     child: Text(

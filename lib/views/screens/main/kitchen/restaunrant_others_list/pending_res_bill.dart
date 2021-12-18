@@ -66,7 +66,7 @@ class BodyPendingBill extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              'List of Orders',
+              'List of Pending Orders',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16,

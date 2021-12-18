@@ -17,6 +17,7 @@ import 'package:hotel_management_system/widgets/total_price_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
+import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 
 class FoodRequest extends StatefulWidget {
   static const String nameRoute = '/foodrequest';
@@ -89,7 +90,7 @@ class _BodyFormReqState extends State<BodyFormReq> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final authProvider = Provider.of<AuthProvider>(context);
-    final dateData = (DateTime.now().toIso8601String());
+    final dateData = (DateTimeExtension.getUtc);
     final dateDisplay = DateFormat('HH:MM dd/MM/yyyy').format(DateTime.now());
     final nameRequest = '#ID' + DateFormat('HHMMddMMyy').format(DateTime.now());
     return SingleChildScrollView(
