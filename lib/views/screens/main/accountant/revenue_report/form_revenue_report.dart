@@ -28,6 +28,12 @@ class RevenueReport extends StatefulWidget {
 
 class _RevenueReportState extends State<RevenueReport> {
   @override
+  void didChangeDependencies() {
+    context.read<AccountantProvider>().getDataFromApi();
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbarTitleRight(
