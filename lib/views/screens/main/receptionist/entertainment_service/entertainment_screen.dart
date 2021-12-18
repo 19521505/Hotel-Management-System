@@ -4,6 +4,7 @@ import 'package:hotel_management_system/views/screens/main/receptionist/entertai
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/widgets/entertainment_widget.dart';
 
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -81,6 +82,10 @@ class BodyEntertainmentScreen extends StatelessWidget {
               nameEntertainment:
                   provider.listEntertainment[index].entertainName,
               press: () {
+                if (provider.listEntertainment[index].typeTicket.isEmpty) {
+                  return DialogSuccessNotify()
+                      .onFail(context, 'The service has not approved!');
+                }
                 context.read<EntertainmentProvider>().setType(
                     provider.listEntertainment[index].typeTicket.first,
                     notify: false);
