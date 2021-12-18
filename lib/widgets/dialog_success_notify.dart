@@ -46,11 +46,13 @@ class DialogSuccessNotify {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            title: Text(
-              content,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
+            title: Center(
+              child: Text(
+                content,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
             actions: [

@@ -13,8 +13,8 @@ class Entertainment {
   Entertainment.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     entertainName = json['entertainName'];
+    typeTicket = <TypeTicket>[];
     if (json['typeTicket'] != null) {
-      typeTicket = <TypeTicket>[];
       json['typeTicket'].forEach((v) {
         typeTicket.add(new TypeTicket.fromJson(v));
       });

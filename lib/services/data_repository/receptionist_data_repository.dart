@@ -85,8 +85,8 @@ class ReceptionistDataRepository {
       "totalPrice": totalPrice,
     };
     try {
-      Response response =
-          await _dio.patch("$baseUrl${AppEndpoints.room}$roomId", data: data);
+      Response response = await _dio
+          .post("$baseUrl${AppEndpoints.roomDetail}$roomId", data: data);
       return response;
     } catch (e, stacktrace) {
       throw Exception("Exception occured: $e stackTrace: $stacktrace");
