@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
+import 'package:hotel_management_system/services/data_provider/manager_data_provider.dart';
 import 'package:hotel_management_system/services/data_provider/receptionist_data_provider.dart';
 
 class HotelManagementProvider extends ChangeNotifier {
@@ -40,7 +41,7 @@ class HotelManagementProvider extends ChangeNotifier {
     if (roomNameText.text.isNotEmpty && roomPriceText.text.isNotEmpty) {
       try {
         isLoad = true;
-        await ReceptionistDataProvider().addNewRoom(
+        await ManagerDataProvider().addNewRoom(
             roomName: roomNameText.text,
             roomPrice: int.parse(roomPriceText.text));
         clearAddRoomText();
@@ -58,7 +59,7 @@ class HotelManagementProvider extends ChangeNotifier {
     if (newRoomPriceText.text.isNotEmpty) {
       try {
         isLoad = true;
-        await ReceptionistDataProvider().updateRoom(
+        await ManagerDataProvider().updateRoom(
             roomId: roomId, newPrice: int.parse(newRoomPriceText.text));
         newRoomPriceText.clear();
         loadAllRoom();

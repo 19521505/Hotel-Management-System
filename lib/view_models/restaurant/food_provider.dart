@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hotel_management_system/models/restaurant/food.dart';
+import 'package:hotel_management_system/services/data_provider/manager_data_provider.dart';
 import 'package:hotel_management_system/services/data_provider/restaurant_data_provider.dart';
 
 class FoodProvider extends ChangeNotifier {
@@ -41,7 +42,7 @@ class FoodProvider extends ChangeNotifier {
 
   Future deleteFood(String foodID, int foodType) async {
     try {
-      await RestaurantDataProvider().deleteFood(foodID: foodID);
+      await ManagerDataProvider().deleteFood(foodID: foodID);
       await loadFood(foodType);
       notifyListeners();
     } on DioError catch (err) {
@@ -53,7 +54,7 @@ class FoodProvider extends ChangeNotifier {
       String foodID, Function onSuccess, Function onFail, int foodType) async {
     if (newPriceText.text.isNotEmpty && newNameText.text.isNotEmpty) {
       try {
-        await RestaurantDataProvider().updateFood(
+        await ManagerDataProvider().updateFood(
             foodID: foodID,
             foodPrice: int.parse(newPriceText.text),
             foodName: newNameText.text);

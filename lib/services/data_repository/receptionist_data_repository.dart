@@ -28,24 +28,6 @@ class ReceptionistDataRepository {
     }
   }
 
-  Future<Response> addNewRoom(
-      {required String roomName, required int roomPrice}) async {
-    Dio _dio = new Dio();
-    final data = {"roomName": roomName, "roomPrice": roomPrice};
-    Response response =
-        await _dio.post("$baseUrl${AppEndpoints.room}", data: data);
-    return response;
-  }
-
-  Future<Response> updateRoom(
-      {required String roomId, required int newPrice}) async {
-    Dio _dio = new Dio();
-    final data = {"roomPrice": newPrice};
-    Response response =
-        await _dio.patch("$baseUrl${AppEndpoints.room}$roomId", data: data);
-    return response;
-  }
-
   // get a room detail
   Future<Response> getRoomDetail({required String roomId}) async {
     Dio _dio = new Dio();

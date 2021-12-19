@@ -17,6 +17,11 @@ class AppEndpoints {
   static const entertainment = "/entertainment/";
   static const addEntertainBill = "/entertainment/bill/";
 
+  static const deleteTicketInEntertainment =
+      "/entertainment/delete_ticket_in_entertainment/";
+
+  static const typeTicket = "/entertainment/type_ticket/";
+
   // get all food
   static const getByFoodType = "/food/type";
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:hotel_management_system/services/data_provider/manager_data_provider.dart';
 import 'package:hotel_management_system/services/data_provider/restaurant_data_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -38,7 +39,7 @@ class AddFoodProvider extends ChangeNotifier {
         foodTypeText.text.isNotEmpty &&
         imageFood.path != '') {
       try {
-        await RestaurantDataProvider().addFood(
+        await ManagerDataProvider().addFood(
             foodName: foodNameText.text,
             foodPrice: int.parse(foodPriceText.text),
             foodType: int.parse(foodTypeText.text),
