@@ -4,22 +4,32 @@ class Report {
   late String reportID;
   late String reportName;
   late Staff staff;
-  late String date;
-  late String reportDetail;
+  late DateTime date;
+  late double roomBillTotal;
+  late double resBillTotal;
+  late double entertainmentBillTotal;
+  late double outflowBillTotal;
 
-  Report(
-      {required this.reportID,
-      required this.reportName,
-      required this.staff,
-      required this.date,
-      required this.reportDetail});
+  Report({
+    this.reportID = "",
+    required this.reportName,
+    required this.staff,
+    required this.date,
+    required this.entertainmentBillTotal,
+    required this.outflowBillTotal,
+    required this.resBillTotal,
+    required this.roomBillTotal,
+  });
 
   Report.fromJson(Map<String, dynamic> json) {
     reportID = json['reportID'];
     reportName = json['reportName'];
     staff = Staff.fromJson(json['staff']);
-    date = json['date'];
-    reportDetail = json['reportDetail'];
+    date = DateTime.parse(json['date']);
+    entertainmentBillTotal = json['entertainmentBillTotal'];
+    outflowBillTotal = json['outflowBillTotal'];
+    resBillTotal = json['resBillTotal'];
+    roomBillTotal = json['roomBillTotal'];
   }
 
   Map<String, dynamic> toJson() {
@@ -28,7 +38,10 @@ class Report {
     data['reportName'] = this.reportName;
     data['staff'] = this.staff.toJson();
     data['date'] = this.date;
-    data['reportDetail'] = this.reportDetail;
+    data['entertainmentBillTotal'] = this.entertainmentBillTotal;
+    data['outflowBillTotal'] = this.outflowBillTotal;
+    data['resBillTotal'] = this.resBillTotal;
+    data['roomBillTotal'] = this.roomBillTotal;
     return data;
   }
 }
