@@ -4,6 +4,7 @@ class FormBoxDescription extends StatelessWidget {
   const FormBoxDescription(
       {Key? key,
       required this.child,
+      required this.onIconPress,
       this.hasIcon = false,
       this.nameRoute = "",
       this.image = "right_arrow_view_icon.png"})
@@ -13,6 +14,7 @@ class FormBoxDescription extends StatelessWidget {
   final bool hasIcon;
   final String nameRoute;
   final String image;
+  final VoidCallback onIconPress;
   @override
   Widget build(BuildContext context) {
     return hasIcon
@@ -42,10 +44,7 @@ class FormBoxDescription extends StatelessWidget {
               right: 10,
               child: Container(
                 child: GestureDetector(
-                  onTap: () async {
-                    if (nameRoute == "/outflow") {}
-                    Navigator.pushNamed(context, nameRoute);
-                  },
+                  onTap: onIconPress,
                   child: Image.asset('assets/images/' + image),
                 ),
               ),

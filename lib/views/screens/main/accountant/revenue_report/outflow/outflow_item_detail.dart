@@ -46,6 +46,7 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
                 headerText: 'Basic Information',
               ),
               FormBoxDescription(
+                onIconPress: () {},
                 image: "ic_paid.png",
                 hasIcon: true,
                 child: Row(

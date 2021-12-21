@@ -40,13 +40,13 @@ dependencies:
   another_flushbar: ^1.10.26
   image_picker: ^0.8.4+4
   cached_network_image: ^3.2.0
+  fl_chart: ^0.40.6
 flutter_native_splash:
   color: "#606CD3"
   image: assets/images/app_logo.png
   android: true
   ios: true
 
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter
