@@ -307,18 +307,20 @@ class BodyRevenueReport extends StatelessWidget {
                     return RoundedLinearButton(
                       text: "Create Report",
                       press: () {
-                        provider.submitReport(
-                            context.read<AuthProvider>().currentStaff, () {
-                          DialogSuccessNotify().onComplete(
-                              context, "Create Report Successfully", () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                RevenueReportResultPage.nameRoute,
-                                (route) => false,
-                                arguments: RevenueReportResultPageArgument(
-                                    provider, provider.report));
+                        if (!(provider.totalInFlow == 0 &&
+                            provider.totalOutFlow == 0 &&
+                            provider.totalProfit == 0)) {
+                          provider.submitReport(
+                              context.read<AuthProvider>().currentStaff, () {
+                            DialogSuccessNotify().onComplete(
+                                context, "Create Report Successfully", () {
+                              Navigator.pushNamed(
+                                  context, RevenueReportResultPage.nameRoute,
+                                  arguments: RevenueReportResultPageArgument(
+                                      provider, provider.report));
+                            });
                           });
-                        });
+                        }
                       },
                       textColor: Colors.white,
                       startColor: startButtonLinearColor,

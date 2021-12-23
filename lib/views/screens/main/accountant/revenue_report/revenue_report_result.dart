@@ -46,7 +46,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
     final argument = (ModalRoute.of(context)!.settings.arguments
         as RevenueReportResultPageArgument);
     return Scaffold(
-      appBar: CustomAppbarTitleRight(title: "Revenue Report Summary"),
+      appBar: CustomAppbarTitleRight(
+          title: "Revenue Report Summary", backToMainScreen: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -140,57 +141,33 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                   color: Color(0xffFF5C2D),
                                   text: 'Room Bill',
                                   isSquare: true,
-                                  secondText: argument.accountantProvider
-                                          .getPrecentageOfListType("RoomBill")
-                                          .toString() +
-                                      " - " +
-                                      argument
+                                  secondText: argument
                                           .accountantProvider.totalListRoomBill
-                                          .toStringAsFixed(1) +
-                                      "VND",
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
+                                          .toStringAsFixed(0) +
+                                      " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xffFFA539),
                                   text: 'Restaurant Bill',
                                   isSquare: true,
-                                  secondText: argument.accountantProvider
-                                          .getPrecentageOfListType("ResBill")
-                                          .toString() +
-                                      " - " +
-                                      argument.accountantProvider.totalOfResBill
-                                          .toStringAsFixed(1) +
-                                      "VND",
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
+                                  secondText: argument
+                                          .accountantProvider.totalOfResBill
+                                          .toStringAsFixed(0) +
+                                      " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff64B34B),
                                   text: 'Entertainment Bill',
                                   isSquare: true,
                                   secondText: argument.accountantProvider
-                                          .getPrecentageOfListType(
-                                              "EntertainmentBill")
-                                          .toString() +
-                                      " - " +
-                                      argument.accountantProvider
                                           .totalListEntertainmentBill
-                                          .toStringAsFixed(1) +
-                                      "VND",
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
+                                          .toStringAsFixed(0) +
+                                      " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff1FB5FF),
                                   text: 'Risk Bill',
                                   isSquare: true,
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
                                 ),
                               ],
                             ),

@@ -39,10 +39,6 @@ class AccountantProvider extends ChangeNotifier {
   RequestType _requestType = RequestType.Import;
   PaidStatus _paidStatus = PaidStatus.Paid;
 
-  AccountantProvider() {
-    getDataFromApi();
-  }
-
   @override
   void dispose() {
     totalListResBill = 0;
@@ -60,10 +56,10 @@ class AccountantProvider extends ChangeNotifier {
     _listRoomBill = await AccountantDataProvider().getRoomBillByDate();
     _listResBill =
         await AccountantDataProvider().getRestaurantBillByDate(_paidStatus);
-    if (totalInFlow != 0 && totalOutFlow != 0) {
-      getTotalProfit();
-    }
-    isLoad = false;
+    getTotalInFlow();
+    getTotalOutflow();
+    getTotalProfit();
+
     notifyListeners();
   }
 
@@ -111,6 +107,10 @@ class AccountantProvider extends ChangeNotifier {
   double getTotalProfit() {
     double _totalProfit = 0;
     _totalProfit = totalInFlow - totalOutFlow;
+    if (totalInFlow != 0 || totalOutFlow != 0) {
+      isLoad = false;
+      notifyListeners();
+    }
     return _totalProfit;
   }
 

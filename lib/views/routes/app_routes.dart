@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow_list.dart';
@@ -57,6 +58,8 @@ class AppRoutes {
       /**
         * Accountant Department 
       */
+      case AccountantPage.nameRoute:
+        return AccountantPage.route();
       case RevenueReport.nameRoute:
         return RevenueReport.route();
       case CashInflowPage.nameRoute:

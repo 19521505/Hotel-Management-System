@@ -50,7 +50,7 @@ class Indicator extends StatelessWidget {
                 height: size / 3,
               ),
               Text(
-                text,
+                secondText,
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
