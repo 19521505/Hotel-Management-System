@@ -57,4 +57,13 @@ class AccountantDataProvider {
   Future submitReport(Report report) async {
     await AccountantRepository().submitReport(report);
   }
+
+  // get report by date
+  Future<List<Report>> getAllReport() async {
+    final response = await AccountantRepository().getAllReport();
+    final reportList = (response.data as List)
+        .map((report) => Report.fromJson(report))
+        .toList();
+    return reportList;
+  }
 }

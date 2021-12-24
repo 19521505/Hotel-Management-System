@@ -7,9 +7,11 @@ class CustomAppbarTitleRight extends StatelessWidget
   const CustomAppbarTitleRight({
     Key? key,
     required this.title,
+    this.backToMainScreen = false,
   }) : super(key: key);
 
   final String title;
+  final bool backToMainScreen;
 
   @override
   Size get preferredSize => Size.fromHeight(60.0);
@@ -28,7 +30,11 @@ class CustomAppbarTitleRight extends StatelessWidget
         ),
       ),
       backgroundColor: Colors.white,
-      leading: CustomBackButton(),
+      leading: backToMainScreen
+          ? CustomBackButton(
+              backToMainScreen: backToMainScreen,
+            )
+          : CustomBackButton(),
       elevation: 1,
     );
   }

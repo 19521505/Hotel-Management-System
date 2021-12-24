@@ -1,38 +1,26 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/models/report/report.dart';
-import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
-import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
+import 'package:hotel_management_system/view_models/manager/revenue_report_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/indicator.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:provider/provider.dart';
 
-class RevenueReportResultPage extends StatefulWidget {
-  const RevenueReportResultPage({Key? key}) : super(key: key);
-  static const String nameRoute = '/revenue_report_result';
-  final List<Color> availableColors = const [
-    Colors.purpleAccent,
-    Colors.yellow,
-    Colors.lightBlue,
-    Colors.orange,
-    Colors.pink,
-    Colors.redAccent,
-  ];
+class ReportDetail extends StatefulWidget {
+  const ReportDetail({Key? key}) : super(key: key);
+  static const String nameRoute = '/revenue_report_detail';
 
   @override
-  _RevenueReportResultPageState createState() =>
-      _RevenueReportResultPageState();
+  _ReportDetailState createState() => _ReportDetailState();
 }
 
-class RevenueReportResultPageArgument {
-  final AccountantProvider accountantProvider;
-  final Report report;
-  RevenueReportResultPageArgument(this.accountantProvider, this.report);
+class ReportDetailArgument {
+  final RevenueReportProvider revenueReportProvider;
+  final int index;
+  ReportDetailArgument(this.revenueReportProvider, this.index);
 }
 
-class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
+class _ReportDetailState extends State<ReportDetail> {
   int touchedIndex = -1;
   final Color barBackgroundColor = const Color(0xff99ddff);
   final Duration animDuration = const Duration(milliseconds: 250);
@@ -43,11 +31,10 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final argument = (ModalRoute.of(context)!.settings.arguments
-        as RevenueReportResultPageArgument);
+    final argument =
+        (ModalRoute.of(context)!.settings.arguments as ReportDetailArgument);
     return Scaffold(
-      appBar: CustomAppbarTitleRight(
-          title: "Revenue Report Summary", backToMainScreen: true),
+      appBar: CustomAppbarTitleRight(title: "Revenue Report Summary"),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -124,54 +111,59 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                         sectionsSpace: 0,
                                         centerSpaceRadius: 40,
                                         sections: showingSections(
-                                            argument.accountantProvider)),
+                                            argument.revenueReportProvider,
+                                            argument.index)),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(right: size.height * 0.01),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Indicator(
-                                  color: Color(0xffFF5C2D),
-                                  text: 'Room Bill',
-                                  isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalListRoomBill
-                                          .toStringAsFixed(0) +
-                                      " VND",
+                          Consumer<RevenueReportProvider>(
+                            builder: (context, provider, child) {
+                              final report = argument.revenueReportProvider
+                                  .reportList[argument.index];
+                              return Padding(
+                                padding:
+                                    EdgeInsets.only(right: size.height * 0.01),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Indicator(
+                                      color: Color(0xffFF5C2D),
+                                      text: 'Room Bill',
+                                      isSquare: true,
+                                      secondText: report.roomBillTotal
+                                              .toStringAsFixed(0) +
+                                          " VND",
+                                    ),
+                                    Indicator(
+                                      color: Color(0xffFFA539),
+                                      text: 'Restaurant Bill',
+                                      isSquare: true,
+                                      secondText: report.resBillTotal
+                                              .toStringAsFixed(0) +
+                                          " VND",
+                                    ),
+                                    Indicator(
+                                      color: Color(0xff64B34B),
+                                      text: 'Entertainment Bill',
+                                      isSquare: true,
+                                      secondText: report.entertainmentBillTotal
+                                              .toStringAsFixed(0) +
+                                          " VND",
+                                    ),
+                                    Indicator(
+                                      color: Color(0xff1FB5FF),
+                                      text: 'Risk Bill',
+                                      isSquare: true,
+                                    ),
+                                  ],
                                 ),
-                                Indicator(
-                                  color: Color(0xffFFA539),
-                                  text: 'Restaurant Bill',
-                                  isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalOfResBill
-                                          .toStringAsFixed(0) +
-                                      " VND",
-                                ),
-                                Indicator(
-                                  color: Color(0xff64B34B),
-                                  text: 'Entertainment Bill',
-                                  isSquare: true,
-                                  secondText: argument.accountantProvider
-                                          .totalListEntertainmentBill
-                                          .toStringAsFixed(0) +
-                                      " VND",
-                                ),
-                                Indicator(
-                                  color: Color(0xff1FB5FF),
-                                  text: 'Risk Bill',
-                                  isSquare: true,
-                                ),
-                              ],
-                            ),
-                          ),
+                              );
+                            },
+                          )
                         ],
                       ),
                     ],
@@ -222,10 +214,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: BarChart(
-                                  isPlaying
-                                      ? randomData()
-                                      : mainBarData(
-                                          argument.accountantProvider),
+                                  mainBarData(argument.revenueReportProvider,
+                                      argument.index),
                                   swapAnimationDuration: animDuration,
                                 ),
                               ),
@@ -245,14 +235,7 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                               isPlaying ? Icons.pause : Icons.play_arrow,
                               color: const Color(0xff0f4a3c),
                             ),
-                            onPressed: () {
-                              setState(() {
-                                isPlaying = !isPlaying;
-                                if (isPlaying) {
-                                  refreshState();
-                                }
-                              });
-                            },
+                            onPressed: () {},
                           ),
                         ),
                       )
@@ -267,20 +250,22 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
     );
   }
 
-  List<PieChartSectionData> showingSections(AccountantProvider provider) {
+  List<PieChartSectionData> showingSections(
+      RevenueReportProvider provider, int index) {
     return List.generate(4, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
+      final totalRoomBill = provider.getPrecentageOfListType("RoomBill", index);
+      final totalResBill = provider.getPrecentageOfListType("ResBill", index);
+      final totalEntertainmentBill =
+          provider.getPrecentageOfListType("EntertainmentBill", index);
       switch (i) {
         case 0:
           return PieChartSectionData(
             color: const Color(0xffFF5C2D),
-            value: provider.getPrecentageOfListType("RoomBill"),
-            title: provider
-                    .getPrecentageOfListType("RoomBill")
-                    .toStringAsFixed(0) +
-                "%",
+            value: totalRoomBill,
+            title: totalRoomBill.toStringAsFixed(0) + "%",
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -290,10 +275,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
         case 1:
           return PieChartSectionData(
             color: const Color(0xffFFA539),
-            value: provider.getPrecentageOfListType("ResBill"),
-            title:
-                provider.getPrecentageOfListType("ResBill").toStringAsFixed(0) +
-                    '%',
+            value: totalResBill,
+            title: totalResBill.toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -303,11 +286,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
         case 2:
           return PieChartSectionData(
             color: const Color(0xff64B34B),
-            value: provider.getPrecentageOfListType("EntertainmentBill"),
-            title: provider
-                    .getPrecentageOfListType("EntertainmentBill")
-                    .toStringAsFixed(0) +
-                '%',
+            value: totalEntertainmentBill,
+            title: totalEntertainmentBill.toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -361,27 +341,31 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
     );
   }
 
-  List<BarChartGroupData> showingGroups(AccountantProvider provider) =>
+  List<BarChartGroupData> showingGroups(
+          RevenueReportProvider provider, int index) =>
       List.generate(3, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(provider.getMaxValueForChart(), 0,
-                double.parse(provider.totalInFlow.toStringAsFixed(1)),
+            return makeGroupData(provider.getMaxValueForChart(index), 0,
+                double.parse(provider.getTotalInflow(index).toStringAsFixed(1)),
                 isTouched: i == touchedIndexBarChart);
           case 1:
-            return makeGroupData(provider.getMaxValueForChart(), 1,
-                double.parse(provider.totalOutFlow.toStringAsFixed(1)),
+            return makeGroupData(
+                provider.getMaxValueForChart(index),
+                1,
+                double.parse(provider.reportList[index].outflowBillTotal
+                    .toStringAsFixed(1)),
                 isTouched: i == touchedIndexBarChart);
           case 2:
-            return makeGroupData(provider.getMaxValueForChart(), 2,
-                double.parse(provider.getTotalProfit().toStringAsFixed(1)),
+            return makeGroupData(provider.getMaxValueForChart(index), 2,
+                double.parse(provider.getTotalProfit(index).toStringAsFixed(1)),
                 isTouched: i == touchedIndexBarChart);
           default:
             return throw Error();
         }
       });
 
-  BarChartData mainBarData(AccountantProvider provider) {
+  BarChartData mainBarData(RevenueReportProvider provider, int index) {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -463,135 +447,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
       borderData: FlBorderData(
         show: false,
       ),
-      barGroups: showingGroups(provider),
+      barGroups: showingGroups(provider, index),
       gridData: FlGridData(show: false),
     );
-  }
-
-  //
-  //Party Region Alert By KSB
-  //          *           ,
-  //                    _/^\_
-  //                   <     >
-  //  *                 /.-.\         *
-  //           *        `/&\`                   *
-  //                   ,@.*;@,
-  //                  /_o.I %_\    *
-  //     *           (`'--:o(_@;
-  //                /`;--.,__ `')             *
-  //               ;@`o % O,*`'`&\
-  //         *    (`'--)_@ ;o %'()\      *
-  //              /`;--._`''--._O'@;
-  //             /&*,()~o`;-.,_ `""`)
-  //  *          /`,@ ;+& () o*`;-';\
-  //            (`""--.,_0 +% @' &()\
-  //            /-.,_    ``''--....-'`)  *
-  //       *    /@%;o`:;'--,.__   __.'\
-  //           ;*,&(); @ % &^;~`"`o;@();         *
-  //           /(); o^~; & ().o@*&`;&%O\
-  //     jgs   `"="==""==,,,.,="=="==="`
-  //        __.----.(\-''#####---...___...-----._
-  //      '`         \)_`"""""`
-  //              .--' ')
-  //            o(  )_-\
-  //     *        `"""` `         *                                        *
-//   ___ ___                *          _______ __    __   *   __      *
-//  |   Y   .-----.----.----.--.--.   |   _   |  |--|__.-----|  |_.--------.---.-.-----.
-//  |.      |  -__|   _|   _|  |  |   |.  1___|     |  |__ --|   _|        |  _  |__ --|    *
-//  |. \_/  |_____|__| |__| |___  |   |.  |___|__|__|__|_____|____|__|__|__|___._|_____|
-//  |:  |   |               |_____|   |:  1   |
-//  |::.|:. |         *               |::.. . |
-//  `--- ---'                         `-------'
-
-  BarChartData randomData() {
-    return BarChartData(
-      barTouchData: BarTouchData(
-        enabled: false,
-      ),
-      titlesData: FlTitlesData(
-          show: true,
-          bottomTitles: SideTitles(
-            showTitles: true,
-            getTextStyles: (context, value) => const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-            margin: 16,
-            getTitles: (double value) {
-              switch (value.toInt()) {
-                case 0:
-                  return 'M';
-                case 1:
-                  return 'T';
-                case 2:
-                  return 'W';
-                case 3:
-                  return 'T';
-                case 4:
-                  return 'F';
-                case 5:
-                  return 'S';
-                case 6:
-                  return 'S';
-                default:
-                  return '';
-              }
-            },
-          ),
-          leftTitles: SideTitles(
-            showTitles: false,
-          ),
-          topTitles: SideTitles(
-            showTitles: false,
-          ),
-          rightTitles: SideTitles(
-            showTitles: false,
-          )),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      barGroups: List.generate(7, (i) {
-        switch (i) {
-          case 0:
-            return makeGroupData(20, 0, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 1:
-            return makeGroupData(20, 1, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 2:
-            return makeGroupData(20, 2, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 3:
-            return makeGroupData(20, 3, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 4:
-            return makeGroupData(20, 4, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 5:
-            return makeGroupData(20, 5, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          case 6:
-            return makeGroupData(20, 6, Random().nextInt(15).toDouble() + 6,
-                barColor: widget.availableColors[
-                    Random().nextInt(widget.availableColors.length)]);
-          default:
-            return throw Error();
-        }
-      }),
-      gridData: FlGridData(show: false),
-    );
-  }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-        animDuration + const Duration(milliseconds: 50));
-    if (isPlaying) {
-      await refreshState();
-    }
   }
 }
