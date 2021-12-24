@@ -22,14 +22,15 @@ class Report {
   });
 
   Report.fromJson(Map<String, dynamic> json) {
-    reportID = json['reportID'];
+    reportID = json['_id'];
     reportName = json['reportName'];
     staff = Staff.fromJson(json['staff']);
     date = DateTime.parse(json['date']);
-    entertainmentBillTotal = json['entertainmentBillTotal'];
-    outflowBillTotal = json['outflowBillTotal'];
-    resBillTotal = json['resBillTotal'];
-    roomBillTotal = json['roomBillTotal'];
+    entertainmentBillTotal =
+        double.parse(json['entertainmentBillTotal'].toString());
+    outflowBillTotal = double.parse(json['outflowBillTotal'].toString());
+    resBillTotal = double.parse(json['resBillTotal'].toString());
+    roomBillTotal = double.parse(json['roomBillTotal'].toString());
   }
 
   Map<String, dynamic> toJson() {

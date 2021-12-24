@@ -14,8 +14,10 @@ import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_o
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
 import 'package:hotel_management_system/views/screens/main/manager/manager_home_page.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/daily_report_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/report_detail.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
@@ -155,6 +157,19 @@ class AppRoutes {
         return FoodManagementScreen.route();
       case HotelManagementScreen.nameRoute:
         return HotelManagementScreen.route();
+      case DailyReportScreen.nameRoute:
+        return DailyReportScreen.route();
+      case ReportDetail.nameRoute:
+        final args = settings.arguments as ReportDetailArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.revenueReportProvider)
+            ],
+            child: ReportDetail(),
+          ),
+        );
       /**
         * Default 
       */

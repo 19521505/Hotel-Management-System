@@ -89,12 +89,16 @@ class AccountantRepository {
     final data = {
       'reportName': report.reportName,
       'date': report.date.toString(),
-      'resBillTotal': report.resBillTotal,
-      'roomBillTotal': report.roomBillTotal,
-      'entertainmentBillTotal': report.entertainmentBillTotal,
-      'outflowBillTotal': report.outflowBillTotal,
+      'resBillTotal': double.parse(report.resBillTotal.toStringAsFixed(2)),
+      'roomBillTotal': double.parse(report.roomBillTotal.toStringAsFixed(2)),
+      'entertainmentBillTotal':
+          double.parse(report.entertainmentBillTotal.toStringAsFixed(2)),
+      'outflowBillTotal':
+          double.parse(report.outflowBillTotal.toStringAsFixed(2)),
       'staff': report.staff.staffID
     };
+
+    print(data);
 
     try {
       Response response = await _dio
@@ -115,6 +119,23 @@ class AccountantRepository {
     try {
       Response response = await _dio.get(
         "$baseUrl${AppEndpoints.reportEndpoint}/get_report_by_date",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get report by day
+  Future<Response> getAllReport() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.reportEndpoint}/",
       );
 
       //print(response);

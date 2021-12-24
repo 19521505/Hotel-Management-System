@@ -52,8 +52,16 @@ class _RevenueReportState extends State<RevenueReport> {
               size: 40.0,
             ),
             inAsyncCall: provider.isLoad,
-            child: Visibility(
-                visible: !provider.isLoad, child: BodyRevenueReport()),
+            child: provider.hasNoData
+                ? Visibility(
+                    visible: !provider.isLoad,
+                    child: Container(
+                      child: Center(
+                        child: Text("Has No Data To Report"),
+                      ),
+                    ))
+                : Visibility(
+                    visible: !provider.isLoad, child: BodyRevenueReport()),
           );
         },
       ),

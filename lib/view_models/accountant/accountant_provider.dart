@@ -17,6 +17,7 @@ import 'package:hotel_management_system/services/data_provider/accountant_data_p
 
 class AccountantProvider extends ChangeNotifier {
   bool isLoad = true;
+  bool hasNoData = false;
   // init list request
   List<Request> _listTypeofRequest = [];
   List<Request> _listFilterRequest = [];
@@ -108,6 +109,10 @@ class AccountantProvider extends ChangeNotifier {
     double _totalProfit = 0;
     _totalProfit = totalInFlow - totalOutFlow;
     if (totalInFlow != 0 || totalOutFlow != 0) {
+      isLoad = false;
+      notifyListeners();
+    } else if (totalInFlow == 0 && totalOutFlow == 0 && totalProfit == 0) {
+      hasNoData = true;
       isLoad = false;
       notifyListeners();
     }

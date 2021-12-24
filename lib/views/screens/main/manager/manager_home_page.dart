@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/daily_report_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
@@ -48,8 +49,7 @@ class ManagerHomePage extends StatelessWidget {
               title: 'Watch Report',
               subTitle: 'Report Daily from Accountant',
               press: () {
-                // Navigator.pushNamed(
-                //     context, FormCreateRestaurantBill.nameRoute);
+                Navigator.pushNamed(context, DailyReportScreen.nameRoute);
               },
             ),
             SizedBox(
