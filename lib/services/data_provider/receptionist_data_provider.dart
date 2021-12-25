@@ -12,6 +12,16 @@ class ReceptionistDataProvider {
     return listAllRoom;
   }
 
+  // find room empty
+  Future<List<Room>> findEmptyRoom(
+      {required String checkIn, required String checkOut}) async {
+    final response = await ReceptionistDataRepository()
+        .findEmptyRoom(checkIn: checkIn, checkOut: checkOut);
+    var listEmptyRoom =
+        (response.data as List).map((e) => Room.fromJson(e)).toList();
+    return listEmptyRoom;
+  }
+
   // get a room detail
   Future<List<ReservationRoom>> getRoomDetail({required String roomId}) async {
     final response =

@@ -1,26 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
+
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
+import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_payment_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/booking_card.dart';
 import 'package:hotel_management_system/widgets/custom_back_button.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:provider/provider.dart';
 
 class RoomDetail extends StatefulWidget {
   static const String nameRoute = '/room_detail';
   static Route route(RouteSettings settings) {
+    final agrument = settings.arguments as RoomDetailArgument;
     return MaterialPageRoute(
-      builder: (context) => ChangeNotifierProvider<RoomProvider>(
-        create: (_) => RoomProvider(settings.arguments as Room),
-        // lazy: false,
-        child: RoomDetail(),
-      ),
+      builder: (context) =>
+          // lazy: false,
+          MultiProvider(providers: [
+        ChangeNotifierProvider<RoomProvider>(
+          create: (_) => RoomProvider(agrument.room),
+        ),
+        ChangeNotifierProvider<HotelProvider>.value(
+          value: agrument.hotelProvider,
+        )
+      ], child: RoomDetail()),
       settings: settings,
     );
   }
@@ -29,6 +37,15 @@ class RoomDetail extends StatefulWidget {
 
   @override
   State<RoomDetail> createState() => _RoomDetailState();
+}
+
+class RoomDetailArgument {
+  final Room room;
+  final HotelProvider hotelProvider;
+  RoomDetailArgument({
+    required this.room,
+    required this.hotelProvider,
+  });
 }
 
 class _RoomDetailState extends State<RoomDetail> {
@@ -56,7 +73,7 @@ class _RoomDetailState extends State<RoomDetail> {
           IconButton(
             onPressed: () async {
               await Navigator.pushNamed(context, AddBookingScreen.nameRoute,
-                  arguments: roomDetail.selectedRoom);
+                  arguments: roomDetail);
               roomDetail.loadRoomDetail();
             },
             icon: Icon(
@@ -101,7 +118,9 @@ class _RoomDetailState extends State<RoomDetail> {
                       Navigator.pushNamed(
                         context,
                         BookingPaymentDetail.nameRoute,
-                        arguments: provider.listRoomDetal[index],
+                        arguments: BookingPaymentArgument(
+                          reservationRoom: provider.listRoomDetal[index],
+                        ),
                       );
                     },
                   );

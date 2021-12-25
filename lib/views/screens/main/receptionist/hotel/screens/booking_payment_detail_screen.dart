@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/view_models/receptionist/reservation_provider.dart';
+import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
+import 'package:provider/provider.dart';
+
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
@@ -11,13 +15,23 @@ import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
 import 'package:hotel_management_system/widgets/get_now_dateTime.dart';
 import 'package:hotel_management_system/widgets/info_form1.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
-import 'package:provider/provider.dart';
+
+class BookingPaymentArgument {
+  final ReservationRoom reservationRoom;
+  BookingPaymentArgument({
+    required this.reservationRoom,
+  });
+}
 
 class BookingPaymentDetail extends StatelessWidget {
   static const String nameRoute = '/booking_payment_detail';
   static Route route(RouteSettings settings) {
+    final agrument = settings.arguments as BookingPaymentArgument;
     return MaterialPageRoute(
-      builder: (context) => BookingPaymentDetail(),
+      builder: (context) => ChangeNotifierProvider<ReservationProvider>(
+        create: (_) => ReservationProvider(agrument.reservationRoom),
+        child: BookingPaymentDetail(),
+      ),
       settings: settings,
     );
   }
@@ -27,11 +41,12 @@ class BookingPaymentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final reservation =
-        (ModalRoute.of(context)!.settings.arguments as ReservationRoom);
+    final reservationProvider = context.read<ReservationProvider>();
+    final room = reservationProvider.selectedReservation.room;
+    final reservation = reservationProvider.selectedReservation;
     return Scaffold(
       appBar: CustomAppbarTitleRight(
-        title: 'Room ' + reservation.room.roomName,
+        title: 'Room ' + room.roomName,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -225,9 +240,8 @@ class BookingPaymentDetail extends StatelessWidget {
                     RoundedLinearButton(
                       text: "   Pay   ",
                       press: () => context
-                          .read<HotelProvider>()
+                          .read<ReservationProvider>()
                           .updatePaidStatus(
-                            reservation.id,
                             1,
                             () => DialogSuccessNotify().onUpdateSucces(
                                 context, "Pay success!", RoomDetail.nameRoute),
@@ -242,9 +256,7 @@ class BookingPaymentDetail extends StatelessWidget {
                       press: () {
                         DialogSuccessNotify().confirmDialog(
                             context, "Do you wanto delete this Booking?", () {
-                          context
-                              .read<HotelProvider>()
-                              .deleteBooking(reservation.id);
+                          context.read<ReservationProvider>().deleteBooking();
                           Navigator.popUntil(
                               context,
                               (route) =>

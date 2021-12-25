@@ -27,7 +27,7 @@ class Request {
     id = json['_id'];
     nameRequest = json['nameRequest'];
     type = RequestTypeExtension.fromInt(json['type']);
-    date = DateTime.parse(json['date']);
+    date = DateTime.parse(json['date']).toLocal();
     status = StatusTypeExtension.fromInt(json['status']);
 
     staff =
