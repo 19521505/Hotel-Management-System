@@ -26,7 +26,7 @@ class ResBill {
     resBillId = json['_id'];
     status = StatusTypeExtension.fromInt(json['status']);
     paidStatus = PaidStautsExtension.fromInt(json['paidStatus']);
-    date = DateTime.parse(json['date']);
+    date = DateTime.parse(json['date']).toLocal();
     if (json['resBillDetail'] != null) {
       resBillDetail = <DetailResBill>[];
       json['resBillDetail'].forEach((v) {

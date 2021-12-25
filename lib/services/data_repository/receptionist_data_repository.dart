@@ -28,6 +28,19 @@ class ReceptionistDataRepository {
     }
   }
 
+  // Find empty room
+  Future<Response> findEmptyRoom(
+      {required String checkIn, required String checkOut}) async {
+    Dio _dio = new Dio();
+    final data = {
+      "checkIn": checkIn,
+      "checkOut": checkOut,
+    };
+    Response response = await _dio.get("$baseUrl${AppEndpoints.room}/find_room",
+        queryParameters: data);
+    return response;
+  }
+
   // get a room detail
   Future<Response> getRoomDetail({required String roomId}) async {
     Dio _dio = new Dio();

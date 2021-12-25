@@ -17,7 +17,10 @@ class BookingScreen extends StatelessWidget {
   static const String nameRoute = '/booking';
   static Route route(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => BookingScreen(),
+      builder: (context) => ChangeNotifierProvider<HotelProvider>(
+        create: (context) => HotelProvider(),
+        child: BookingScreen(),
+      ),
       settings: settings,
     );
   }
@@ -58,8 +61,6 @@ class BodyBookingScreen extends StatefulWidget {
 }
 
 class _BodyBookingScreenState extends State<BodyBookingScreen> {
-  DateTime checkinDate = DateTime.now();
-  DateTime checkoutDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -73,141 +74,155 @@ class _BodyBookingScreenState extends State<BodyBookingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Choose Check-in date
-          // Container(
-          //   width: double.infinity,
-          //   padding: EdgeInsets.only(
-          //     left: size.height * 0.02,
-          //     right: size.height * 0.02,
-          //   ),
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.rectangle,
-          //     borderRadius: BorderRadius.circular(15),
-          //     color: Colors.white,
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: Colors.grey.withOpacity(0.2),
-          //         spreadRadius: 2,
-          //         blurRadius: 2,
-          //         offset: Offset(0, 3),
-          //       ),
-          //     ],
-          //   ),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     mainAxisSize: MainAxisSize.max,
-          //     children: [
-          //       Text(
-          //         'Check-in: ',
-          //         style: TextStyle(
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //       Text(
-          //         FormatDateTime.formatterDay.format(checkinDate).toString(),
-          //         style: TextStyle(
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.w500,
-          //         ),
-          //       ),
-          //       IconButton(
-          //         onPressed: () {
-          //           showDatePicker(
-          //                   context: context,
-          //                   initialDate: checkinDate,
-          //                   firstDate: DateTime(2021),
-          //                   lastDate: DateTime(2999))
-          //               .then((date) {
-          //             setState(() {
-          //               checkinDate = date!;
-          //             });
-          //           });
-          //         },
-          //         icon: Icon(
-          //           Icons.calendar_today_rounded,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: size.height * 0.01,
-          // ),
-          // // check-out date
-          // Container(
-          //   width: double.infinity,
-          //   padding: EdgeInsets.only(
-          //     left: size.height * 0.02,
-          //     right: size.height * 0.02,
-          //   ),
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.rectangle,
-          //     borderRadius: BorderRadius.circular(15),
-          //     color: Colors.white,
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: Colors.grey.withOpacity(0.2),
-          //         spreadRadius: 2,
-          //         blurRadius: 2,
-          //         offset: Offset(0, 3),
-          //       ),
-          //     ],
-          //   ),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Text(
-          //         'Check-out: ',
-          //         style: TextStyle(
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.bold,
-          //         ),
-          //       ),
-          //       Text(
-          //         FormatDateTime.formatterDay.format(checkoutDate).toString(),
-          //         style: TextStyle(
-          //           fontSize: 16,
-          //           fontWeight: FontWeight.w500,
-          //         ),
-          //       ),
-          //       IconButton(
-          //         onPressed: () {
-          //           showDatePicker(
-          //                   context: context,
-          //                   initialDate: checkoutDate,
-          //                   firstDate: DateTime(2021),
-          //                   lastDate: DateTime(2999))
-          //               .then((date) {
-          //             setState(() {
-          //               checkoutDate = date!;
-          //             });
-          //           });
-          //         },
-          //         icon: Icon(
-          //           Icons.calendar_today_rounded,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: size.height * 0.03,
-          // ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     RoundedLinearButton(
-          //       text: 'Find',
-          //       press: () {},
-          //       textColor: Colors.white,
-          //       endColor: endButtonLinearColor,
-          //       startColor: startButtonLinearColor,
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(
-          //   height: size.height * 0.03,
-          // ),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.only(
+              left: size.height * 0.02,
+              right: size.height * 0.02,
+            ),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Check-in: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Consumer<HotelProvider>(
+                  builder: (context, hotelProvider, child) {
+                    return Text(
+                      FormatDateTime.formatterDay
+                          .format(hotelProvider.checkinDate)
+                          .toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  onPressed: () {
+                    final checkInProvider = context.read<HotelProvider>();
+                    showDatePicker(
+                            context: context,
+                            initialDate: checkInProvider.checkinDate,
+                            firstDate: DateTime(2021),
+                            lastDate: DateTime(2999))
+                        .then((date) {
+                      checkInProvider.checinDate = date;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.calendar_today_rounded,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.01,
+          ),
+          // check-out date
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.only(
+              left: size.height * 0.02,
+              right: size.height * 0.02,
+            ),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Check-out: ',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Consumer<HotelProvider>(
+                  builder: (context, hotelProvider, child) {
+                    return Text(
+                      FormatDateTime.formatterDay
+                          .format(hotelProvider.checkoutDate)
+                          .toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  onPressed: () {
+                    final checkOutProvider = context.read<HotelProvider>();
+                    showDatePicker(
+                            context: context,
+                            initialDate: checkOutProvider.checkoutDate,
+                            firstDate: DateTime(2021),
+                            lastDate: DateTime(2999))
+                        .then((date) {
+                      setState(() {
+                        checkOutProvider.checkoutDate = date!;
+                      });
+                    });
+                  },
+                  icon: Icon(
+                    Icons.calendar_today_rounded,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.03,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RoundedLinearButton(
+                text: 'Find',
+                press: () {
+                  context.read<HotelProvider>().findEmptyRoom();
+                },
+                textColor: Colors.white,
+                endColor: endButtonLinearColor,
+                startColor: startButtonLinearColor,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: size.height * 0.03,
+          ),
           Center(
             child: Text(
               'List Room',
@@ -235,7 +250,9 @@ class _BodyBookingScreenState extends State<BodyBookingScreen> {
                         Navigator.pushNamed(
                           context,
                           RoomDetail.nameRoute,
-                          arguments: provider.listAllRoom[index],
+                          arguments: RoomDetailArgument(
+                              room: provider.listAllRoom[index],
+                              hotelProvider: provider),
                         );
                       },
                     );

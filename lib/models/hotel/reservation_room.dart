@@ -30,11 +30,11 @@ class ReservationRoom {
     id = json['_id'];
     staffId = Staff.fromJson(json['staffId']);
     room = Room.fromJson(json['room']);
-    dateCreate = DateTime.parse(json['dateCreate']);
+    dateCreate = DateTime.parse(json['dateCreate']).toLocal();
     customerName = json['customerName'];
     customerPhone = json['customerPhone'];
-    checkIn = DateTime.parse(json['checkIn']);
-    checkOut = DateTime.parse(json['checkOut']);
+    checkIn = DateTime.parse(json['checkIn']).toLocal();
+    checkOut = DateTime.parse(json['checkOut']).toLocal();
     paidStatus = PaidStautsExtension.fromInt(json['paidStatus']);
     totalPrice = json['totalPrice'];
   }

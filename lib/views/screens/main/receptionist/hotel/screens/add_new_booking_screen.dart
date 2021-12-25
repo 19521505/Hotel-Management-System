@@ -4,6 +4,7 @@ import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
 import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/receptionist/hotel_provider.dart';
+import 'package:hotel_management_system/view_models/receptionist/room_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
@@ -17,7 +18,10 @@ class AddBookingScreen extends StatefulWidget {
   static const String nameRoute = '/add_booking';
   static Route route(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => AddBookingScreen(),
+      builder: (context) => ChangeNotifierProvider<RoomProvider>.value(
+        value: settings.arguments as RoomProvider,
+        child: AddBookingScreen(),
+      ),
       settings: settings,
     );
   }
@@ -29,18 +33,11 @@ class AddBookingScreen extends StatefulWidget {
 }
 
 class _AddBookingScreenState extends State<AddBookingScreen> {
-  DateTime checkInDate =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  DateTime checkOutDate = DateTime.now();
-
-  DateTime dateCreate = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final room = (ModalRoute.of(context)!.settings.arguments as Room);
     final authProvider = Provider.of<AuthProvider>(context);
-    final booking = Provider.of<HotelProvider>(context);
+    final booking = context.read<RoomProvider>();
 
     return Scaffold(
       appBar: CustomAppbarTitleRight(
@@ -87,7 +84,7 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: room.roomName,
+                            text: booking.selectedRoom.roomName,
                             style: TextStyle(
                               color: kPrimaryColor,
                               fontSize: 18,
@@ -121,28 +118,30 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                     SizedBox(
                       height: size.height * 0.01,
                     ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Date Create: ',
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: FormatDateTime.formatterDateTime
-                                .format(dateCreate)
-                                .toString(),
-                            style: TextStyle(
-                              color: blackColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
+                    Consumer<RoomProvider>(builder: (context, provider, child) {
+                      return RichText(
+                        text: TextSpan(
+                          text: 'Date Create: ',
+                          style: TextStyle(
+                            color: blackColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
                           ),
-                        ],
-                      ),
-                    ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: FormatDateTime.formatterDateTime
+                                  .format(provider.checkInDate)
+                                  .toString(),
+                              style: TextStyle(
+                                color: blackColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -223,27 +222,28 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Text(
-                          FormatDateTime.formatterDay
-                              .format(checkInDate)
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        Consumer<RoomProvider>(
+                            builder: (context, provider, child) {
+                          return Text(
+                            FormatDateTime.formatterDay
+                                .format(provider.checkInDate)
+                                .toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        }),
                         IconButton(
                           onPressed: () {
                             showDatePicker(
                                     context: context,
-                                    initialDate: checkInDate,
+                                    initialDate: booking.checkInDate,
                                     firstDate: DateTime(2021),
                                     lastDate: DateTime(2999))
                                 .then((date) {
-                              setState(() {
-                                checkInDate = DateTime(
-                                    date!.year, date.month, date.day, 0, 0, 0);
-                              });
+                              booking.checkInDate = DateTime(
+                                  date!.year, date.month, date.day, 0, 0, 0);
                             });
                           },
                           icon: Icon(
@@ -262,27 +262,28 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Text(
-                          FormatDateTime.formatterDay
-                              .format(checkOutDate)
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        Consumer<RoomProvider>(
+                            builder: (context, provider, child) {
+                          return Text(
+                            FormatDateTime.formatterDay
+                                .format(provider.checkOutDate)
+                                .toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        }),
                         IconButton(
                           onPressed: () {
                             showDatePicker(
                                     context: context,
-                                    initialDate: checkOutDate,
+                                    initialDate: booking.checkOutDate,
                                     firstDate: DateTime(2021),
                                     lastDate: DateTime(2999))
                                 .then((date) {
-                              setState(() {
-                                checkOutDate = DateTime(
-                                    date!.year, date.month, date.day, 0, 0, 0);
-                              });
+                              booking.checkOutDate = DateTime(
+                                  date!.year, date.month, date.day, 0, 0, 0);
                             });
                           },
                           icon: Icon(
@@ -299,24 +300,16 @@ class _AddBookingScreenState extends State<AddBookingScreen> {
               ),
               RoundedLinearButton(
                 text: 'Booking',
-                press: () => context.read<HotelProvider>().addBooking(
-                      room.roomId,
-                      authProvider.currentStaff.staffID,
-                      DateTimeExtension.getUtc,
-                      checkInDate.stringUtc,
-                      checkOutDate.stringUtc,
-                      //count date stay in hotel and get total price
-
-                      ((checkOutDate.difference(checkInDate).inDays) + 1) *
-                          room.roomPrice,
-                      () => DialogSuccessNotify().onUpdateSucces(
-                        context,
-                        'Booking successfully',
-                        RoomDetail.nameRoute,
-                      ),
-                      () => DialogSuccessNotify().onFail(
-                          context, "Customer information is incomplete!"),
-                    ),
+                press: () => booking.addBooking(
+                  authProvider.currentStaff.staffID,
+                  () => DialogSuccessNotify().onUpdateSucces(
+                    context,
+                    'Booking successfully',
+                    RoomDetail.nameRoute,
+                  ),
+                  () => DialogSuccessNotify()
+                      .onFail(context, "Customer information is incomplete!"),
+                ),
                 textColor: whiteColor,
                 endColor: endButtonLinearColor,
                 startColor: startButtonLinearColor,

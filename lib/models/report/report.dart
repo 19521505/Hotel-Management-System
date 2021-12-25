@@ -25,7 +25,7 @@ class Report {
     reportID = json['_id'];
     reportName = json['reportName'];
     staff = Staff.fromJson(json['staff']);
-    date = DateTime.parse(json['date']);
+    date = DateTime.parse(json['date']).toLocal();
     entertainmentBillTotal =
         double.parse(json['entertainmentBillTotal'].toString());
     outflowBillTotal = double.parse(json['outflowBillTotal'].toString());
