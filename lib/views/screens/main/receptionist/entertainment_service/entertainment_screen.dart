@@ -12,8 +12,8 @@ class EntertainmentScreen extends StatefulWidget {
   static const String nameRoute = '/entertainment';
   static Route route() {
     return MaterialPageRoute(
-      builder: (context) => ChangeNotifierProvider<EntertainmentProvider>.value(
-        value: EntertainmentProvider(),
+      builder: (context) => ChangeNotifierProvider<EntertainmentProvider>(
+        create: (_) => EntertainmentProvider(),
         // lazy: false,
         child: EntertainmentScreen(),
       ),

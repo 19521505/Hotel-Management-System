@@ -25,51 +25,6 @@ class RestaurantDataRepository {
     }
   }
 
-  Future<Response> addFood({
-    required String foodName,
-    required int foodPrice,
-    required int foodType,
-    required String image,
-  }) async {
-    Dio _dio = new Dio();
-    final data = FormData.fromMap({
-      "foodName": foodName,
-      "foodPrice": foodPrice,
-      "foodType": foodType,
-      "image": MultipartFile.fromFileSync(image),
-    });
-    Response response =
-        await _dio.post("$baseUrl${AppEndpoints.food}add", data: data);
-    return response;
-  }
-
-  Future<Response> updateFood(
-      {required String foodID,
-      required int foodPrice,
-      required String foodName}) async {
-    Dio _dio = new Dio();
-    final data = {"foodPrice": foodPrice, "foodName": foodName};
-    try {
-      Response response =
-          await _dio.patch("$baseUrl${AppEndpoints.food}$foodID", data: data);
-      return response;
-    } catch (e, stacktrace) {
-      throw Exception("Exception occured: $e stackTrace: $stacktrace");
-    }
-  }
-
-  Future<Response> deleteFood({required String foodID}) async {
-    Dio _dio = new Dio();
-
-    try {
-      Response response =
-          await _dio.delete("$baseUrl${AppEndpoints.food}$foodID");
-      return response;
-    } catch (e, stacktrace) {
-      throw Exception("Exception occured: $e stackTrace: $stacktrace");
-    }
-  }
-
   Future<Response> addRestaunrantBill({
     required int status,
     required String date,

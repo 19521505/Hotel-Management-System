@@ -14,6 +14,12 @@ import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_o
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
 import 'package:hotel_management_system/views/screens/landing/landing_page.dart';
 import 'package:hotel_management_system/views/screens/main/manager/manager_home_page.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/entertainment_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/main_entertainment_managment_screen.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/entertainment_management_detail.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/type_ticket_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/daily_report_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
@@ -157,6 +163,14 @@ class AppRoutes {
         return FoodManagementScreen.route();
       case HotelManagementScreen.nameRoute:
         return HotelManagementScreen.route();
+      case MainEntertainemtManagementScreen.nameRoute:
+        return MainEntertainemtManagementScreen.route();
+      case EntertainmentManagementScreen.nameRoute:
+        return EntertainmentManagementScreen.route();
+      case EntertainmentManagementDetail.nameRoute:
+        return EntertainmentManagementDetail.route(settings);
+      case TypeTicketManagementScreen.nameRoute:
+        return TypeTicketManagementScreen.route(settings);
       case DailyReportScreen.nameRoute:
         return DailyReportScreen.route();
       case ReportDetail.nameRoute:
@@ -170,6 +184,7 @@ class AppRoutes {
             child: ReportDetail(),
           ),
         );
+
       /**
         * Default 
       */
