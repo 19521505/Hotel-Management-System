@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
 import 'package:hotel_management_system/view_models/kitchen/request_provider.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow_list.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_box_description.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:provider/provider.dart';
 
@@ -20,26 +25,137 @@ class CashInflowPage extends StatefulWidget {
 class _CashInflowPageState extends State<CashInflowPage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppbarTitleRight(
         title: "Cash Inflow",
       ),
       body: Container(
-        child: Column(
-          children: [
-            Consumer<RequestProvider>(
-              builder: (context, provider, listTile) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: 0,
-                    itemBuilder: buildList,
+          padding: EdgeInsets.only(
+            left: size.height * 0.01,
+            top: size.height * 0.03,
+            right: size.height * 0.01,
+            bottom: size.height * 0.03,
+          ),
+          child: Consumer<AccountantProvider>(
+            builder: (context, provider, child) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FormHeader(
+                    headerText: 'Bill List',
                   ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+                  FormBoxDescription(
+                    hasIcon: true,
+                    nameRoute: InflowListPage.nameRoute,
+                    onIconPress: () {
+                      Navigator.pushNamed(context, InflowListPage.nameRoute,
+                          arguments:
+                              InflowListDetailArgument(provider, "ResBill"));
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FormRow(
+                                    firstText: 'Bill Type:',
+                                    secondText: 'Restaurant Bill'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FormRow(
+                                    firstText: "Total: ",
+                                    secondText:
+                                        provider.totalOfResBill.toString()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  FormBoxDescription(
+                    hasIcon: true,
+                    nameRoute: InflowListPage.nameRoute,
+                    onIconPress: () {
+                      Navigator.pushNamed(context, InflowListPage.nameRoute,
+                          arguments:
+                              InflowListDetailArgument(provider, "RoomBill"));
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FormRow(
+                                    firstText: 'Bill Type:',
+                                    secondText: 'Room Bill'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FormRow(
+                                    firstText: "Total: ",
+                                    secondText:
+                                        provider.totalListRoomBill.toString()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  FormBoxDescription(
+                    hasIcon: true,
+                    nameRoute: InflowListPage.nameRoute,
+                    onIconPress: () {
+                      Navigator.pushNamed(context, InflowListPage.nameRoute,
+                          arguments: InflowListDetailArgument(
+                              provider, "EntertainmentBill"));
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FormRow(
+                                    firstText: 'Bill Type:',
+                                    secondText: 'Entertainment Bill'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FormRow(
+                                    firstText: "Total: ",
+                                    secondText: provider
+                                        .totalListEntertainmentBill
+                                        .toString()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          )),
     );
   }
 

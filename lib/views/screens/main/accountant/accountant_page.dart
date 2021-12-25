@@ -5,6 +5,13 @@ import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class AccountantPage extends StatefulWidget {
   const AccountantPage({Key? key}) : super(key: key);
+  static const String nameRoute = '/accountantPage';
+  static Route route() {
+    return MaterialPageRoute(
+      builder: (context) => AccountantPage(),
+      settings: RouteSettings(name: nameRoute),
+    );
+  }
 
   @override
   _AccountantPageState createState() => _AccountantPageState();

@@ -6,7 +6,7 @@ class EntertainBill {
   late DateTime date;
   late List<DetailEnterBill> entertainBillDetail;
   late Staff staff;
-  late double totalPrice;
+  late int totalPrice;
 
   EntertainBill(
       {required this.enBillID,
@@ -17,7 +17,7 @@ class EntertainBill {
 
   EntertainBill.fromJson(Map<String, dynamic> json) {
     enBillID = json['_id'];
-    date = DateTime.parse(json['date']);
+    date = DateTime.parse(json['dateCreate']);
     if (json['entertainBillDetail'] != null) {
       entertainBillDetail = <DetailEnterBill>[];
       json['entertainBillDetail'].forEach((v) {
@@ -31,7 +31,7 @@ class EntertainBill {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.enBillID;
-    data['date'] = this.date;
+    data['dateCreate'] = this.date;
 
     data['entertainBillDetail'] =
         this.entertainBillDetail.map((v) => v.toJson()).toList();

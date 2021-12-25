@@ -46,6 +46,7 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
                 headerText: 'Basic Information',
               ),
               FormBoxDescription(
+                onIconPress: () {},
                 image: "ic_paid.png",
                 hasIcon: true,
                 child: Row(
@@ -69,6 +70,9 @@ class _OutFlowItemDetailState extends State<OutFlowItemDetail> {
                               firstText: "Date",
                               secondText: FormatDateTime.formatterDay
                                   .format(payment.date),
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             FormRow(
                               firstText: "Status",

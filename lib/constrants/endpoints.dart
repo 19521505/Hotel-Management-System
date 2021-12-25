@@ -34,4 +34,7 @@ class AppEndpoints {
   static const statusResBill = "/resbill/status";
 
   static const restaurantBill = '/resbill/';
+
+  //report
+  static const reportEndpoint = '/report';
 }

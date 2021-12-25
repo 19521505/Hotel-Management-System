@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow_list.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/widgets/inflow_list_item.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow_item_detail.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/revenue_report_result.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/pending_res_bill.dart';
@@ -15,6 +20,10 @@ import 'package:hotel_management_system/views/screens/main/manager/screens/hotel
 import 'package:hotel_management_system/views/screens/main/manager/screens/main_entertainment_managment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/entertainment_management_detail.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/type_ticket_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/daily_report_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/report_detail.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/add_new_booking_screen.dart';
@@ -34,6 +43,7 @@ import 'package:hotel_management_system/views/screens/main/warehouse/manage_ingr
 import 'package:hotel_management_system/views/screens/main/warehouse/warehouse_page.dart';
 import 'package:hotel_management_system/views/screens/main/warehouse/widgets/form_detail_request.dart';
 import 'package:hotel_management_system/views/screens/screens.dart';
+import 'package:provider/provider.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -56,6 +66,8 @@ class AppRoutes {
       /**
         * Accountant Department 
       */
+      case AccountantPage.nameRoute:
+        return AccountantPage.route();
       case RevenueReport.nameRoute:
         return RevenueReport.route();
       case CashInflowPage.nameRoute:
@@ -64,6 +76,39 @@ class AppRoutes {
         return CashOutflowPage.route();
       case OutFlowItemDetail.nameRoute:
         return OutFlowItemDetail.route(settings);
+      case InflowListPage.nameRoute:
+        final args = settings.arguments as InflowListDetailArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.accountantProvider)
+            ],
+            child: InflowListPage(),
+          ),
+        );
+      case InflowListItem.nameRoute:
+        final args = settings.arguments as InflowListItemArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.accountantProvider)
+            ],
+            child: InflowListItem(),
+          ),
+        );
+      case RevenueReportResultPage.nameRoute:
+        final args = settings.arguments as RevenueReportResultPageArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.accountantProvider)
+            ],
+            child: RevenueReportResultPage(),
+          ),
+        );
       /**
         * Warehouse Department 
       */
@@ -126,6 +171,20 @@ class AppRoutes {
         return EntertainmentManagementDetail.route(settings);
       case TypeTicketManagementScreen.nameRoute:
         return TypeTicketManagementScreen.route(settings);
+      case DailyReportScreen.nameRoute:
+        return DailyReportScreen.route();
+      case ReportDetail.nameRoute:
+        final args = settings.arguments as ReportDetailArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.revenueReportProvider)
+            ],
+            child: ReportDetail(),
+          ),
+        );
+
       /**
         * Default 
       */

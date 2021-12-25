@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/configs/app_configs.dart';
 import 'package:hotel_management_system/constrants/endpoints.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
+import 'package:hotel_management_system/models/report/report.dart';
 
 class AccountantRepository {
   static final AccountantRepository _singleton =
@@ -14,17 +16,15 @@ class AccountantRepository {
   static final baseUrl = AppConfigs.apiUrl;
 
   // get all room bill by day
-  Future<Response> getRoomBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getRoomBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.room}/find_room_bills",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.room}/paid_bills",
+      );
+
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -33,17 +33,15 @@ class AccountantRepository {
   }
 
   // get all entertainment bill by day
-  Future<Response> getEntertainmentBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getEntertainmentBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.entertainment}/find_entertainment_bills_by_date",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.entertainment}/bill/",
+      );
+
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
@@ -52,17 +50,95 @@ class AccountantRepository {
   }
 
   // get all request bill by day
-  Future<Response> getRequestBillByDay({
-    required String day,
-    required String month,
-    required String year,
-  }) async {
+  Future<Response> getRequestBillByDay() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
-          "$baseUrl${AppEndpoints.request}/find_request_bills_by_date",
-          queryParameters: {'year': year, 'month': month, 'day': day});
+        "$baseUrl${AppEndpoints.request}/",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all restaurant bill by day
+  Future<Response> getRestaurantBillByDay(PaidStatus paidStatus) async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get("$baseUrl${AppEndpoints.paidResBill}/",
+          queryParameters: {'paidStatus': 1});
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // submit report by day
+  Future<Response> submitReport(Report report) async {
+    Dio _dio = new Dio();
+
+    final data = {
+      'reportName': report.reportName,
+      'date': report.date.toString(),
+      'resBillTotal': double.parse(report.resBillTotal.toStringAsFixed(2)),
+      'roomBillTotal': double.parse(report.roomBillTotal.toStringAsFixed(2)),
+      'entertainmentBillTotal':
+          double.parse(report.entertainmentBillTotal.toStringAsFixed(2)),
+      'outflowBillTotal':
+          double.parse(report.outflowBillTotal.toStringAsFixed(2)),
+      'staff': report.staff.staffID
+    };
+
+    print(data);
+
+    try {
+      Response response = await _dio
+          .post("$baseUrl${AppEndpoints.reportEndpoint}/add", data: data);
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get report by day
+  Future<Response> getReportByDate() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.reportEndpoint}/get_report_by_date",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get report by day
+  Future<Response> getAllReport() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.reportEndpoint}/",
+      );
+
+      //print(response);
 
       return response;
     } catch (e, stacktrace) {
