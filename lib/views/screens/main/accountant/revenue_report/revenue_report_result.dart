@@ -167,6 +167,10 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                 Indicator(
                                   color: Color(0xff1FB5FF),
                                   text: 'Risk Bill',
+                                  secondText: argument
+                                          .accountantProvider.totalListRiskBill
+                                          .toStringAsFixed(0) +
+                                      " VND",
                                   isSquare: true,
                                 ),
                               ],
@@ -317,8 +321,11 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
         case 3:
           return PieChartSectionData(
             color: const Color(0xff1FB5FF),
-            value: 0,
-            title: '0',
+            value: provider.getPrecentageOfListType("RiskBill"),
+            title: provider
+                    .getPrecentageOfListType("RiskBill")
+                    .toStringAsFixed(0) +
+                '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,

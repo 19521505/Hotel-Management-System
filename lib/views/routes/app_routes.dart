@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_page_detail.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_history_page.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/payment_history/payment_history_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow_list.dart';
@@ -32,7 +35,7 @@ import 'package:hotel_management_system/views/screens/main/receptionist/hotel/sc
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/room_detail_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/receptionist_page.dart';
-import 'package:hotel_management_system/views/screens/main/waiter/screens/add_detail_dish.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/risk/risk_bill_screen.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/add_food_screen.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_detail_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/form_create_res_bill_screen.dart';
@@ -66,6 +69,20 @@ class AppRoutes {
       /**
         * Accountant Department 
       */
+
+      case BillHistoryPage.nameRoute:
+        return BillHistoryPage.route();
+      case BillPageDetail.nameRoute:
+        final args = settings.arguments as BillDetailListArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.billHistoryProvider)
+            ],
+            child: BillPageDetail(),
+          ),
+        );
       case AccountantPage.nameRoute:
         return AccountantPage.route();
       case RevenueReport.nameRoute:
@@ -109,6 +126,8 @@ class AppRoutes {
             child: RevenueReportResultPage(),
           ),
         );
+      case PaymentHistoryPage.nameRoute:
+        return PaymentHistoryPage.route();
       /**
         * Warehouse Department 
       */
@@ -125,6 +144,9 @@ class AppRoutes {
       */
       case ReceptionistPage.nameRoute:
         return ReceptionistPage.route();
+      //RiskBill
+      case RiskBillPage.nameRoute:
+        return RiskBillPage.route();
       // Hotel
       case HotelPage.nameRoute:
         return HotelPage.route();

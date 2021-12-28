@@ -184,7 +184,6 @@ class _DailyReportScreenState extends State<DailyReportScreen> {
                                 ),
                               ),
                             );
-                            ;
                           },
                           separatorBuilder: (BuildContext context, int index) =>
                               SizedBox(

@@ -3,6 +3,7 @@ import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/entertainment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/hotel_page.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/screens/booking_screen.dart';
+import 'package:hotel_management_system/views/screens/main/receptionist/risk/risk_bill_screen.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
 class ReceptionistPage extends StatelessWidget {
@@ -61,6 +62,17 @@ class ReceptionistPage extends StatelessWidget {
               subTitle: '.....',
               press: () {
                 Navigator.pushNamed(context, EntertainmentScreen.nameRoute);
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            // View list of restaurant orders
+            CustomMainCard(
+              title: 'Create Risk Bill',
+              subTitle: '.....',
+              press: () {
+                Navigator.pushNamed(context, RiskBillPage.nameRoute);
               },
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:hotel_management_system/models/entertainment_service/entertainment.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
+import 'package:hotel_management_system/models/riskBill.dart';
 import 'package:hotel_management_system/services/data_repository/receptionist_data_repository.dart';
 
 class ReceptionistDataProvider {
@@ -44,7 +45,7 @@ class ReceptionistDataProvider {
     required int paidStatus,
     required int totalPrice,
   }) async {
-    final reponse = await ReceptionistDataRepository().addBooking(
+    await ReceptionistDataRepository().addBooking(
       roomId: roomId,
       staffId: staffId,
       dateCreate: dateCreate,
@@ -88,10 +89,15 @@ class ReceptionistDataProvider {
     required List<Map<String, dynamic>> entertainBillDetail,
     required int totalPrice,
   }) async {
-    final response = ReceptionistDataRepository().addEntertainmentBill(
+    await ReceptionistDataRepository().addEntertainmentBill(
         staff: staff,
         dateCreate: dateCreate,
         entertainBillDetail: entertainBillDetail,
         totalPrice: totalPrice);
+  }
+
+  // add entertainment bill
+  Future<void> submitRiskBill({required RiskBill riskBill}) async {
+    await ReceptionistDataRepository().submitRiskBill(riskBill: riskBill);
   }
 }

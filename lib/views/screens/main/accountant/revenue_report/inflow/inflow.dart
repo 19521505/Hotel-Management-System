@@ -152,6 +152,41 @@ class _CashInflowPageState extends State<CashInflowPage> {
                       ],
                     ),
                   ),
+                  FormBoxDescription(
+                    hasIcon: true,
+                    nameRoute: InflowListPage.nameRoute,
+                    onIconPress: () {
+                      Navigator.pushNamed(context, InflowListPage.nameRoute,
+                          arguments:
+                              InflowListDetailArgument(provider, "RiskBill"));
+                    },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FormRow(
+                                    firstText: 'Bill Type:',
+                                    secondText: 'Risk Bill'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FormRow(
+                                    firstText: "Total: ",
+                                    secondText:
+                                        provider.totalListRiskBill.toString()),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               );
             },

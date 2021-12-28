@@ -5,6 +5,7 @@ class Report {
   late String reportName;
   late Staff staff;
   late DateTime date;
+  late double riskBillTotal;
   late double roomBillTotal;
   late double resBillTotal;
   late double entertainmentBillTotal;
@@ -15,6 +16,7 @@ class Report {
     required this.reportName,
     required this.staff,
     required this.date,
+    required this.riskBillTotal,
     required this.entertainmentBillTotal,
     required this.outflowBillTotal,
     required this.resBillTotal,
@@ -31,6 +33,7 @@ class Report {
     outflowBillTotal = double.parse(json['outflowBillTotal'].toString());
     resBillTotal = double.parse(json['resBillTotal'].toString());
     roomBillTotal = double.parse(json['roomBillTotal'].toString());
+    riskBillTotal = double.parse(json['riskBillTotal'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +46,7 @@ class Report {
     data['outflowBillTotal'] = this.outflowBillTotal;
     data['resBillTotal'] = this.resBillTotal;
     data['roomBillTotal'] = this.roomBillTotal;
+    data['riskBillTotal'] = this.riskBillTotal;
     return data;
   }
 }
