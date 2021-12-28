@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_management_system/models/report/report.dart';
 import 'package:hotel_management_system/view_models/manager/revenue_report_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/indicator.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
@@ -158,6 +157,9 @@ class _ReportDetailState extends State<ReportDetail> {
                                       color: Color(0xff1FB5FF),
                                       text: 'Risk Bill',
                                       isSquare: true,
+                                      secondText: report.riskBillTotal
+                                              .toStringAsFixed(0) +
+                                          " VND",
                                     ),
                                   ],
                                 ),
@@ -260,6 +262,7 @@ class _ReportDetailState extends State<ReportDetail> {
       final totalResBill = provider.getPrecentageOfListType("ResBill", index);
       final totalEntertainmentBill =
           provider.getPrecentageOfListType("EntertainmentBill", index);
+      final totalRiskBill = provider.getPrecentageOfListType("RiskBill", index);
       switch (i) {
         case 0:
           return PieChartSectionData(
@@ -297,8 +300,8 @@ class _ReportDetailState extends State<ReportDetail> {
         case 3:
           return PieChartSectionData(
             color: const Color(0xff1FB5FF),
-            value: 0,
-            title: '0',
+            value: totalRiskBill,
+            title: totalRiskBill.toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,

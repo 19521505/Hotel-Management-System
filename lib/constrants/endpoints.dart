@@ -32,4 +32,7 @@ class AppEndpoints {
 
   //report
   static const reportEndpoint = '/report';
+
+  //risk bill
+  static const riskBillEndpoint = '/risk';
 }

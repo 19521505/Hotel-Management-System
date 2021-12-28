@@ -30,7 +30,7 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
         child: Center(
           child: Text(
             roleName,
-            style: TextStyle(),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ),

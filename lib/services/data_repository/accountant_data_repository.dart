@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/configs/app_configs.dart';
 import 'package:hotel_management_system/constrants/endpoints.dart';
+import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/enum_type.dart';
 import 'package:hotel_management_system/models/enum/paid_status.dart';
 import 'package:hotel_management_system/models/report/report.dart';
 
@@ -66,6 +68,29 @@ class AccountantRepository {
     }
   }
 
+  // get all request bill by type and status
+  Future<Response> getAllRequestBillByStatus(
+      RequestType requestType, StatusType statusType) async {
+    Dio _dio = new Dio();
+
+    final query = {
+      "type": requestType.value,
+      "status": statusType.value,
+    };
+
+    try {
+      Response response = await _dio.get(
+          "$baseUrl${AppEndpoints.request}/status",
+          queryParameters: query);
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
   // get all restaurant bill by day
   Future<Response> getRestaurantBillByDay(PaidStatus paidStatus) async {
     Dio _dio = new Dio();
@@ -95,10 +120,11 @@ class AccountantRepository {
           double.parse(report.entertainmentBillTotal.toStringAsFixed(2)),
       'outflowBillTotal':
           double.parse(report.outflowBillTotal.toStringAsFixed(2)),
+      'riskBillTotal': double.parse(report.riskBillTotal.toStringAsFixed(2)),
       'staff': report.staff.staffID
     };
 
-    print(data);
+    //print(data);
 
     try {
       Response response = await _dio
@@ -129,13 +155,81 @@ class AccountantRepository {
     }
   }
 
-  // get report by day
+  // get all report
   Future<Response> getAllReport() async {
     Dio _dio = new Dio();
 
     try {
       Response response = await _dio.get(
         "$baseUrl${AppEndpoints.reportEndpoint}/",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all entertainment bill
+  Future<Response> getAllEntertainmentBill() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.entertainment}/bill/get_all_biil",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all restaurant bill by day
+  Future<Response> getAllRestaurantBill(PaidStatus paidStatus) async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+          "$baseUrl${AppEndpoints.restaurantBill}/get_all_paid",
+          queryParameters: {'paidStatus': 1});
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all room bill
+  Future<Response> getAllRoomBill() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.room}/all_paid_bills",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
+  // get all room bill
+  Future<Response> getAllRiskBill() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.riskBillEndpoint}/all",
       );
 
       //print(response);

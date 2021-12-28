@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
-import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
-import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/widgets/inflow_list_item.dart';
+import 'package:hotel_management_system/view_models/accountant/bill_history_provider.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/bill_history/widgets/bill_list_item.dart';
 import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 import 'package:provider/provider.dart';
 
-class InflowListDetail extends StatelessWidget {
-  const InflowListDetail({
-    Key? key,
-    required this.size,
-    required this.index,
-    required this.typeOfInflowList,
-  }) : super(key: key);
-
+class BillListDetail extends StatelessWidget {
+  static const String nameRoute = '/billListDetail';
+  const BillListDetail(
+      {required this.size,
+      required this.index,
+      required this.typeOfInflowList,
+      Key? key})
+      : super(key: key);
   final Size size;
   final int index;
   final String typeOfInflowList;
   @override
   Widget build(BuildContext context) {
-    return Consumer<AccountantProvider>(
+    return Consumer<BillHistoryProvider>(
       builder: (context, provider, child) {
         return Container(
           margin: EdgeInsets.only(top: 5, left: 10, right: 10),
@@ -74,48 +74,32 @@ class InflowListDetail extends StatelessWidget {
                                           fontSize: 16,
                                         ),
                                       )
-                                    : typeOfInflowList == "RiskBill"
-                                        ? Text(
-                                            provider.listRiskBill[index].staff
-                                                .fullName,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                            ),
-                                          )
-                                        : SizedBox(
-                                            width: 0,
-                                          )
+                                    : SizedBox(
+                                        width: 0,
+                                      ),
                       ],
                     ),
                     Container(
                       child: GestureDetector(
                         onTap: () {
                           if (typeOfInflowList == "ResBill") {
-                            Navigator.pushNamed(
-                                context, InflowListItem.nameRoute,
-                                arguments: InflowListItemArgument(
+                            Navigator.pushNamed(context, BillListItem.nameRoute,
+                                arguments: BillListItemArgument(
                                     provider,
                                     typeOfInflowList,
                                     index,
                                     "Restaurant Bill"));
                           } else if (typeOfInflowList == "RoomBill") {
-                            Navigator.pushNamed(
-                                context, InflowListItem.nameRoute,
-                                arguments: InflowListItemArgument(provider,
+                            Navigator.pushNamed(context, BillListItem.nameRoute,
+                                arguments: BillListItemArgument(provider,
                                     typeOfInflowList, index, "Room Bill"));
                           } else if (typeOfInflowList == "EntertainmentBill") {
-                            Navigator.pushNamed(
-                                context, InflowListItem.nameRoute,
-                                arguments: InflowListItemArgument(
+                            Navigator.pushNamed(context, BillListItem.nameRoute,
+                                arguments: BillListItemArgument(
                                     provider,
                                     typeOfInflowList,
                                     index,
                                     "Entertainment Bill"));
-                          } else if (typeOfInflowList == "RiskBill") {
-                            Navigator.pushNamed(
-                                context, InflowListItem.nameRoute,
-                                arguments: InflowListItemArgument(provider,
-                                    typeOfInflowList, index, "Risk Bill"));
                           }
                         },
                         child: RightCircularBlackArrow(size: size),
@@ -198,28 +182,9 @@ class InflowListDetail extends StatelessWidget {
                                       ))
                                 ],
                               )
-                            : typeOfInflowList == "RiskBill"
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Center(
-                                        child: Text(
-                                          provider.listRiskBill[index].price
-                                                  .toString() +
-                                              " VND",
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : SizedBox(
-                                    width: 0,
-                                  ),
+                            : SizedBox(
+                                width: 0,
+                              ),
                 SizedBox(
                   height: 10,
                 ),
@@ -335,49 +300,9 @@ class InflowListDetail extends StatelessWidget {
                                   )
                                 ],
                               )
-                            : typeOfInflowList == "RiskBill"
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        FormatDateTime.formatterDay.format(
-                                            provider.listRiskBill[index].date),
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Text(
-                                        FormatDateTime.formatterTime.format(
-                                            provider.listRiskBill[index].date),
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "PAID",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.green,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Image.asset(
-                                              'assets/images/ic_paid.png')
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                : SizedBox(
-                                    width: 0,
-                                  ),
+                            : SizedBox(
+                                width: 0,
+                              ),
               ],
             ),
           ),

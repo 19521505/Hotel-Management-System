@@ -22,8 +22,10 @@ class RevenueReport extends StatefulWidget {
   static const String nameRoute = '/revenue_report';
   static Route route() {
     return MaterialPageRoute(
-      builder: (context) => RevenueReport(),
-      settings: RouteSettings(name: nameRoute),
+      builder: (context) => ChangeNotifierProvider<AccountantProvider>(
+        create: (_) => AccountantProvider(),
+        child: RevenueReport(),
+      ),
     );
   }
 
@@ -32,12 +34,6 @@ class RevenueReport extends StatefulWidget {
 }
 
 class _RevenueReportState extends State<RevenueReport> {
-  @override
-  void didChangeDependencies() {
-    context.read<AccountantProvider>().getDataFromApi();
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

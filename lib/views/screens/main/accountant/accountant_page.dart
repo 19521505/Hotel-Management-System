@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_history_page.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/payment_history/payment_history_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/widgets/custom_main_card.dart';
 
@@ -60,7 +62,9 @@ class _AccountantPageState extends State<AccountantPage> {
             CustomMainCard(
               title: 'Payment History',
               subTitle: 'List of invoices for purchase ingredients',
-              press: () {},
+              press: () {
+                Navigator.pushNamed(context, PaymentHistoryPage.nameRoute);
+              },
             ),
             SizedBox(
               height: size.height * 0.01,
@@ -69,16 +73,9 @@ class _AccountantPageState extends State<AccountantPage> {
             CustomMainCard(
               title: 'Bills History',
               subTitle: 'List of bills from hotel services and restaurant',
-              press: () {},
-            ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            // View list of payment request
-            CustomMainCard(
-              title: 'Payment Request',
-              subTitle: 'List of payment request from the warehouse department',
-              press: () {},
+              press: () {
+                Navigator.pushNamed(context, BillHistoryPage.nameRoute);
+              },
             ),
           ],
         ),

@@ -97,7 +97,15 @@ class _InflowListItemState extends State<InflowListItem> {
                                                     argument.index]
                                                 .staff
                                                 .fullName
-                                            : "Not Found"),
+                                            : argument.typeOfListDetail ==
+                                                    "RiskBill"
+                                                ? argument
+                                                    .accountantProvider
+                                                    .listRiskBill[
+                                                        argument.index]
+                                                    .staff
+                                                    .fullName
+                                                : "Not Found"),
                             SizedBox(
                               height: 10,
                             ),
@@ -122,7 +130,15 @@ class _InflowListItemState extends State<InflowListItem> {
                                                   .listEntertainmentBill[
                                                       argument.index]
                                                   .date)
-                                          : "Not Found",
+                                          : argument.typeOfListDetail ==
+                                                  "RiskBill"
+                                              ? FormatDateTime.formatterDay
+                                                  .format(argument
+                                                      .accountantProvider
+                                                      .listRiskBill[
+                                                          argument.index]
+                                                      .date)
+                                              : "Not Found",
                             ),
                             SizedBox(
                               height: 10,
@@ -230,9 +246,152 @@ class _InflowListItemState extends State<InflowListItem> {
                                   .entertainBillDetail
                                   .length,
                             )
-                          : SizedBox(
-                              width: 0,
-                            ),
+                          : argument.typeOfListDetail == "RiskBill"
+                              ? SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      FormBoxDescription(
+                                        onIconPress: () {},
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                            size.height * 0.02,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              FormRow(
+                                                firstText: "Staff Name: ",
+                                                secondText: argument
+                                                    .accountantProvider
+                                                    .listRiskBill[
+                                                        argument.index]
+                                                    .staff
+                                                    .name,
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+                                              FormRow(
+                                                firstText: "Date Create: ",
+                                                secondText: FormatDateTime
+                                                    .formatterDateTime
+                                                    .format(DateTime.now())
+                                                    .toString(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white,
+                                          ),
+                                          child: Consumer<AccountantProvider>(
+                                            builder:
+                                                (context, provider, child) {
+                                              final riskBill = argument
+                                                  .accountantProvider
+                                                  .listRiskBill[argument.index];
+                                              return Column(children: [
+                                                FormBoxDescription(
+                                                    hasIcon: false,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.all(
+                                                        size.height * 0.02,
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          FormRow(
+                                                            firstText:
+                                                                "Risk Type: ",
+                                                            secondText: riskBill
+                                                                .riskName,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Risk Detail: ",
+                                                            secondText: riskBill
+                                                                    .detail!
+                                                                    .isEmpty
+                                                                ? "No Detail"
+                                                                : riskBill
+                                                                    .detail
+                                                                    .toString(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onIconPress: () {}),
+                                                FormBoxDescription(
+                                                    hasIcon: false,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.all(
+                                                        size.height * 0.02,
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          FormRow(
+                                                            firstText:
+                                                                "Customer Name: ",
+                                                            secondText: riskBill
+                                                                .customerName,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Customer Phone: ",
+                                                            secondText: riskBill
+                                                                .customerPhoneNumber,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Total Bill: ",
+                                                            secondText: riskBill
+                                                                .price
+                                                                .toStringAsFixed(
+                                                                    0),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onIconPress: () {})
+                                              ]);
+                                            },
+                                          )),
+                                      SizedBox(
+                                        height: size.height * 0.01,
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.03,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : SizedBox(
+                                  width: 0,
+                                ),
               SizedBox(
                 height: size.height * 0.03,
               ),

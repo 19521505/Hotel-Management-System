@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hotel_management_system/configs/app_configs.dart';
 import 'package:hotel_management_system/constrants/endpoints.dart';
+import 'package:hotel_management_system/models/riskBill.dart';
 
 class ReceptionistDataRepository {
   static final ReceptionistDataRepository _singleton =
@@ -153,6 +154,21 @@ class ReceptionistDataRepository {
 
     Response response =
         await _dio.post("$baseUrl${AppEndpoints.addEntertainBill}", data: data);
+    return response;
+  }
+
+  // add entertainment bill
+  Future<Response> submitRiskBill({
+    required RiskBill riskBill,
+  }) async {
+    Dio _dio = new Dio();
+
+    final data = riskBill.toJson();
+
+    //print(data);
+
+    Response response = await _dio
+        .post("$baseUrl${AppEndpoints.riskBillEndpoint}/add", data: data);
     return response;
   }
 }

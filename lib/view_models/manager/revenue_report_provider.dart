@@ -27,14 +27,16 @@ class RevenueReportProvider extends ChangeNotifier {
   double getTotalProfit(int index) {
     return (_reportList[index].entertainmentBillTotal +
             _reportList[index].resBillTotal +
-            _reportList[index].roomBillTotal) -
+            _reportList[index].roomBillTotal +
+            _reportList[index].riskBillTotal) -
         _reportList[index].outflowBillTotal;
   }
 
   double getTotalInflow(int index) {
     return _reportList[index].entertainmentBillTotal +
         _reportList[index].resBillTotal +
-        _reportList[index].roomBillTotal;
+        _reportList[index].roomBillTotal +
+        _reportList[index].riskBillTotal;
   }
 
   double getPrecentageOfListType(String typeOfList, int index) {
@@ -46,6 +48,8 @@ class RevenueReportProvider extends ChangeNotifier {
       return (report.roomBillTotal / totalInFlow * 100);
     } else if (typeOfList == "EntertainmentBill") {
       return (report.entertainmentBillTotal / totalInFlow * 100);
+    } else if (typeOfList == "RiskBill") {
+      return (report.riskBillTotal / totalInFlow * 100);
     } else
       return (report.outflowBillTotal / getTotalProfit(index) * 100);
   }

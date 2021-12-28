@@ -12,6 +12,7 @@ import 'package:hotel_management_system/models/form_request/request.dart';
 import 'package:hotel_management_system/models/hotel/reservation_room.dart';
 import 'package:hotel_management_system/models/report/report.dart';
 import 'package:hotel_management_system/models/restaurant/resBill.dart';
+import 'package:hotel_management_system/models/riskBill.dart';
 import 'package:hotel_management_system/models/staff/staff.dart';
 import 'package:hotel_management_system/services/data_provider/accountant_data_provider.dart';
 
@@ -24,6 +25,7 @@ class AccountantProvider extends ChangeNotifier {
   List<EntertainBill> _listEntertainmentBill = [];
   List<ReservationRoom> _listRoomBill = [];
   List<ResBill> _listResBill = [];
+  List<RiskBill> _listRiskBill = [];
 
   late Report _report;
 
@@ -31,6 +33,7 @@ class AccountantProvider extends ChangeNotifier {
   double totalListResBill = 0;
   double totalListEntertainmentBill = 0;
   double totalListRoomBill = 0;
+  double totalListRiskBill = 0;
   double totalOutFlow = 0;
   double totalInFlow = 0;
   double _totalProfit = 0;
@@ -40,12 +43,17 @@ class AccountantProvider extends ChangeNotifier {
   RequestType _requestType = RequestType.Import;
   PaidStatus _paidStatus = PaidStatus.Paid;
 
+  AccountantProvider() {
+    getDataFromApi();
+  }
+
   @override
   void dispose() {
     totalListResBill = 0;
     totalListEntertainmentBill = 0;
     totalListRoomBill = 0;
     totalOutFlow = 0;
+    isLoad = true;
     super.dispose();
   }
 
@@ -57,6 +65,7 @@ class AccountantProvider extends ChangeNotifier {
     _listRoomBill = await AccountantDataProvider().getRoomBillByDate();
     _listResBill =
         await AccountantDataProvider().getRestaurantBillByDate(_paidStatus);
+    _listRiskBill = await AccountantDataProvider().getAllRiskBill();
     getTotalInFlow();
     getTotalOutflow();
     getTotalProfit();
@@ -91,6 +100,7 @@ class AccountantProvider extends ChangeNotifier {
     totalListResBill = 0;
     totalListEntertainmentBill = 0;
     totalListRoomBill = 0;
+    totalListRiskBill = 0;
     for (EntertainBill entertainBill in _listEntertainmentBill) {
       totalListEntertainmentBill += entertainBill.totalPrice;
     }
@@ -100,8 +110,13 @@ class AccountantProvider extends ChangeNotifier {
     for (ResBill resBill in _listResBill) {
       totalListResBill += resBill.totalPrice;
     }
-    totalInFlow =
-        totalListEntertainmentBill + totalListResBill + totalListRoomBill;
+    for (RiskBill riskBill in _listRiskBill) {
+      totalListRiskBill += riskBill.price;
+    }
+    totalInFlow = totalListEntertainmentBill +
+        totalListResBill +
+        totalListRoomBill +
+        totalListRiskBill;
     return totalInFlow;
   }
 
@@ -122,7 +137,8 @@ class AccountantProvider extends ChangeNotifier {
   int getInflowBillCount() {
     return _listEntertainmentBill.length +
         _listRoomBill.length +
-        _listResBill.length;
+        _listResBill.length +
+        _listRiskBill.length;
   }
 
   int getInflowListLength(String typeOfInflowList) {
@@ -132,8 +148,10 @@ class AccountantProvider extends ChangeNotifier {
       return _listRoomBill.length;
     } else if (typeOfInflowList == "EntertainmentBill") {
       return _listEntertainmentBill.length;
-    } else
-      return 0;
+    } else if (typeOfInflowList == "RiskBill") {
+      return _listRiskBill.length;
+    }
+    return 0;
   }
 
   //chart data
@@ -144,6 +162,8 @@ class AccountantProvider extends ChangeNotifier {
       return (totalOfRoomBill / totalInFlow * 100);
     } else if (typeOfList == "EntertainmentBill") {
       return (totalOfEntertainBill / totalInFlow * 100);
+    } else if (typeOfList == "RiskBill") {
+      return (totalListRiskBill / totalInFlow * 100);
     } else
       return (totalOutFlow / _totalProfit * 100);
   }
@@ -163,6 +183,7 @@ class AccountantProvider extends ChangeNotifier {
           reportName: reportName,
           staff: staff,
           date: DateTime.now(),
+          riskBillTotal: totalListRiskBill,
           entertainmentBillTotal: totalListEntertainmentBill,
           outflowBillTotal: totalOutFlow,
           resBillTotal: totalListResBill,
@@ -191,6 +212,10 @@ class AccountantProvider extends ChangeNotifier {
     return _listResBill;
   }
 
+  List<RiskBill> get listRiskBill {
+    return _listRiskBill;
+  }
+
   double get totalOfResBill {
     return totalListResBill;
   }
@@ -201,6 +226,10 @@ class AccountantProvider extends ChangeNotifier {
 
   double get totalOfEntertainBill {
     return totalListEntertainmentBill;
+  }
+
+  double get totalOfRiskBill {
+    return totalListResBill;
   }
 
   double get totalProfit {
