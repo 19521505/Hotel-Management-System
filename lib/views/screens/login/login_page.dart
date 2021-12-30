@@ -59,10 +59,10 @@ class _LoginPageState extends State<LoginPage> {
       child: Stack(children: <Widget>[
         Scaffold(
           backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              BottomHalfContainer(true, () {}),
+              BottomHalfContainer(true, () {}, size.height * 0.62),
               Container(
                 height: size.height * 0.47,
                 width: size.width,
@@ -204,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   }
                 },
+                size.height * 0.62,
               ),
             ],
           ),
@@ -226,11 +227,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Widget BottomHalfContainer(bool showShadow, VoidCallback onSignInPress) {
+Widget BottomHalfContainer(
+    bool showShadow, VoidCallback onSignInPress, double size) {
   return AnimatedPositioned(
     duration: Duration(milliseconds: 700),
     curve: Curves.bounceInOut,
-    top: 430,
+    top: size,
     right: 0,
     left: 0,
     child: Center(
