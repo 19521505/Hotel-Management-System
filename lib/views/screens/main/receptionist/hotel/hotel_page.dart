@@ -39,16 +39,17 @@ class HotelPage extends StatelessWidget {
                   'Activities',
                   style: TextStyle(
                     color: kPrimaryColor,
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               SizedBox(
-                height: size.height * 0.03,
+                height: size.height * 0.01,
               ),
               // Create new form import request to warehouse department
               CustomMainCard(
+                icon: "ic_room.png",
                 title: 'Booking Room',
                 subTitle: '.....',
                 press: () {
@@ -60,6 +61,7 @@ class HotelPage extends StatelessWidget {
               ),
               // View list of restaurant orders
               CustomMainCard(
+                icon: "ic_management.png",
                 title: 'List of Hotel Bill',
                 subTitle: '.....',
                 press: () {},

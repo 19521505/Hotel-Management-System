@@ -35,16 +35,17 @@ class WaiterPage extends StatelessWidget {
                 'Activities',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.01,
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
+              icon: "ic_bill.png",
               title: 'New Restaurant Bill',
               subTitle: '.....',
               press: () {
@@ -56,6 +57,7 @@ class WaiterPage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_pay_bill.png",
               title: 'Pay The Restaurant Bill',
               subTitle: '.....',
               press: () {

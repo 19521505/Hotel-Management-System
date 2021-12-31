@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Colors.black.withOpacity(0.3),
+                                        color: Colors.black.withOpacity(0.2),
                                         blurRadius: 15,
                                         spreadRadius: 5)
                                   ]),
@@ -135,7 +135,8 @@ class _LoginPageState extends State<LoginPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(left: 10),
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.05),
                                     child: Text(
                                       "Sign In".toUpperCase(),
                                       style: TextStyle(
@@ -145,7 +146,8 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(right: 10),
+                                    padding: EdgeInsets.only(
+                                        right: size.width * 0.05),
                                     child: RichText(
                                       text: TextSpan(
                                           text: "Hotel",
@@ -246,7 +248,7 @@ Widget BottomHalfContainer(
             boxShadow: [
               if (showShadow)
                 BoxShadow(
-                  color: Colors.black.withOpacity(.3),
+                  color: Colors.black.withOpacity(0.2),
                   spreadRadius: 1.5,
                   blurRadius: 10,
                 )

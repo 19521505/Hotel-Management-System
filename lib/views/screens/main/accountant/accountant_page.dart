@@ -38,16 +38,17 @@ class _AccountantPageState extends State<AccountantPage> {
                 'Activities',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.01,
             ),
             // Create new revenue report
             CustomMainCard(
+              icon: "ic_statistic.png",
               title: 'New Revenue Report',
               subTitle:
                   'Create a revenue daily report about the profit of the company',
@@ -60,6 +61,7 @@ class _AccountantPageState extends State<AccountantPage> {
             ),
             //View payment history
             CustomMainCard(
+              icon: "ic_history.png",
               title: 'Payment History',
               subTitle: 'List of invoices for purchase ingredients',
               press: () {
@@ -71,6 +73,7 @@ class _AccountantPageState extends State<AccountantPage> {
             ),
             // View list of bills history
             CustomMainCard(
+              icon: "ic_history.png",
               title: 'Bills History',
               subTitle: 'List of bills from hotel services and restaurant',
               press: () {

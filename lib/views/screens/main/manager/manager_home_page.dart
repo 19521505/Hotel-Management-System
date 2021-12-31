@@ -38,16 +38,17 @@ class ManagerHomePage extends StatelessWidget {
                 'Activities',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.01,
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
+              icon: "ic_statistic.png",
               title: 'Watch Report',
               subTitle: 'Report Daily from Accountant',
               press: () {
@@ -58,6 +59,7 @@ class ManagerHomePage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_food.png",
               title: 'Food Management',
               subTitle: 'Add, Edit, Delete Food',
               press: () {
@@ -68,6 +70,7 @@ class ManagerHomePage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_room.png",
               title: 'Hotel Management',
               subTitle: 'Add, Edit Room',
               press: () {
@@ -78,6 +81,7 @@ class ManagerHomePage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_entertainment.png",
               title: 'Entertainment Management',
               subTitle: '.....',
               press: () {
