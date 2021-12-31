@@ -20,7 +20,7 @@ class CustomMenuSidebar extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/images/thumnail.png'),
+                image: AssetImage('assets/images/login_background.png'),
               ),
             ),
             accountName: Text(

@@ -18,20 +18,31 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: whiteColor,
       iconTheme: IconThemeData(color: kPrimaryColor),
       centerTitle: true,
-      title: Container(
-        height: MediaQuery.of(context).size.height * 0.055,
-        width: MediaQuery.of(context).size.width * 0.6,
-        decoration: BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            roleName,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+      leading: IconButton(
+        color: Colors.red,
+        icon: Image.asset("assets/images/ic_drawer.png"),
+        onPressed: () => Scaffold.of(context).openDrawer(),
+      ),
+      title: Align(
+        alignment: Alignment.centerRight,
+        child: Wrap(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.055,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  roleName.toUpperCase(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

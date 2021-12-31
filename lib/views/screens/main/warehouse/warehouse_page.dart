@@ -37,16 +37,17 @@ class WarehousePage extends StatelessWidget {
                 'Activities',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.01,
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
+              icon: "ic_product.png",
               title: 'List of Import Requests',
               subTitle: '...........',
               press: () {
@@ -61,6 +62,7 @@ class WarehousePage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_export.png",
               title: 'List of Export Requests',
               subTitle: '...........',
               press: () {
@@ -75,6 +77,7 @@ class WarehousePage extends StatelessWidget {
               height: size.height * 0.01,
             ),
             CustomMainCard(
+              icon: "ic_ingredient.png",
               title: 'Ingredients Management',
               subTitle: '...........',
               press: () {

@@ -35,16 +35,17 @@ class KitchenPage extends StatelessWidget {
                 'Activities',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(
-              height: size.height * 0.03,
+              height: size.height * 0.01,
             ),
             // Create new form import request to warehouse department
             CustomMainCard(
+              icon: "ic_product.png",
               title: 'New Request',
               subTitle: 'Create a request send to the Warehouse',
               press: () {
@@ -57,6 +58,7 @@ class KitchenPage extends StatelessWidget {
             ),
             // View list of restaurant orders
             CustomMainCard(
+              icon: "ic_supplies.png",
               title: 'Restaurant Orders List',
               subTitle: 'List of order requests from the Waiter',
               press: () {

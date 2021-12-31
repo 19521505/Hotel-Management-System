@@ -28,6 +28,7 @@ class MainEntertainemtManagementScreen extends StatelessWidget {
           child: Column(
             children: [
               CustomMainCard(
+                icon: "ic_management.png",
                 title: 'Entertainment Management',
                 subTitle: '.......',
                 press: () {
@@ -39,6 +40,7 @@ class MainEntertainemtManagementScreen extends StatelessWidget {
                 height: size.height * 0.01,
               ),
               CustomMainCard(
+                icon: "ic_ticket.png",
                 title: 'Type Ticket Management',
                 subTitle: '.....',
                 press: () {
