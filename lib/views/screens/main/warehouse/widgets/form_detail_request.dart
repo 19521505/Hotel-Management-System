@@ -20,7 +20,10 @@ class DetailRequest extends StatelessWidget {
   static const String nameRoute = '/detailrequest';
   static Route route(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => DetailRequest(),
+      builder: (context) => ChangeNotifierProvider<WarehouseProvider>.value(
+        value: WarehouseProvider(),
+        child: DetailRequest(),
+      ),
       settings: settings,
     );
   }
