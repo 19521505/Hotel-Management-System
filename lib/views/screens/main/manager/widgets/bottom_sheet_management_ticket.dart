@@ -187,7 +187,7 @@ class AddTicketBottomSheet extends StatelessWidget {
                 height: size.height * 0.02,
               ),
               Text(
-                'Enter Type  Name',
+                'Type Ticket Name',
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,
@@ -205,13 +205,14 @@ class AddTicketBottomSheet extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  hintText: 'Enter Ticket Name',
                 ),
               ),
               SizedBox(
                 height: size.height * 0.015,
               ),
               Text(
-                'Enter New  Price',
+                'Ticket Price',
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,
@@ -229,13 +230,14 @@ class AddTicketBottomSheet extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  hintText: 'Enter Ticket Price',
                 ),
               ),
               SizedBox(
                 height: size.height * 0.015,
               ),
               Text(
-                'Enter Type  Ticket',
+                'Type Ticket',
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,
@@ -253,6 +255,7 @@ class AddTicketBottomSheet extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  hintText: 'Enter Type Ticket',
                   helperText: '1: Adult, 2: Children',
                   helperStyle: TextStyle(
                     fontSize: 14,
