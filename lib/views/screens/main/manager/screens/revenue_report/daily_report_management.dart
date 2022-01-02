@@ -51,145 +51,151 @@ class _DailyReportScreenState extends State<DailyReportScreen> {
                 : Visibility(
                     visible: !provider.isLoad,
                     child: SingleChildScrollView(
-                      child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin:
-                                  EdgeInsets.only(top: 5, left: 10, right: 10),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    spreadRadius: 2,
-                                    blurRadius: 2,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Padding(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: size.height * 0.02),
+                        child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    top: 5, left: 10, right: 10),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                                'assets/images/ic_pin_staff.png'),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              provider.reportList[index].staff
-                                                  .fullName,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.pushNamed(context,
-                                                  ReportDetail.nameRoute,
-                                                  arguments:
-                                                      ReportDetailArgument(
-                                                          provider, index));
-                                            },
-                                            child: RightCircularBlackArrow(
-                                                size: size),
-                                          ),
-                                        ),
-                                      ],
+                                    vertical: 5, horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 2,
+                                      offset: Offset(0, 3),
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                          child: Text(
-                                            provider
-                                                    .getTotalProfit(index)
-                                                    .toStringAsFixed(0) +
-                                                " VND",
-                                            style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          FormatDateTime.formatterDay.format(
-                                              provider.reportList[index].date),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        Text(
-                                          FormatDateTime.formatterTime.format(
-                                              provider.reportList[index].date),
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "PAID",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.green,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Image.asset(
-                                                'assets/images/ic_paid.png')
-                                          ],
-                                        )
-                                      ],
-                                    )
                                   ],
                                 ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                          itemCount: provider.reportList.length),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/ic_pin_staff.png'),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                provider.reportList[index].staff
+                                                    .fullName,
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.pushNamed(context,
+                                                    ReportDetail.nameRoute,
+                                                    arguments:
+                                                        ReportDetailArgument(
+                                                            provider, index));
+                                              },
+                                              child: RightCircularBlackArrow(
+                                                  size: size),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Center(
+                                            child: Text(
+                                              provider
+                                                      .getTotalProfit(index)
+                                                      .toStringAsFixed(0) +
+                                                  " VND",
+                                              style: TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            FormatDateTime.formatterDay.format(
+                                                provider
+                                                    .reportList[index].date),
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          Text(
+                                            FormatDateTime.formatterTime.format(
+                                                provider
+                                                    .reportList[index].date),
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "PAID",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.green,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Image.asset(
+                                                  'assets/images/ic_paid.png')
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) => SizedBox(
+                                      height: size.height * 0.02,
+                                    ),
+                            itemCount: provider.reportList.length),
+                      ),
                     ),
                   ),
           );

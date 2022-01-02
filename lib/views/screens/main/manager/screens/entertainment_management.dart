@@ -6,6 +6,7 @@ import 'package:hotel_management_system/views/screens/main/manager/widgets/botto
 import 'package:hotel_management_system/widgets/custom_back_button.dart';
 import 'package:hotel_management_system/widgets/delete_item_widget.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
+import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -144,10 +145,7 @@ class EntertainmentManagementScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: blackColor,
-                                  ),
+                                  RightCircularBlackArrow(size: size),
                                 ],
                               ),
                               SizedBox(
