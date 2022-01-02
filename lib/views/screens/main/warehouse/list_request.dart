@@ -14,7 +14,10 @@ class ListRequest extends StatefulWidget {
   static const String nameRoute = '/listrequest';
   static Route route(settings) {
     return MaterialPageRoute(
-      builder: (_) => ListRequest(),
+      builder: (context) => ChangeNotifierProvider<WarehouseProvider>(
+        create: (context) => WarehouseProvider(),
+        child: ListRequest(),
+      ),
       settings: settings,
     );
   }
