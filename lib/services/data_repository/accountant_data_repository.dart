@@ -68,6 +68,23 @@ class AccountantRepository {
     }
   }
 
+  // get all risk bill by day
+  Future<Response> getRiskBillByDate() async {
+    Dio _dio = new Dio();
+
+    try {
+      Response response = await _dio.get(
+        "$baseUrl${AppEndpoints.riskBillEndpoint}/bills_by_date",
+      );
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
   // get all request bill by type and status
   Future<Response> getAllRequestBillByStatus(
       RequestType requestType, StatusType statusType) async {
@@ -223,7 +240,7 @@ class AccountantRepository {
     }
   }
 
-  // get all room bill
+  // get all risk bill
   Future<Response> getAllRiskBill() async {
     Dio _dio = new Dio();
 

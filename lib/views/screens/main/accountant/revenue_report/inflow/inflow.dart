@@ -11,10 +11,10 @@ import 'package:provider/provider.dart';
 class CashInflowPage extends StatefulWidget {
   const CashInflowPage({Key? key}) : super(key: key);
   static const String nameRoute = '/inflow';
-  static Route route() {
+  static Route route(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (context) => CashInflowPage(),
-      settings: RouteSettings(name: nameRoute),
+      settings: settings,
     );
   }
 
@@ -25,6 +25,8 @@ class CashInflowPage extends StatefulWidget {
 class _CashInflowPageState extends State<CashInflowPage> {
   @override
   Widget build(BuildContext context) {
+    final accountantProvider =
+        (ModalRoute.of(context)!.settings.arguments as AccountantProvider);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppbarTitleRight(
@@ -51,8 +53,8 @@ class _CashInflowPageState extends State<CashInflowPage> {
                     nameRoute: InflowListPage.nameRoute,
                     onIconPress: () {
                       Navigator.pushNamed(context, InflowListPage.nameRoute,
-                          arguments:
-                              InflowListDetailArgument(provider, "ResBill"));
+                          arguments: InflowListDetailArgument(
+                              accountantProvider, "ResBill"));
                     },
                     child: Row(
                       children: [
@@ -72,8 +74,9 @@ class _CashInflowPageState extends State<CashInflowPage> {
                                 ),
                                 FormRow(
                                     firstText: "Total: ",
-                                    secondText:
-                                        provider.totalOfResBill.toString()),
+                                    secondText: accountantProvider
+                                        .totalOfResBill
+                                        .toString()),
                               ],
                             ),
                           ),
@@ -86,8 +89,8 @@ class _CashInflowPageState extends State<CashInflowPage> {
                     nameRoute: InflowListPage.nameRoute,
                     onIconPress: () {
                       Navigator.pushNamed(context, InflowListPage.nameRoute,
-                          arguments:
-                              InflowListDetailArgument(provider, "RoomBill"));
+                          arguments: InflowListDetailArgument(
+                              accountantProvider, "RoomBill"));
                     },
                     child: Row(
                       children: [
@@ -107,8 +110,9 @@ class _CashInflowPageState extends State<CashInflowPage> {
                                 ),
                                 FormRow(
                                     firstText: "Total: ",
-                                    secondText:
-                                        provider.totalListRoomBill.toString()),
+                                    secondText: accountantProvider
+                                        .totalListRoomBill
+                                        .toString()),
                               ],
                             ),
                           ),
@@ -122,7 +126,7 @@ class _CashInflowPageState extends State<CashInflowPage> {
                     onIconPress: () {
                       Navigator.pushNamed(context, InflowListPage.nameRoute,
                           arguments: InflowListDetailArgument(
-                              provider, "EntertainmentBill"));
+                              accountantProvider, "EntertainmentBill"));
                     },
                     child: Row(
                       children: [
@@ -142,7 +146,7 @@ class _CashInflowPageState extends State<CashInflowPage> {
                                 ),
                                 FormRow(
                                     firstText: "Total: ",
-                                    secondText: provider
+                                    secondText: accountantProvider
                                         .totalListEntertainmentBill
                                         .toString()),
                               ],
@@ -157,8 +161,8 @@ class _CashInflowPageState extends State<CashInflowPage> {
                     nameRoute: InflowListPage.nameRoute,
                     onIconPress: () {
                       Navigator.pushNamed(context, InflowListPage.nameRoute,
-                          arguments:
-                              InflowListDetailArgument(provider, "RiskBill"));
+                          arguments: InflowListDetailArgument(
+                              accountantProvider, "RiskBill"));
                     },
                     child: Row(
                       children: [
@@ -178,8 +182,9 @@ class _CashInflowPageState extends State<CashInflowPage> {
                                 ),
                                 FormRow(
                                     firstText: "Total: ",
-                                    secondText:
-                                        provider.totalListRiskBill.toString()),
+                                    secondText: accountantProvider
+                                        .totalListRiskBill
+                                        .toString()),
                               ],
                             ),
                           ),

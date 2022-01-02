@@ -67,6 +67,15 @@ class AccountantDataProvider {
     return reportList;
   }
 
+  // get risk bill by date
+  Future<List<RiskBill>> getRiskBillByDate() async {
+    final response = await AccountantRepository().getRiskBillByDate();
+    final riskBillList = (response.data as List)
+        .map((riskBill) => RiskBill.fromJson(riskBill))
+        .toList();
+    return riskBillList;
+  }
+
   // submit report by date
   Future submitReport(Report report) async {
     await AccountantRepository().submitReport(report);
