@@ -135,7 +135,8 @@ class BodyRevenueReport extends StatelessWidget {
                       nameRoute: CashInflowPage.nameRoute,
                       hasIcon: true,
                       onIconPress: () {
-                        Navigator.pushNamed(context, CashInflowPage.nameRoute);
+                        Navigator.pushNamed(context, CashInflowPage.nameRoute,
+                            arguments: provider);
                       },
                       child: Row(
                         children: [

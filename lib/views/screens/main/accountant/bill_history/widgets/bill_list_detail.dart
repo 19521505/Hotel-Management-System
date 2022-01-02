@@ -6,7 +6,6 @@ import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart'
 import 'package:provider/provider.dart';
 
 class BillListDetail extends StatelessWidget {
-  static const String nameRoute = '/billListDetail';
   const BillListDetail(
       {required this.size,
       required this.index,

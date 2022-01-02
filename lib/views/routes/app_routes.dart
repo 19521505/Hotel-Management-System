@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_page_detail.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_history_page.dart';
+import 'package:hotel_management_system/views/screens/main/accountant/bill_history/widgets/bill_list_item.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/payment_history/payment_history_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/form_revenue_report.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow.dart';
@@ -69,7 +70,17 @@ class AppRoutes {
       /**
         * Accountant Department 
       */
-
+      case BillListItem.nameRoute:
+        final args = settings.arguments as BillListItemArgument;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider.value(value: args.billHistoryProvider)
+            ],
+            child: BillListItem(),
+          ),
+        );
       case BillHistoryPage.nameRoute:
         return BillHistoryPage.route();
       case BillPageDetail.nameRoute:
@@ -88,7 +99,7 @@ class AppRoutes {
       case RevenueReport.nameRoute:
         return RevenueReport.route();
       case CashInflowPage.nameRoute:
-        return CashInflowPage.route();
+        return CashInflowPage.route(settings);
       case CashOutflowPage.nameRoute:
         return CashOutflowPage.route();
       case OutFlowItemDetail.nameRoute:

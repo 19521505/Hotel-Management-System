@@ -65,7 +65,7 @@ class AccountantProvider extends ChangeNotifier {
     _listRoomBill = await AccountantDataProvider().getRoomBillByDate();
     _listResBill =
         await AccountantDataProvider().getRestaurantBillByDate(_paidStatus);
-    _listRiskBill = await AccountantDataProvider().getAllRiskBill();
+    _listRiskBill = await AccountantDataProvider().getRiskBillByDate();
     getTotalInFlow();
     getTotalOutflow();
     getTotalProfit();
