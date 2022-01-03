@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -87,6 +88,10 @@ class _RoomDetailState extends State<RoomDetail> {
       ),
       body: Consumer<RoomProvider>(builder: (context, provider, child) {
         return ModalProgressHUD(
+          progressIndicator: SpinKitFoldingCube(
+            color: kPrimaryColor,
+            size: 40.0,
+          ),
           inAsyncCall: provider.isLoad,
           child: Container(
             padding: EdgeInsets.all(

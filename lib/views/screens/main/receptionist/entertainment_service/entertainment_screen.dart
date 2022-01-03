@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/receptionist/entertainment_provider.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/invoice_entertainment.dart';
 import 'package:hotel_management_system/views/screens/main/receptionist/entertainment_service/widgets/entertainment_widget.dart';
@@ -48,6 +50,10 @@ class _EntertainmentScreenState extends State<EntertainmentScreen> {
       body:
           Consumer<EntertainmentProvider>(builder: (context, provider, child) {
         return ModalProgressHUD(
+          progressIndicator: SpinKitFoldingCube(
+            color: kPrimaryColor,
+            size: 40.0,
+          ),
           inAsyncCall: provider.isLoad,
           child: BodyEntertainmentScreen(),
         );

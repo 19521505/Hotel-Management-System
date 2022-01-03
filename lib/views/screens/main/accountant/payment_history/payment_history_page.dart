@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/view_models/accountant/payment_history_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow_item_detail.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/has_no_data_widget.dart';
 import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -39,12 +42,12 @@ class _PaymentHistoryPageState extends State<PaymentHistoryPage> {
           builder: (context, provider, child) {
             return ModalProgressHUD(
               inAsyncCall: provider.isLoad,
+              progressIndicator: SpinKitFoldingCube(
+                color: kPrimaryColor,
+                size: 40.0,
+              ),
               child: provider.hasNoData
-                  ? Container(
-                      child: Center(
-                        child: Text("No Payment History!"),
-                      ),
-                    )
+                  ? HasNoDataWidget(title: "No Payment History Found!")
                   : Visibility(
                       visible: !provider.isLoad,
                       child: SingleChildScrollView(

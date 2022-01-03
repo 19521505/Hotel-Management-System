@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/enum_status.dart';
@@ -37,6 +38,10 @@ class _PendingResListState extends State<PendingResList> {
       ),
       body: Consumer<PaidResBillProvider>(builder: (context, provider, child) {
         return ModalProgressHUD(
+          progressIndicator: SpinKitFoldingCube(
+            color: kPrimaryColor,
+            size: 40.0,
+          ),
           inAsyncCall: provider.isLoad,
           child: BodyPendingBill(),
         );

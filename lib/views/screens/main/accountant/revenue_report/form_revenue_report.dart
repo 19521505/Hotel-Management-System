@@ -13,6 +13,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
 import 'package:hotel_management_system/widgets/dialog_success_notify.dart';
+import 'package:hotel_management_system/widgets/has_no_data_widget.dart';
 import 'package:hotel_management_system/widgets/rounded_linear_button.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -51,11 +52,7 @@ class _RevenueReportState extends State<RevenueReport> {
             child: provider.hasNoData
                 ? Visibility(
                     visible: !provider.isLoad,
-                    child: Container(
-                      child: Center(
-                        child: Text("Has No Data To Report"),
-                      ),
-                    ))
+                    child: HasNoDataWidget(title: "Found Nothing To Report!"))
                 : Visibility(
                     visible: !provider.isLoad, child: BodyRevenueReport()),
           );

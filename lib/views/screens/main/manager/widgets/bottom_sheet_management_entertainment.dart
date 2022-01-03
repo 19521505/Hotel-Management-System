@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/manager/entertainment_management_provider.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/entertainment_management.dart';
@@ -14,6 +15,10 @@ class AddEntertainmentBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ModalProgressHUD(
+      progressIndicator: SpinKitFoldingCube(
+        color: kPrimaryColor,
+        size: 40.0,
+      ),
       inAsyncCall: context.watch<EntertainmentManagmentProvider>().isLoad,
       child: SingleChildScrollView(
         child: Container(

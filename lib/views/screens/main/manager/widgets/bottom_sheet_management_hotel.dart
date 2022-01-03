@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/models/hotel/room.dart';
@@ -18,6 +19,10 @@ class UpdateHotelBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ModalProgressHUD(
+      progressIndicator: SpinKitFoldingCube(
+        color: kPrimaryColor,
+        size: 40.0,
+      ),
       inAsyncCall: context.watch<HotelManagementProvider>().isLoad,
       child: SingleChildScrollView(
         child: Container(
@@ -127,6 +132,10 @@ class AddHotelBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ModalProgressHUD(
+      progressIndicator: SpinKitFoldingCube(
+        color: kPrimaryColor,
+        size: 40.0,
+      ),
       inAsyncCall: context.watch<HotelManagementProvider>().isLoad,
       child: SingleChildScrollView(
         child: Container(
