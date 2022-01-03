@@ -73,9 +73,17 @@ class BillListDetail extends StatelessWidget {
                                           fontSize: 16,
                                         ),
                                       )
-                                    : SizedBox(
-                                        width: 0,
-                                      ),
+                                    : typeOfInflowList == "RiskBill"
+                                        ? Text(
+                                            provider.listRiskBill[index].staff
+                                                .fullName,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          )
+                                        : SizedBox(
+                                            width: 0,
+                                          ),
                       ],
                     ),
                     Container(
@@ -93,12 +101,22 @@ class BillListDetail extends StatelessWidget {
                                 arguments: BillListItemArgument(provider,
                                     typeOfInflowList, index, "Room Bill"));
                           } else if (typeOfInflowList == "EntertainmentBill") {
-                            Navigator.pushNamed(context, BillListItem.nameRoute,
-                                arguments: BillListItemArgument(
-                                    provider,
-                                    typeOfInflowList,
-                                    index,
-                                    "Entertainment Bill"));
+                            Navigator.pushNamed(
+                              context,
+                              BillListItem.nameRoute,
+                              arguments: BillListItemArgument(
+                                  provider,
+                                  typeOfInflowList,
+                                  index,
+                                  "Entertainment Bill"),
+                            );
+                          } else if (typeOfInflowList == "RiskBill") {
+                            Navigator.pushNamed(
+                              context,
+                              BillListItem.nameRoute,
+                              arguments: BillListItemArgument(provider,
+                                  typeOfInflowList, index, "Risk Bill"),
+                            );
                           }
                         },
                         child: RightCircularBlackArrow(size: size),
@@ -181,9 +199,34 @@ class BillListDetail extends StatelessWidget {
                                       ))
                                 ],
                               )
-                            : SizedBox(
-                                width: 0,
-                              ),
+                            : typeOfInflowList == "RiskBill"
+                                ? Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          provider.listRiskBill[index].price
+                                                  .toString() +
+                                              " VND",
+                                          style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                        "1 Issue",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                : SizedBox(
+                                    width: 0,
+                                  ),
                 SizedBox(
                   height: 10,
                 ),
@@ -299,9 +342,49 @@ class BillListDetail extends StatelessWidget {
                                   )
                                 ],
                               )
-                            : SizedBox(
-                                width: 0,
-                              ),
+                            : typeOfInflowList == "RiskBill"
+                                ? Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        FormatDateTime.formatterDay.format(
+                                            provider.listRiskBill[index].date),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Text(
+                                        FormatDateTime.formatterTime.format(
+                                            provider.listRiskBill[index].date),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "PAID",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.green,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Image.asset(
+                                              'assets/images/ic_paid.png')
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                : SizedBox(
+                                    width: 0,
+                                  ),
               ],
             ),
           ),

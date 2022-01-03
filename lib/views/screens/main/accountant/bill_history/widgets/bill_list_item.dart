@@ -10,6 +10,7 @@ import 'package:hotel_management_system/views/screens/main/receptionist/hotel/sc
 import 'package:hotel_management_system/views/screens/main/receptionist/hotel/widgets/booking_card.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/widgets/res_bill_detail_widget.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:provider/provider.dart';
 
 class BillListItem extends StatefulWidget {
   static const String nameRoute = '/billListItem';
@@ -90,7 +91,15 @@ class _BillListItemDetailState extends State<BillListItem> {
                                                     argument.index]
                                                 .staff
                                                 .fullName
-                                            : "Not Found"),
+                                            : argument.typeOfListDetail ==
+                                                    "RiskBill"
+                                                ? argument
+                                                    .billHistoryProvider
+                                                    .listRiskBill[
+                                                        argument.index]
+                                                    .staff
+                                                    .fullName
+                                                : "Not Found"),
                             SizedBox(
                               height: 10,
                             ),
@@ -115,7 +124,15 @@ class _BillListItemDetailState extends State<BillListItem> {
                                                   .listEntertainmentBill[
                                                       argument.index]
                                                   .date)
-                                          : "Not Found",
+                                          : argument.typeOfListDetail ==
+                                                  "RiskBill"
+                                              ? FormatDateTime.formatterDay
+                                                  .format(argument
+                                                      .billHistoryProvider
+                                                      .listRiskBill[
+                                                          argument.index]
+                                                      .date)
+                                              : "Not Found",
                             ),
                             SizedBox(
                               height: 10,
@@ -223,9 +240,152 @@ class _BillListItemDetailState extends State<BillListItem> {
                                   .entertainBillDetail
                                   .length,
                             )
-                          : SizedBox(
-                              width: 0,
-                            ),
+                          : argument.typeOfListDetail == "RiskBill"
+                              ? SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      FormBoxDescription(
+                                        onIconPress: () {},
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                            size.height * 0.02,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              FormRow(
+                                                firstText: "Staff Name: ",
+                                                secondText: argument
+                                                    .billHistoryProvider
+                                                    .listRiskBill[
+                                                        argument.index]
+                                                    .staff
+                                                    .name,
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+                                              FormRow(
+                                                firstText: "Date Create: ",
+                                                secondText: FormatDateTime
+                                                    .formatterDateTime
+                                                    .format(DateTime.now())
+                                                    .toString(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white,
+                                          ),
+                                          child: Consumer<BillHistoryProvider>(
+                                            builder:
+                                                (context, provider, child) {
+                                              final riskBill = argument
+                                                  .billHistoryProvider
+                                                  .listRiskBill[argument.index];
+                                              return Column(children: [
+                                                FormBoxDescription(
+                                                    hasIcon: false,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.all(
+                                                        size.height * 0.02,
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          FormRow(
+                                                            firstText:
+                                                                "Risk Type: ",
+                                                            secondText: riskBill
+                                                                .riskName,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Risk Detail: ",
+                                                            secondText: riskBill
+                                                                    .detail!
+                                                                    .isEmpty
+                                                                ? "No Detail"
+                                                                : riskBill
+                                                                    .detail
+                                                                    .toString(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onIconPress: () {}),
+                                                FormBoxDescription(
+                                                    hasIcon: false,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.all(
+                                                        size.height * 0.02,
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          FormRow(
+                                                            firstText:
+                                                                "Customer Name: ",
+                                                            secondText: riskBill
+                                                                .customerName,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Customer Phone: ",
+                                                            secondText: riskBill
+                                                                .customerPhoneNumber,
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                size.height *
+                                                                    0.01,
+                                                          ),
+                                                          FormRow(
+                                                            firstText:
+                                                                "Total Bill: ",
+                                                            secondText: riskBill
+                                                                .price
+                                                                .toStringAsFixed(
+                                                                    0),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    onIconPress: () {})
+                                              ]);
+                                            },
+                                          )),
+                                      SizedBox(
+                                        height: size.height * 0.01,
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.03,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : SizedBox(
+                                  width: 0,
+                                ),
               SizedBox(
                 height: size.height * 0.03,
               ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/view_models/manager/revenue_report_provider.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/report_detail.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/has_no_data_widget.dart';
 import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -41,13 +44,13 @@ class _DailyReportScreenState extends State<DailyReportScreen> {
       body: Consumer<RevenueReportProvider>(
         builder: (context, provider, child) {
           return ModalProgressHUD(
+            progressIndicator: SpinKitFoldingCube(
+              color: kPrimaryColor,
+              size: 40.0,
+            ),
             inAsyncCall: provider.isLoad,
             child: provider.hasNoData
-                ? Container(
-                    child: Center(
-                      child: Text("No Report Found!"),
-                    ),
-                  )
+                ? HasNoDataWidget(title: "No Report Found!")
                 : Visibility(
                     visible: !provider.isLoad,
                     child: SingleChildScrollView(

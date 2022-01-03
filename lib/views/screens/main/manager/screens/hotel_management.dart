@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_currency.dart';
@@ -87,6 +88,10 @@ class _BodyHotelMangementScreen extends StatelessWidget {
     return Consumer<HotelManagementProvider>(
         builder: (context, provider, child) {
       return ModalProgressHUD(
+        progressIndicator: SpinKitFoldingCube(
+          color: kPrimaryColor,
+          size: 40.0,
+        ),
         inAsyncCall: provider.isLoad,
         child: Container(
           padding: EdgeInsets.only(

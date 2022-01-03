@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_currency.dart';
 import 'package:hotel_management_system/models/entertainment_service/entertainment.dart';
@@ -70,6 +71,10 @@ class EntertainmentManagementDetail extends StatelessWidget {
         ),
       ),
       body: ModalProgressHUD(
+        progressIndicator: SpinKitFoldingCube(
+          color: kPrimaryColor,
+          size: 40.0,
+        ),
         inAsyncCall: context.watch<EntertainmentManagmentProvider>().isLoad,
         child: Container(
           padding: EdgeInsets.only(

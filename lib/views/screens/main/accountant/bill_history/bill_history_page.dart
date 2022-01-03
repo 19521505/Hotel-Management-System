@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/accountant/bill_history_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_page_detail.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/inflow/inflow_list.dart';
@@ -6,6 +8,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_row.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:hotel_management_system/widgets/has_no_data_widget.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 
@@ -40,12 +43,12 @@ class _BillHistoryPageState extends State<BillHistoryPage> {
           builder: (context, provider, child) {
             return ModalProgressHUD(
               inAsyncCall: provider.isLoad,
+              progressIndicator: SpinKitFoldingCube(
+                color: kPrimaryColor,
+                size: 40.0,
+              ),
               child: provider.hasNoData
-                  ? Container(
-                      child: Center(
-                        child: Text("No Bills Found"),
-                      ),
-                    )
+                  ? HasNoDataWidget(title: "No Bills Found!")
                   : Visibility(
                       visible: !provider.isLoad,
                       child: Container(
@@ -169,6 +172,43 @@ class _BillHistoryPageState extends State<BillHistoryPage> {
                                                     firstText: "Total: ",
                                                     secondText: provider
                                                         .totalListEntertainmentBill
+                                                        .toString()),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  FormBoxDescription(
+                                    hasIcon: true,
+                                    nameRoute: BillPageDetail.nameRoute,
+                                    onIconPress: () {
+                                      Navigator.pushNamed(
+                                          context, BillPageDetail.nameRoute,
+                                          arguments: BillDetailListArgument(
+                                              provider, "RiskBill"));
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 5,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                FormRow(
+                                                    firstText: 'Bill Type:',
+                                                    secondText: 'Risk Bill'),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                FormRow(
+                                                    firstText: "Total: ",
+                                                    secondText: provider
+                                                        .totalListRiskBill
                                                         .toString()),
                                               ],
                                             ),
