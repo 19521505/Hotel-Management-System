@@ -11,10 +11,10 @@ import 'package:provider/provider.dart';
 class CashOutflowPage extends StatefulWidget {
   const CashOutflowPage({Key? key}) : super(key: key);
   static const String nameRoute = '/outflow';
-  static Route route() {
+  static Route route(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (context) => CashOutflowPage(),
-      settings: RouteSettings(name: nameRoute),
+      settings: settings,
     );
   }
 
@@ -25,6 +25,8 @@ class CashOutflowPage extends StatefulWidget {
 class _CashOutflowPageState extends State<CashOutflowPage> {
   @override
   Widget build(BuildContext context) {
+    final accountantProvider =
+        (ModalRoute.of(context)!.settings.arguments as AccountantProvider);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppbarTitleRight(
@@ -85,7 +87,9 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                           'assets/images/ic_pin_staff.png'),
                                       SizedBox(width: 5),
                                       Text(
-                                        provider.listFilterRequest[index].staff
+                                        accountantProvider
+                                            .listFilterRequest[index]
+                                            .staff
                                             .fullName,
                                         style: TextStyle(
                                           fontSize: 16,
@@ -98,7 +102,7 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                       onTap: () {
                                         Navigator.pushNamed(context,
                                             OutFlowItemDetail.nameRoute,
-                                            arguments: provider
+                                            arguments: accountantProvider
                                                 .listFilterRequest[index]);
                                       },
                                       child:
@@ -117,7 +121,8 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                 children: [
                                   Center(
                                     child: Text(
-                                      provider.listFilterRequest[index]
+                                      accountantProvider
+                                              .listFilterRequest[index]
                                               .totalPrice
                                               .toString() +
                                           " VND",
@@ -127,8 +132,10 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                     ),
                                   ),
                                   Text(
-                                      provider.listFilterRequest[index]
-                                              .ingredientDetail.length
+                                      accountantProvider
+                                              .listFilterRequest[index]
+                                              .ingredientDetail
+                                              .length
                                               .toString() +
                                           " Supplies",
                                       style: TextStyle(
@@ -146,14 +153,16 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                                 children: [
                                   Text(
                                     FormatDateTime.formatterDay.format(
-                                        provider.listFilterRequest[index].date),
+                                        accountantProvider
+                                            .listFilterRequest[index].date),
                                     style: TextStyle(
                                       fontSize: 16,
                                     ),
                                   ),
                                   Text(
                                     FormatDateTime.formatterTime.format(
-                                        provider.listFilterRequest[index].date),
+                                        accountantProvider
+                                            .listFilterRequest[index].date),
                                     style: TextStyle(
                                       fontSize: 16,
                                     ),
@@ -185,7 +194,7 @@ class _CashOutflowPageState extends State<CashOutflowPage> {
                         SizedBox(
                           height: size.height * 0.02,
                         ),
-                    itemCount: provider.listFilterRequest.length);
+                    itemCount: accountantProvider.listFilterRequest.length);
               },
             ),
             SizedBox(
