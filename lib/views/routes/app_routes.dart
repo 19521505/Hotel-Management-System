@@ -101,7 +101,7 @@ class AppRoutes {
       case CashInflowPage.nameRoute:
         return CashInflowPage.route(settings);
       case CashOutflowPage.nameRoute:
-        return CashOutflowPage.route();
+        return CashOutflowPage.route(settings);
       case OutFlowItemDetail.nameRoute:
         return OutFlowItemDetail.route(settings);
       case InflowListPage.nameRoute:

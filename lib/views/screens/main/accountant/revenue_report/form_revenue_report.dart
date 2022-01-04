@@ -188,7 +188,8 @@ class BodyRevenueReport extends StatelessWidget {
                   builder: (context, provider, child) {
                     return FormBoxDescription(
                       onIconPress: () {
-                        Navigator.pushNamed(context, CashOutflowPage.nameRoute);
+                        Navigator.pushNamed(context, CashOutflowPage.nameRoute,
+                            arguments: provider);
                       },
                       nameRoute: CashOutflowPage.nameRoute,
                       hasIcon: true,
