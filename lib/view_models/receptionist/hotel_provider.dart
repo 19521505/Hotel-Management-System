@@ -6,8 +6,8 @@ import 'package:hotel_management_system/services/data_provider/receptionist_data
 class HotelProvider extends ChangeNotifier {
   bool _isLoad = true;
 
-  DateTime _checkinDate = DateTime.now();
-  DateTime _checkoutDate = DateTime.now();
+  DateTime _checkinDate = DateTime.now().toUtc();
+  DateTime _checkoutDate = DateTime.now().toUtc();
 
   // ignore: unused_field
   List<Room> _listAllRoom = [];

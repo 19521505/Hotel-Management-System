@@ -131,7 +131,7 @@ class _BodyBookingScreenState extends State<BodyBookingScreen> {
                             firstDate: DateTime(2021),
                             lastDate: DateTime(2999))
                         .then((date) {
-                      checkInProvider.checinDate = date;
+                      checkInProvider.checinDate = date!;
                     });
                   },
                   icon: Icon(

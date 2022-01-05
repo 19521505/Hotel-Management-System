@@ -257,48 +257,42 @@ class BodyRevenueReport extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: context
-                                      .read<AccountantProvider>()
-                                      .getTotalProfit() >
-                                  0
-                              ? Colors.green[100]
-                              : Colors.red[100],
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                        ),
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 10,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            context
-                                .read<AccountantProvider>()
-                                .getTotalProfit()
-                                .toString(),
-                            style: TextStyle(
-                                fontSize: 26,
-                                color: context
-                                            .read<AccountantProvider>()
-                                            .getTotalProfit() >
-                                        0
-                                    ? Colors.green
-                                    : Colors.red,
-                                fontWeight: FontWeight.bold),
+                      Consumer<AccountantProvider>(
+                          builder: (context, accountantProvider, child) {
+                        return Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
                           ),
-                        ),
-                      ),
+                          decoration: BoxDecoration(
+                            color: accountantProvider.totalProfit > 0
+                                ? Colors.green[100]
+                                : Colors.red[100],
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
+                          ),
+                          margin: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              accountantProvider.totalProfit.toString(),
+                              style: TextStyle(
+                                  fontSize: 26,
+                                  color: accountantProvider.totalProfit > 0
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        );
+                      }),
                     ],
                   ),
                 ),

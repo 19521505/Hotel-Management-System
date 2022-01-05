@@ -24,7 +24,10 @@ class FoodRequest extends StatefulWidget {
   static const String nameRoute = '/foodrequest';
   static Route route() {
     return MaterialPageRoute(
-      builder: (context) => FoodRequest(),
+      builder: (context) => ChangeNotifierProvider<RequestProvider>.value(
+        value: RequestProvider(),
+        child: FoodRequest(),
+      ),
       settings: RouteSettings(name: nameRoute),
     );
   }
@@ -38,37 +41,37 @@ class FoodRequest extends StatefulWidget {
 class _FoodRequestState extends State<FoodRequest> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppbarTitleRight(
-        title: 'Form Request',
-      ),
-      body: Consumer<RequestProvider>(builder: (context, provider, child) {
-        return ModalProgressHUD(
+    return Consumer<RequestProvider>(builder: (context, provider, child) {
+      return Scaffold(
+        appBar: CustomAppbarTitleRight(
+          title: 'Form Request',
+        ),
+        body: ModalProgressHUD(
           progressIndicator: SpinKitFoldingCube(
             color: kPrimaryColor,
             size: 40.0,
           ),
           inAsyncCall: provider.isLoad,
           child: BodyFormReq(),
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        heroTag: null,
-        backgroundColor: startLinearColor,
-        child: IconButton(
-          onPressed: () {
-            // Navigator.pushNamed(context, AddIngre.nameRoute);
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return CustomDialog();
-                });
-          },
-          icon: Icon(Icons.add),
         ),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: null,
+          heroTag: null,
+          backgroundColor: startLinearColor,
+          child: IconButton(
+            onPressed: () {
+              // Navigator.pushNamed(context, AddIngre.nameRoute);
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CustomDialog.getInstance(provider);
+                  });
+            },
+            icon: Icon(Icons.add),
+          ),
+        ),
+      );
+    });
   }
 }
 

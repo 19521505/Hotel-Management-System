@@ -50,11 +50,6 @@ class CustomMenuSidebar extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.grey),
-            title: Text("Settings"),
-          ),
-          Divider(),
-          ListTile(
             leading: Icon(Icons.exit_to_app, color: Colors.grey),
             title: Text("Log out"),
             onTap: () {

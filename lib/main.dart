@@ -20,11 +20,6 @@ class HotelManagerSystem extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AuthProvider>(
             create: (context) => AuthProvider()),
-        ChangeNotifierProvider<RequestProvider>(
-          create: (context) => RequestProvider(),
-          lazy: false,
-        ),
-       
         ChangeNotifierProvider<AccountantProvider>(
           create: (context) => AccountantProvider(),
           lazy: false,
