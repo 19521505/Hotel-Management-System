@@ -130,7 +130,7 @@ class AccountantRepository {
 
     final data = {
       'reportName': report.reportName,
-      'date': report.date.toString(),
+      'date': report.date.toUtc().toIso8601String(),
       'resBillTotal': double.parse(report.resBillTotal.toStringAsFixed(2)),
       'roomBillTotal': double.parse(report.roomBillTotal.toStringAsFixed(2)),
       'entertainmentBillTotal':

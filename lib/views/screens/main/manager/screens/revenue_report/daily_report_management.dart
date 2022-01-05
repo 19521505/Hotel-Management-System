@@ -172,7 +172,7 @@ class _DailyReportScreenState extends State<DailyReportScreen> {
                                           Row(
                                             children: [
                                               Text(
-                                                "PAID",
+                                                "DONE",
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.green,

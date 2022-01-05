@@ -5,6 +5,14 @@ import 'package:hotel_management_system/view_models/kitchen/request_provider.dar
 import 'package:provider/provider.dart';
 
 class CustomDialog extends StatefulWidget {
+  static Widget getInstance(RequestProvider requestProvider) {
+    return ChangeNotifierProvider<RequestProvider>.value(
+      value: requestProvider,
+      // lazy: false,
+      child: CustomDialog(),
+    );
+  }
+
   const CustomDialog({Key? key}) : super(key: key);
 
   @override

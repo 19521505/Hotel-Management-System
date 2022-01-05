@@ -121,7 +121,6 @@ class AccountantProvider extends ChangeNotifier {
   }
 
   double getTotalProfit() {
-    double _totalProfit = 0;
     _totalProfit = totalInFlow - totalOutFlow;
     if (totalInFlow != 0 || totalOutFlow != 0) {
       isLoad = false;
