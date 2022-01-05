@@ -10,7 +10,11 @@ class KitchenPage extends StatelessWidget {
   static const String nameRoute = '/kitchen';
   static Route route() {
     return MaterialPageRoute(
-      builder: (context) => KitchenPage(),
+      builder: (context) => ChangeNotifierProvider<RequestProvider>(
+        create: (context) => RequestProvider(),
+        lazy: false,
+        child: KitchenPage(),
+      ),
       settings: RouteSettings(name: nameRoute),
     );
   }
@@ -49,7 +53,7 @@ class KitchenPage extends StatelessWidget {
               title: 'New Request',
               subTitle: 'Create a request send to the Warehouse',
               press: () {
-                context.read<RequestProvider>().detailIngredient.clear();
+                // context.read<RequestProvider>().detailIngredient.clear();
                 Navigator.pushNamed(context, FoodRequest.nameRoute);
               },
             ),

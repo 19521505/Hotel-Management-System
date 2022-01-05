@@ -16,6 +16,7 @@ import 'package:hotel_management_system/views/screens/main/accountant/revenue_re
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/outflow/outflow_item_detail.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/revenue_report_result.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/kitchenpage.dart';
+import 'package:hotel_management_system/views/screens/main/kitchen/request_form/dialog_details_req.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/request_form/form_foods_request.dart';
 import 'package:hotel_management_system/views/screens/main/kitchen/restaunrant_others_list/pending_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/main_screen.dart';
@@ -71,6 +72,7 @@ class AppRoutes {
         return FoodRequest.route();
       case PendingResList.nameRoute:
         return PendingResList.route();
+
       /**
         * Accountant Department 
       */

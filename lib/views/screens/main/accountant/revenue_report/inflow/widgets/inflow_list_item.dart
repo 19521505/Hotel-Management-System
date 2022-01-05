@@ -209,7 +209,8 @@ class _InflowListItemState extends State<InflowListItem> {
                                   context,
                                   BookingPaymentDetail.nameRoute,
                                   arguments: BookingPaymentArgument(
-                                      reservationRoom: roomBill),
+                                    reservationRoom: roomBill,
+                                  ),
                                 );
                               },
                             );
