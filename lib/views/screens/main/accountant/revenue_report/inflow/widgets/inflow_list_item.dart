@@ -208,7 +208,8 @@ class _InflowListItemState extends State<InflowListItem> {
                                 Navigator.pushNamed(
                                   context,
                                   BookingPaymentDetail.nameRoute,
-                                  arguments: roomBill,
+                                  arguments: BookingPaymentArgument(
+                                      reservationRoom: roomBill),
                                 );
                               },
                             );

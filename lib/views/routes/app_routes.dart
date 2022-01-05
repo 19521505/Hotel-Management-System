@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel_management_system/models/report/report.dart';
+import 'package:hotel_management_system/view_models/manager/revenue_report_provider.dart';
+import 'package:hotel_management_system/view_models/manager/statistic_provider.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/accountant_page.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_page_detail.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/bill_history/bill_history_page.dart';
@@ -23,6 +26,7 @@ import 'package:hotel_management_system/views/screens/main/manager/screens/food_
 import 'package:hotel_management_system/views/screens/main/manager/screens/hotel_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/main_entertainment_managment_screen.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/entertainment_management_detail.dart';
+import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/monthly_report_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/type_ticket_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/revenue_report/daily_report_management.dart';
 import 'package:hotel_management_system/views/screens/main/manager/screens/food_management.dart';
@@ -217,7 +221,8 @@ class AppRoutes {
             child: ReportDetail(),
           ),
         );
-
+      case MonthlyReportScreen.nameRoute:
+        return MonthlyReportScreen.route();
       /**
         * Default 
       */
