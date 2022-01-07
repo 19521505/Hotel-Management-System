@@ -5,4 +5,5 @@ class FormatDateTime {
   static DateFormat formatterDayToID = DateFormat('ddMMyyyy');
   static DateFormat formatterTime = DateFormat('HH:mm');
   static DateFormat formatterDateTime = DateFormat('dd/MM/yyyy -- HH:mm');
+  static DateFormat formatterBillID = DateFormat('ddMMyyyyHHmm');
 }

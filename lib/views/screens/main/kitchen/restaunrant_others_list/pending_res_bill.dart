@@ -3,6 +3,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/constrants/format_date.dart';
 import 'package:hotel_management_system/models/enum/enum_status.dart';
+import 'package:hotel_management_system/models/enum/paid_status.dart';
+import 'package:hotel_management_system/view_models/auth_provider.dart';
 import 'package:hotel_management_system/view_models/restaurant/paid_res_bill_provider.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/screens/pay_detail_res_bill.dart';
 import 'package:hotel_management_system/views/screens/main/waiter/widgets/restaurant_bill_widget.dart';
@@ -109,6 +111,19 @@ class BodyPendingBill extends StatelessWidget {
                               context, PayResBillDetail.nameRoute,
                               arguments: item);
                         },
+                        icStatus: item.status == StatusType.Done
+                            ? 'ic_paid.png'
+                            : item.status == StatusType.Pending
+                                ? 'ic_pending.png'
+                                : 'ic_paid.png',
+                        billID:
+                            FormatDateTime.formatterBillID.format(item.date),
+                        doneBill: false,
+                        roleStaff:
+                            context.read<AuthProvider>().currentStaff.role,
+                        icPaid: item.paidStatus == PaidStatus.Paid
+                            ? 'ic_paid.png'
+                            : 'ic_canceled.png',
                       );
                     },
                     separatorBuilder: (context, index) => SizedBox(
