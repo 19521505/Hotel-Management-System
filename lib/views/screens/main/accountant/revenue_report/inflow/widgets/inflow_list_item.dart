@@ -212,7 +212,7 @@ class _InflowListItemState extends State<InflowListItem> {
                                     reservationRoom: roomBill,
                                   ),
                                 );
-                              },
+                              }, icPaid: 'ic_paid.png',
                             );
                           },
                           itemCount: 1,

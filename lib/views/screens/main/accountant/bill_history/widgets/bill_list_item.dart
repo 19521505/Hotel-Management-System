@@ -205,6 +205,7 @@ class _BillListItemDetailState extends State<BillListItem> {
                                   arguments: roomBill,
                                 );
                               },
+                              icPaid: 'ic_paid.png',
                             );
                           },
                           itemCount: 1,

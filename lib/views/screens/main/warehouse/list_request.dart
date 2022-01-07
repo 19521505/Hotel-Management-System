@@ -169,7 +169,8 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
                         .toString(),
                     status: provider.listFilterRequest[index].status
                         .toString()
-                        .replaceAll("StatusType.", ""),
+                        .replaceAll("StatusType.", "")
+                        .toUpperCase(),
                     color: provider.listFilterRequest[index].status ==
                             StatusType.Done
                         ? Colors.green
@@ -184,6 +185,13 @@ class _BodyImportRequestState extends State<BodyImportRequest> {
                         arguments: [provider.listFilterRequest[index]],
                       );
                     },
+                    icPaid: provider.listFilterRequest[index].status ==
+                            StatusType.Done
+                        ? 'ic_paid.png'
+                        : provider.listFilterRequest[index].status ==
+                                StatusType.Pending
+                            ? 'ic_pending.png'
+                            : 'ic_canceled.png',
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(

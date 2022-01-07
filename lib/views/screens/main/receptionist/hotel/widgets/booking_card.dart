@@ -8,21 +8,23 @@ class BookingCard extends StatelessWidget {
       checkOut,
       dateCreate,
       timeCreate,
-      paidStatus;
+      paidStatus,
+      icPaid;
   final Color color;
   final VoidCallback press;
-  const BookingCard({
-    Key? key,
-    required this.customerName,
-    required this.customerPhone,
-    required this.checkIn,
-    required this.checkOut,
-    required this.dateCreate,
-    required this.timeCreate,
-    required this.paidStatus,
-    required this.color,
-    required this.press,
-  }) : super(key: key);
+  const BookingCard(
+      {Key? key,
+      required this.customerName,
+      required this.customerPhone,
+      required this.checkIn,
+      required this.checkOut,
+      required this.dateCreate,
+      required this.timeCreate,
+      required this.paidStatus,
+      required this.color,
+      required this.press,
+      required this.icPaid})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,15 +148,21 @@ class BookingCard extends StatelessWidget {
                     timeCreate,
                   ),
                 ),
-                Flexible(
-                  child: Text(
-                    paidStatus,
-                    style: TextStyle(
-                      color: color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  children: [
+                    Text(
+                      paidStatus.toUpperCase(),
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    Image.asset(
+                      'assets/images/' + icPaid,
+                      color: color,
+                    ),
+                  ],
                 ),
               ],
             ),

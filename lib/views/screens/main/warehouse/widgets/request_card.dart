@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/widgets/right_circular_black_arrow.dart';
 
 class WidgetRequestCard extends StatelessWidget {
-  final String nameRequest, nameStaff, date, time, status;
+  final String nameRequest, nameStaff, date, time, status, icPaid;
   final Color color;
   final VoidCallback press;
   const WidgetRequestCard({
@@ -14,6 +14,8 @@ class WidgetRequestCard extends StatelessWidget {
     required this.status,
     required this.color,
     required this.press,
+    required this.icPaid,
+    
   }) : super(key: key);
 
   @override
@@ -44,11 +46,19 @@ class WidgetRequestCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  nameStaff,
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                Row(
+                  children: [
+                    Image.asset('assets/images/ic_pin_staff.png'),
+                    SizedBox(
+                      width: size.width * 0.01,
+                    ),
+                    Text(
+                      nameStaff,
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
                 ),
                 RightCircularBlackArrow(size: size),
               ],
@@ -107,15 +117,21 @@ class WidgetRequestCard extends StatelessWidget {
                     time,
                   ),
                 ),
-                Flexible(
-                  child: Text(
-                    status,
-                    style: TextStyle(
-                      color: color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  children: [
+                    Text(
+                      status,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    Image.asset(
+                      'assets/images/' + icPaid,
+                      color: color,
+                    ),
+                  ],
                 ),
               ],
             ),
