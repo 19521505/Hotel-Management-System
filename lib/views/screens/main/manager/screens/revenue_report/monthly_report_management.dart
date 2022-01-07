@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hotel_management_system/constrants/appColors.dart';
 import 'package:hotel_management_system/view_models/manager/statistic_provider.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
-import 'package:hotel_management_system/widgets/has_no_data_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
@@ -51,244 +50,288 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
               inAsyncCall: provider.isLoad,
               child: Visibility(
                 visible: !provider.isLoad,
-                child: Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.02),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: size.width * 0.03),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Weekly Data Chart',
-                                style: TextStyle(
-                                    color: Color(0xff0f4a3c),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.02),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: size.width * 0.03),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Weekly Data Chart',
+                                  style: TextStyle(
+                                      color: Color(0xff0f4a3c),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            height: size.height * 0.04,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: kPrimaryLightColor,
+                            Container(
+                              height: size.height * 0.04,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: kPrimaryLightColor,
+                              ),
+                              margin: EdgeInsets.only(right: size.width * 0.02),
+                              padding: EdgeInsets.only(left: 15, right: 5),
+                              child: Consumer<StatisticProvider>(
+                                builder: (context, provider, child) {
+                                  return DropdownButton<String>(
+                                    dropdownColor: kPrimaryLightColor,
+                                    iconSize: 30,
+                                    iconEnabledColor: Colors.white,
+                                    underline: SizedBox(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    onChanged: (String? val) {
+                                      setState(
+                                        () {
+                                          provider.typeOfData = val!;
+                                          provider.onTypeOfDataChange();
+                                        },
+                                      );
+                                    },
+                                    value: provider.typeOfData,
+                                    items: [
+                                      DropdownMenuItem(
+                                          child: Text('Inflow'),
+                                          value: "Inflow"),
+                                      DropdownMenuItem(
+                                          child: Text('Outflow'),
+                                          value: "Outflow"),
+                                      DropdownMenuItem(
+                                          child: Text('Risk Bill'),
+                                          value: "RiskBill"),
+                                      DropdownMenuItem(
+                                          child: Text('Restaurant Bill'),
+                                          value: "ResBill"),
+                                      DropdownMenuItem(
+                                          child: Text('Room Bill'),
+                                          value: "RoomBill"),
+                                      DropdownMenuItem(
+                                          child: Text('Entertainment Bill'),
+                                          value: "EntertainmentBill"),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
-                            margin: EdgeInsets.only(right: size.width * 0.02),
-                            padding: EdgeInsets.only(left: 15, right: 5),
-                            child: Consumer<StatisticProvider>(
-                              builder: (context, provider, child) {
-                                return DropdownButton<String>(
-                                  dropdownColor: kPrimaryLightColor,
-                                  iconSize: 30,
-                                  iconEnabledColor: Colors.white,
-                                  underline: SizedBox(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  onChanged: (String? val) {
-                                    setState(
-                                      () {
-                                        provider.typeOfData = val!;
-                                        provider.onTypeOfDataChange();
-                                      },
-                                    );
-                                  },
-                                  value: provider.typeOfData,
-                                  items: [
-                                    DropdownMenuItem(
-                                        child: Text('Inflow'), value: "Inflow"),
-                                    DropdownMenuItem(
-                                        child: Text('Outflow'),
-                                        value: "Outflow"),
-                                    DropdownMenuItem(
-                                        child: Text('Profit'), value: "Profit"),
-                                    DropdownMenuItem(
-                                        child: Text('Risk Bill'),
-                                        value: "RiskBill"),
-                                    DropdownMenuItem(
-                                        child: Text('Restaurant Bill'),
-                                        value: "ResBill"),
-                                    DropdownMenuItem(
-                                        child: Text('Room Bill'),
-                                        value: "RoomBill"),
-                                    DropdownMenuItem(
-                                        child: Text('Entertainment Bill'),
-                                        value: "EntertainmentBill"),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: size.height * 0.01,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                            color: Colors.white,
-                            child: Consumer<StatisticProvider>(
-                              builder: (context, provider, child) {
-                                return Stack(
-                                  children: <Widget>[
-                                    provider.hasNoData
-                                        ? Center(
-                                            child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.document_scanner,
-                                                color: Colors.grey,
-                                                size: size.height * 0.1,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    top: size.height * 0.03,
-                                                    bottom: size.height * 0.05),
-                                                child: Text(
-                                                  "No Data Found",
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.grey),
+                          ],
+                        ),
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                              color: Colors.white,
+                              child: Consumer<StatisticProvider>(
+                                builder: (context, provider, child) {
+                                  return Stack(
+                                    children: <Widget>[
+                                      provider.hasNoData
+                                          ? Center(
+                                              child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.document_scanner,
+                                                  color: Colors.grey,
+                                                  size: size.height * 0.1,
                                                 ),
-                                              ),
-                                            ],
-                                          ))
-                                        : SizedBox(
-                                            width: 0,
-                                          ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 16,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  provider
-                                                      .getPreviousWeekStatistic();
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal:
-                                                                  size.width *
-                                                                      0.02),
-                                                      child: Image.asset(
-                                                          "assets/images/left_arrow_view_icon.png",
-                                                          color:
-                                                              kPrimaryLightColor),
-                                                    ),
-                                                    Text(
-                                                      "Before",
-                                                      style: TextStyle(
-                                                        fontSize: 16,
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: size.height * 0.03,
+                                                      bottom:
+                                                          size.height * 0.05),
+                                                  child: Text(
+                                                    "No Data Found",
+                                                    style: TextStyle(
+                                                        fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                        color: Colors.grey),
+                                                  ),
                                                 ),
-                                              ),
-                                              Text(
-                                                provider.weekStart +
-                                                    " - " +
-                                                    provider.weekEnd,
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: kPrimaryColor,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  if (provider.isNext) {
-                                                    context
-                                                        .read<
-                                                            StatisticProvider>()
-                                                        .getNextWeekStatistic();
-                                                  }
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "After",
-                                                      style: TextStyle(
+                                              ],
+                                            ))
+                                          : SizedBox(
+                                              width: 0,
+                                            ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 16,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    provider
+                                                        .getPreviousWeekStatistic();
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    size.width *
+                                                                        0.02),
+                                                        child: Image.asset(
+                                                            "assets/images/left_arrow_view_icon.png",
+                                                            color:
+                                                                kPrimaryLightColor),
+                                                      ),
+                                                      Text(
+                                                        "Before",
+                                                        style: TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: provider.isNext
-                                                              ? Colors.black
-                                                              : Colors.grey),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal:
-                                                                  size.width *
-                                                                      0.02),
-                                                      child: Image.asset(
-                                                        "assets/images/right_arrow_view_icon.png",
-                                                        color: provider.isNext
-                                                            ? kPrimaryLightColor
-                                                            : Colors.grey,
+                                                        ),
                                                       ),
-                                                    )
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: size.height * 0.02,
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 8.0, right: 15),
-                                              child: BarChart(
-                                                mainBarData(provider,
-                                                    provider.typeOfData),
+                                                Text(
+                                                  provider.weekStart +
+                                                      " - " +
+                                                      provider.weekEnd,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: kPrimaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    if (provider.isNext) {
+                                                      context
+                                                          .read<
+                                                              StatisticProvider>()
+                                                          .getNextWeekStatistic();
+                                                    }
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "After",
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: provider
+                                                                    .isNext
+                                                                ? Colors.black
+                                                                : Colors.grey),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    size.width *
+                                                                        0.02),
+                                                        child: Image.asset(
+                                                          "assets/images/right_arrow_view_icon.png",
+                                                          color: provider.isNext
+                                                              ? kPrimaryLightColor
+                                                              : Colors.grey,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0, right: 15),
+                                                child: BarChart(
+                                                  mainBarData(provider,
+                                                      provider.typeOfData),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: size.height * 0.02),
-                                            color: kPrimaryLightColor,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Center(
-                                                  child: Column(
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: size.height * 0.02),
+                                              color: kPrimaryLightColor,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Center(
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              NumberFormat
+                                                                      .compact()
+                                                                  .format(provider
+                                                                      .getTotal(
+                                                                          true)),
+                                                              style: TextStyle(
+                                                                  fontSize: 22,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Text(" VND",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white)),
+                                                          ],
+                                                        ),
+                                                        Text("Average",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white)),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: 1,
+                                                    height: size.height * 0.05,
+                                                    color: Colors.white,
+                                                  ),
+                                                  Column(
                                                     children: [
                                                       Row(
                                                         children: [
@@ -297,7 +340,7 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
                                                                     .compact()
                                                                 .format(provider
                                                                     .getTotal(
-                                                                        true)),
+                                                                        false)),
                                                             style: TextStyle(
                                                                 fontSize: 22,
                                                                 color: Colors
@@ -306,124 +349,237 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          Text(" VND",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
+                                                          Text(
+                                                            " VND",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
                                                         ],
                                                       ),
-                                                      Text("Average",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: Colors
-                                                                  .white)),
+                                                      Text(
+                                                        "Total",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
                                                     ],
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 1,
-                                                  height: size.height * 0.05,
-                                                  color: Colors.white,
-                                                ),
-                                                Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          NumberFormat.compact()
-                                                              .format(provider
-                                                                  .getTotal(
-                                                                      false)),
-                                                          style: TextStyle(
-                                                              fontSize: 22,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Text(
-                                                          " VND",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Text(
-                                                      "Total",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )),
+                        ),
+                        Container(
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: size.height * 0.01,
+                                          horizontal: size.width * 0.05),
+                                      decoration: BoxDecoration(
+                                          color: kPrimaryLightColor,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            "Total Profit: ",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white,
                                             ),
-                                          )
+                                          ),
+                                          Text(
+                                            NumberFormat.compact()
+                                                .format(provider.totalProfit),
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.yellow,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            " VND",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
+                                    PercentageStateWidget(
+                                        size: size,
+                                        percentage: provider.percentageProfit),
                                   ],
-                                );
-                              },
-                            )),
-                      ),
-                      Container(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset("assets/images/ic_budgeting.png"),
-                                Text(
-                                  "Compare to Previous Week",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
                                 ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Image.asset("assets/images/ic_inflow.png"),
-                                Text(
-                                  "Inflow ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  provider.percentageInflow.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Image.asset("assets/images/ic_outflow.png"),
-                                Text(
-                                  "Outflow ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  provider.percentageOutflow.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Compare to Previous Week",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/ic_inflow.png",
+                                        color: kPrimaryColor,
+                                        width: size.width * 0.1,
+                                      ),
+                                      Text(
+                                        "Inflow ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        provider.percentageInflow.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      PercentageStateWidget(
+                                          size: size,
+                                          percentage:
+                                              provider.percentageInflow),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Restaurant Bill ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        provider.percentageResBill.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      PercentageStateWidget(
+                                          size: size,
+                                          percentage:
+                                              provider.percentageResBill),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Room Bill ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        provider.percentageRoomBill.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      PercentageStateWidget(
+                                          size: size,
+                                          percentage:
+                                              provider.percentageRoomBill),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Risk Bill ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        provider.percentageRiskBill.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      PercentageStateWidget(
+                                          size: size,
+                                          percentage:
+                                              provider.percentageRiskBill),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Entertainment Bill ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      Text(
+                                        provider.percentageEntertainmentBill
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      PercentageStateWidget(
+                                          size: size,
+                                          percentage: provider
+                                              .percentageEntertainmentBill),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/ic_outflow.png",
+                                    width: size.width * 0.15,
+                                  ),
+                                  Text(
+                                    "Outflow ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    provider.percentageOutflow.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  PercentageStateWidget(
+                                      size: size,
+                                      percentage: provider.percentageOutflow),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -599,6 +755,55 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
       ),
       barGroups: showingGroups(provider, typeOfData),
       gridData: FlGridData(show: false),
+    );
+  }
+}
+
+class PercentageStateWidget extends StatelessWidget {
+  const PercentageStateWidget({
+    Key? key,
+    required this.size,
+    required this.percentage,
+  }) : super(key: key);
+
+  final Size size;
+  final int percentage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+          vertical: size.height * 0.01, horizontal: size.width * 0.01),
+      padding: EdgeInsets.symmetric(
+          vertical: size.height * 0.01, horizontal: size.width * 0.02),
+      decoration: BoxDecoration(
+          color: percentage > 0
+              ? Colors.green
+              : percentage < 0
+                  ? Colors.red
+                  : Colors.white,
+          borderRadius: BorderRadius.circular(15)),
+      child: Row(
+        children: [
+          percentage > 0
+              ? Icon(
+                  Icons.arrow_drop_up,
+                  color: Colors.white,
+                )
+              : percentage < 0
+                  ? Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white,
+                    )
+                  : SizedBox(
+                      width: 0,
+                    ),
+          Text(
+            percentage.toString(),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ],
+      ),
     );
   }
 }
