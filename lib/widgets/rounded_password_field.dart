@@ -32,7 +32,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
       child: TextFormField(
         onChanged: widget.onChanged,
         obscureText: !_passwordVisibility,
-        textInputAction: TextInputAction.next,
+        textInputAction: TextInputAction.done,
         // controller: widget.controller,
         validator: (val) =>
             val!.isNotEmpty ? null : "Password cannot be blank!",
