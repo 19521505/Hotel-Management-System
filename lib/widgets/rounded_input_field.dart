@@ -21,6 +21,7 @@ class RoundedInputField extends StatelessWidget {
     return TextFieldContainer(
       child: TextFormField(
         // controller: controller,
+        textInputAction: TextInputAction.next,
         onChanged: onChanged,
         validator: (val) =>
             val!.isNotEmpty ? null : inputName + "cannot be blank!",

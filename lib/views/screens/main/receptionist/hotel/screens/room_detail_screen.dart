@@ -131,7 +131,7 @@ class _RoomDetailState extends State<RoomDetail> {
                     icPaid: provider.listRoomDetal[index].paidStatus ==
                             PaidStatus.Paid
                         ? 'ic_paid.png'
-                        : 'ic_canceled.png',
+                        : 'ic_pending.png',
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) => SizedBox(

@@ -102,32 +102,42 @@ class BookingCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Check-in: ',
-                    style: TextStyle(
-                      color: blackColor,
-                      fontSize: 15,
+                Flexible(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Check-in: ',
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 12,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: checkIn,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            )),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: checkIn,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
                   ),
                 ),
-                RichText(
-                  text: TextSpan(
-                    text: 'Check-out: ',
-                    style: TextStyle(
-                      color: blackColor,
-                      fontSize: 15,
+                Flexible(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Check-out: ',
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 12,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: checkOut,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            )),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: checkOut,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
                   ),
                 ),
               ],
