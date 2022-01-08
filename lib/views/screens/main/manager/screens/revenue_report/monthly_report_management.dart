@@ -379,201 +379,344 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
                               )),
                         ),
                         Container(
+                          color: Colors.white,
                           child: Column(
                             children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: size.height * 0.01,
+                                        horizontal: size.width * 0.05),
+                                    decoration: BoxDecoration(
+                                        color: kPrimaryLightColor,
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Total Profit: ",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          NumberFormat.compact()
+                                              .format(provider.totalProfit),
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              color: Colors.yellow,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          " VND",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PercentageStateWidget(
+                                      data: provider.totalProfit,
+                                      size: size,
+                                      percentage: provider.percentageProfit),
+                                ],
+                              ),
                               Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: size.height * 0.01),
+                                margin:
+                                    EdgeInsets.only(top: size.height * 0.02),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: size.height * 0.01,
-                                          horizontal: size.width * 0.05),
-                                      decoration: BoxDecoration(
-                                          color: kPrimaryLightColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            "Total Profit: ",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            NumberFormat.compact()
-                                                .format(provider.totalProfit),
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                color: Colors.yellow,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            " VND",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    PercentageStateWidget(
-                                        size: size,
-                                        percentage: provider.percentageProfit),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: kPrimaryColor,
+                                          blurRadius: 1,
+                                          spreadRadius: 1)
+                                    ]),
+                                child: Center(
+                                  child: Text(
                                     "Compare to Previous Week",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                        color: kPrimaryColor,
+                                        fontSize: 20),
                                   ),
-                                ],
+                                ),
                               ),
                               Column(
                                 children: [
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/ic_inflow.png",
-                                        color: kPrimaryColor,
-                                        width: size.width * 0.1,
-                                      ),
-                                      Text(
-                                        "Inflow ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        provider.percentageInflow.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      PercentageStateWidget(
-                                          size: size,
-                                          percentage:
-                                              provider.percentageInflow),
-                                    ],
+                                  Divider(
+                                    thickness: size.height * 0.001,
+                                    height: size.height * 0.001,
+                                    color: kPrimaryLightColor,
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Restaurant Bill ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        provider.percentageResBill.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      PercentageStateWidget(
-                                          size: size,
-                                          percentage:
-                                              provider.percentageResBill),
-                                    ],
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.05),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: kPrimaryColor
+                                                  .withOpacity(0.5),
+                                              blurRadius: 1,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/ic_inflow.png",
+                                              color: kPrimaryColor,
+                                              width: size.width * 0.1,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              "Inflow ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        PercentageStateWidget(
+                                            hasData: true,
+                                            data: provider.totalInflow,
+                                            size: size,
+                                            percentage:
+                                                provider.percentageInflow),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Room Bill ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        provider.percentageRoomBill.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      PercentageStateWidget(
-                                          size: size,
-                                          percentage:
-                                              provider.percentageRoomBill),
-                                    ],
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.15),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: kPrimaryColor
+                                                  .withOpacity(0.5),
+                                              blurRadius: 1,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/ic_food.png",
+                                              color: kPrimaryColor,
+                                              width: size.width * 0.1,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              "Restaurant Bill ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        PercentageStateWidget(
+                                            hasData: true,
+                                            data: provider.totalResBill,
+                                            size: size,
+                                            percentage:
+                                                provider.percentageResBill),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Risk Bill ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        provider.percentageRiskBill.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      PercentageStateWidget(
-                                          size: size,
-                                          percentage:
-                                              provider.percentageRiskBill),
-                                    ],
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.15),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: kPrimaryColor
+                                                  .withOpacity(0.5),
+                                              blurRadius: 1,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/ic_room.png",
+                                              color: kPrimaryColor,
+                                              width: size.width * 0.1,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              "Room Bill ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        PercentageStateWidget(
+                                            hasData: true,
+                                            data: provider.totalRoomBill,
+                                            size: size,
+                                            percentage:
+                                                provider.percentageRoomBill),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Entertainment Bill ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      Text(
-                                        provider.percentageEntertainmentBill
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                      PercentageStateWidget(
-                                          size: size,
-                                          percentage: provider
-                                              .percentageEntertainmentBill),
-                                    ],
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.15),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: kPrimaryColor
+                                                  .withOpacity(0.5),
+                                              blurRadius: 1,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/ic_risk.png",
+                                              color: kPrimaryColor,
+                                              width: size.width * 0.1,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              "Risk Bill ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        PercentageStateWidget(
+                                            size: size,
+                                            hasData: true,
+                                            data: provider.totalRiskBill,
+                                            percentage:
+                                                provider.percentageRiskBill),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        left: size.width * 0.15),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: kPrimaryColor
+                                                  .withOpacity(0.5),
+                                              blurRadius: 1,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/ic_entertainment.png",
+                                              color: kPrimaryColor,
+                                              width: size.width * 0.1,
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.02,
+                                            ),
+                                            Text(
+                                              "Entertainment Bill ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        PercentageStateWidget(
+                                            size: size,
+                                            hasData: true,
+                                            data:
+                                                provider.totalEntertainmentBill,
+                                            percentage: provider
+                                                .percentageEntertainmentBill),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/images/ic_outflow.png",
-                                    width: size.width * 0.15,
-                                  ),
-                                  Text(
-                                    "Outflow ",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    provider.percentageOutflow.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  PercentageStateWidget(
-                                      size: size,
-                                      percentage: provider.percentageOutflow),
-                                ],
+                              Container(
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.05),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: kPrimaryColor.withOpacity(0.5),
+                                          blurRadius: 1,
+                                          spreadRadius: 1)
+                                    ]),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/ic_outflow.png",
+                                          width: size.width * 0.1,
+                                          color: kPrimaryColor,
+                                        ),
+                                        SizedBox(
+                                          width: size.width * 0.02,
+                                        ),
+                                        Text(
+                                          "Outflow ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                    PercentageStateWidget(
+                                        size: size,
+                                        hasData: true,
+                                        percentage: provider.percentageOutflow,
+                                        data: provider.totalOutflow),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -764,46 +907,103 @@ class PercentageStateWidget extends StatelessWidget {
     Key? key,
     required this.size,
     required this.percentage,
+    required this.data,
+    this.hasData = false,
   }) : super(key: key);
 
   final Size size;
   final int percentage;
+  final int data;
+  final bool hasData;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: size.height * 0.01, horizontal: size.width * 0.01),
-      padding: EdgeInsets.symmetric(
-          vertical: size.height * 0.01, horizontal: size.width * 0.02),
-      decoration: BoxDecoration(
-          color: percentage > 0
-              ? Colors.green
-              : percentage < 0
-                  ? Colors.red
-                  : Colors.white,
-          borderRadius: BorderRadius.circular(15)),
-      child: Row(
-        children: [
-          percentage > 0
-              ? Icon(
-                  Icons.arrow_drop_up,
-                  color: Colors.white,
-                )
-              : percentage < 0
-                  ? Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.white,
-                    )
-                  : SizedBox(
-                      width: 0,
+    return hasData
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: size.width * 0.05),
+                child: Text(
+                  NumberFormat.compact().format(data),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: kPrimaryColor),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * 0.01,
+                    horizontal: size.width * 0.01),
+                padding: EdgeInsets.symmetric(
+                    vertical: size.height * 0.01,
+                    horizontal: size.width * 0.02),
+                decoration: BoxDecoration(
+                    color: percentage > 0
+                        ? Colors.green
+                        : percentage < 0
+                            ? Colors.red
+                            : Colors.white,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                  children: [
+                    percentage > 0
+                        ? Icon(
+                            Icons.arrow_drop_up,
+                            color: Colors.white,
+                          )
+                        : percentage < 0
+                            ? Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.white,
+                              )
+                            : SizedBox(
+                                width: 0,
+                              ),
+                    Text(
+                      percentage.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-          Text(
-            percentage.toString(),
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        ],
-      ),
-    );
+                  ],
+                ),
+              ),
+            ],
+          )
+        : Container(
+            margin: EdgeInsets.symmetric(
+                vertical: size.height * 0.01, horizontal: size.width * 0.01),
+            padding: EdgeInsets.symmetric(
+                vertical: size.height * 0.01, horizontal: size.width * 0.02),
+            decoration: BoxDecoration(
+                color: percentage > 0
+                    ? Colors.green
+                    : percentage < 0
+                        ? Colors.red
+                        : Colors.white,
+                borderRadius: BorderRadius.circular(15)),
+            child: Row(
+              children: [
+                percentage > 0
+                    ? Icon(
+                        Icons.arrow_drop_up,
+                        color: Colors.white,
+                      )
+                    : percentage < 0
+                        ? Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
+                          )
+                        : SizedBox(
+                            width: 0,
+                          ),
+                Text(
+                  percentage.toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ],
+            ),
+          );
   }
 }

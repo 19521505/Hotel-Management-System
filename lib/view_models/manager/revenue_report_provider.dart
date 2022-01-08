@@ -17,6 +17,7 @@ class RevenueReportProvider extends ChangeNotifier {
 
   Future getAllReport() async {
     _reportList = await AccountantDataProvider().getAllReport();
+    _reportList = _reportList.reversed.toList();
     isLoad = false;
     if (_reportList.length == 0) {
       hasNoData = true;
@@ -37,6 +38,17 @@ class RevenueReportProvider extends ChangeNotifier {
         _reportList[index].resBillTotal +
         _reportList[index].roomBillTotal +
         _reportList[index].riskBillTotal;
+  }
+
+  bool checkEmptyInflowData(Report report) {
+    bool result = false;
+    if (report.resBillTotal == 0 &&
+        report.roomBillTotal == 0 &&
+        report.riskBillTotal == 0 &&
+        report.entertainmentBillTotal == 0) {
+      result = true;
+    }
+    return result;
   }
 
   double getPrecentageOfListType(String typeOfList, int index) {

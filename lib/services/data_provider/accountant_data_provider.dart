@@ -81,6 +81,11 @@ class AccountantDataProvider {
     await AccountantRepository().submitReport(report);
   }
 
+  // update report by date
+  Future updateReport(Report report) async {
+    await AccountantRepository().updateReport(report);
+  }
+
   // get report by date
   Future<List<Report>> getAllReport() async {
     final response = await AccountantRepository().getAllReport();

@@ -4,9 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/models/report/report.dart';
 import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
-import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/indicator.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class RevenueReportResultPage extends StatefulWidget {
@@ -141,35 +141,35 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                   color: Color(0xffFF5C2D),
                                   text: 'Room Bill',
                                   isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalListRoomBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListRoomBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xffFFA539),
                                   text: 'Restaurant Bill',
                                   isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalOfResBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalOfResBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff64B34B),
                                   text: 'Entertainment Bill',
                                   isSquare: true,
-                                  secondText: argument.accountantProvider
-                                          .totalListEntertainmentBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListEntertainmentBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff1FB5FF),
                                   text: 'Risk Bill',
-                                  secondText: argument
-                                          .accountantProvider.totalListRiskBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListRiskBill) +
                                       " VND",
                                   isSquare: true,
                                 ),
@@ -295,9 +295,10 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xffFFA539),
             value: provider.getPrecentageOfListType("ResBill"),
-            title:
-                provider.getPrecentageOfListType("ResBill").toStringAsFixed(0) +
-                    '%',
+            title: (provider
+                    .getPrecentageOfListType("ResBill")
+                    .toStringAsFixed(0)) +
+                '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -417,7 +418,7 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: (rod.y - 1).toString(),
+                    text: NumberFormat.compact().format((rod.y - 1)),
                     style: const TextStyle(
                       color: Colors.yellow,
                       fontSize: 16,
