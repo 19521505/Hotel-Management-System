@@ -15,7 +15,7 @@ class StatisticProvider extends ChangeNotifier {
   late String weekStart;
   late String weekEnd;
 
-  String typeOfData = "Profit";
+  String typeOfData = "Inflow";
 
   //init list of report
   List<Report> _reportList = [];
