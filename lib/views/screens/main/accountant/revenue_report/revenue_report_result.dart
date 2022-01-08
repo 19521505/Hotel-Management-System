@@ -141,35 +141,35 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                                   color: Color(0xffFF5C2D),
                                   text: 'Room Bill',
                                   isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalListRoomBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListRoomBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xffFFA539),
                                   text: 'Restaurant Bill',
                                   isSquare: true,
-                                  secondText: argument
-                                          .accountantProvider.totalOfResBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalOfResBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff64B34B),
                                   text: 'Entertainment Bill',
                                   isSquare: true,
-                                  secondText: argument.accountantProvider
-                                          .totalListEntertainmentBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListEntertainmentBill) +
                                       " VND",
                                 ),
                                 Indicator(
                                   color: Color(0xff1FB5FF),
                                   text: 'Risk Bill',
-                                  secondText: argument
-                                          .accountantProvider.totalListRiskBill
-                                          .toStringAsFixed(0) +
+                                  secondText: NumberFormat.compact().format(
+                                          argument.accountantProvider
+                                              .totalListRiskBill) +
                                       " VND",
                                   isSquare: true,
                                 ),
@@ -281,8 +281,9 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xffFF5C2D),
             value: provider.getPrecentageOfListType("RoomBill"),
-            title: NumberFormat.compact()
-                    .format(provider.getPrecentageOfListType("RoomBill")) +
+            title: provider
+                    .getPrecentageOfListType("RoomBill")
+                    .toStringAsFixed(0) +
                 "%",
             radius: radius,
             titleStyle: TextStyle(
@@ -294,8 +295,9 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xffFFA539),
             value: provider.getPrecentageOfListType("ResBill"),
-            title: NumberFormat.compact()
-                    .format(provider.getPrecentageOfListType("ResBill")) +
+            title: (provider
+                    .getPrecentageOfListType("ResBill")
+                    .toStringAsFixed(0)) +
                 '%',
             radius: radius,
             titleStyle: TextStyle(
@@ -307,8 +309,9 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xff64B34B),
             value: provider.getPrecentageOfListType("EntertainmentBill"),
-            title: NumberFormat.compact().format(
-                    provider.getPrecentageOfListType("EntertainmentBill")) +
+            title: provider
+                    .getPrecentageOfListType("EntertainmentBill")
+                    .toStringAsFixed(0) +
                 '%',
             radius: radius,
             titleStyle: TextStyle(
@@ -320,8 +323,9 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xff1FB5FF),
             value: provider.getPrecentageOfListType("RiskBill"),
-            title: NumberFormat.compact()
-                    .format(provider.getPrecentageOfListType("RiskBill")) +
+            title: provider
+                    .getPrecentageOfListType("RiskBill")
+                    .toStringAsFixed(0) +
                 '%',
             radius: radius,
             titleStyle: TextStyle(

@@ -155,6 +155,39 @@ class AccountantRepository {
     }
   }
 
+  // update report
+  Future<Response> updateReport(Report report) async {
+    Dio _dio = new Dio();
+
+    final data = {
+      '_id': report.reportID,
+      'reportName': report.reportName,
+      'date': report.date.toUtc().toIso8601String(),
+      'resBillTotal': double.parse(report.resBillTotal.toStringAsFixed(2)),
+      'roomBillTotal': double.parse(report.roomBillTotal.toStringAsFixed(2)),
+      'entertainmentBillTotal':
+          double.parse(report.entertainmentBillTotal.toStringAsFixed(2)),
+      'outflowBillTotal':
+          double.parse(report.outflowBillTotal.toStringAsFixed(2)),
+      'riskBillTotal': double.parse(report.riskBillTotal.toStringAsFixed(2)),
+      'staff': report.staff.staffID
+    };
+
+    //print(data);
+
+    try {
+      Response response = await _dio.patch(
+          "$baseUrl${AppEndpoints.reportEndpoint}/update/${report.reportID}",
+          data: data);
+
+      //print(response);
+
+      return response;
+    } catch (e, stacktrace) {
+      throw Exception("Exception occured: $e stackTrace: $stacktrace");
+    }
+  }
+
   // get report by day
   Future<Response> getReportByDate() async {
     Dio _dio = new Dio();

@@ -17,6 +17,7 @@ class RevenueReportProvider extends ChangeNotifier {
 
   Future getAllReport() async {
     _reportList = await AccountantDataProvider().getAllReport();
+    _reportList = _reportList.reversed.toList();
     isLoad = false;
     if (_reportList.length == 0) {
       hasNoData = true;

@@ -174,23 +174,47 @@ class AccountantProvider extends ChangeNotifier {
 
   //submit report
   Future submitReport(Staff staff, Function onComplete) async {
-    try {
-      String reportName =
-          "Report" + FormatDateTime.formatterDayToID.format(DateTime.now());
+    List<Report> dbReportList =
+        await AccountantDataProvider().getReportByDate();
+    if (dbReportList.length > 0) {
+      try {
+        String reportName =
+            "Report" + FormatDateTime.formatterDayToID.format(DateTime.now());
 
-      _report = new Report(
-          reportName: reportName,
-          staff: staff,
-          date: DateTime.now(),
-          riskBillTotal: totalListRiskBill,
-          entertainmentBillTotal: totalListEntertainmentBill,
-          outflowBillTotal: totalOutFlow,
-          resBillTotal: totalListResBill,
-          roomBillTotal: totalListRoomBill);
-      await AccountantDataProvider().submitReport(_report);
-      onComplete();
-    } on DioError catch (e) {
-      print(e.response);
+        _report = new Report(
+            reportID: dbReportList[0].reportID,
+            reportName: reportName,
+            staff: staff,
+            date: DateTime.now(),
+            riskBillTotal: totalListRiskBill,
+            entertainmentBillTotal: totalListEntertainmentBill,
+            outflowBillTotal: totalOutFlow,
+            resBillTotal: totalListResBill,
+            roomBillTotal: totalListRoomBill);
+        await AccountantDataProvider().updateReport(_report);
+        onComplete();
+      } on DioError catch (e) {
+        print(e.response);
+      }
+    } else {
+      try {
+        String reportName =
+            "Report" + FormatDateTime.formatterDayToID.format(DateTime.now());
+
+        _report = new Report(
+            reportName: reportName,
+            staff: staff,
+            date: DateTime.now(),
+            riskBillTotal: totalListRiskBill,
+            entertainmentBillTotal: totalListEntertainmentBill,
+            outflowBillTotal: totalOutFlow,
+            resBillTotal: totalListResBill,
+            roomBillTotal: totalListRoomBill);
+        await AccountantDataProvider().submitReport(_report);
+        onComplete();
+      } on DioError catch (e) {
+        print(e.response);
+      }
     }
   }
 

@@ -182,33 +182,36 @@ class _ReportDetailState extends State<ReportDetail> {
                                             color: Color(0xffFF5C2D),
                                             text: 'Room Bill',
                                             isSquare: true,
-                                            secondText: report.roomBillTotal
-                                                    .toStringAsFixed(0) +
+                                            secondText: NumberFormat.compact()
+                                                    .format(
+                                                        report.roomBillTotal) +
                                                 " VND",
                                           ),
                                           Indicator(
                                             color: Color(0xffFFA539),
                                             text: 'Restaurant Bill',
                                             isSquare: true,
-                                            secondText: report.resBillTotal
-                                                    .toStringAsFixed(0) +
+                                            secondText: NumberFormat.compact()
+                                                    .format(
+                                                        report.resBillTotal) +
                                                 " VND",
                                           ),
                                           Indicator(
                                             color: Color(0xff64B34B),
                                             text: 'Entertainment Bill',
                                             isSquare: true,
-                                            secondText: report
-                                                    .entertainmentBillTotal
-                                                    .toStringAsFixed(0) +
+                                            secondText: NumberFormat.compact()
+                                                    .format(report
+                                                        .entertainmentBillTotal) +
                                                 " VND",
                                           ),
                                           Indicator(
                                             color: Color(0xff1FB5FF),
                                             text: 'Risk Bill',
                                             isSquare: true,
-                                            secondText: report.riskBillTotal
-                                                    .toStringAsFixed(0) +
+                                            secondText: NumberFormat.compact()
+                                                    .format(
+                                                        report.riskBillTotal) +
                                                 " VND",
                                           ),
                                         ],
@@ -394,7 +397,7 @@ class _ReportDetailState extends State<ReportDetail> {
           return PieChartSectionData(
             color: const Color(0xffFF5C2D),
             value: totalRoomBill,
-            title: NumberFormat.compact().format(totalRoomBill) + "%",
+            title: (totalRoomBill).toStringAsFixed(0) + "%",
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -405,7 +408,7 @@ class _ReportDetailState extends State<ReportDetail> {
           return PieChartSectionData(
             color: const Color(0xffFFA539),
             value: totalResBill,
-            title: NumberFormat.compact().format(totalResBill) + '%',
+            title: (totalResBill).toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -416,7 +419,7 @@ class _ReportDetailState extends State<ReportDetail> {
           return PieChartSectionData(
             color: const Color(0xff64B34B),
             value: totalEntertainmentBill,
-            title: NumberFormat.compact().format(totalEntertainmentBill) + '%',
+            title: (totalEntertainmentBill).toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -427,7 +430,7 @@ class _ReportDetailState extends State<ReportDetail> {
           return PieChartSectionData(
             color: const Color(0xff1FB5FF),
             value: totalRiskBill,
-            title: NumberFormat.compact().format(totalRiskBill) + '%',
+            title: totalRiskBill.toStringAsFixed(0) + '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
