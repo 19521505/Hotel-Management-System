@@ -961,7 +961,7 @@ class PercentageStateWidget extends StatelessWidget {
                                 width: 0,
                               ),
                     Text(
-                      percentage.toString(),
+                      percentage.toString() + "%",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
@@ -998,7 +998,7 @@ class PercentageStateWidget extends StatelessWidget {
                             width: 0,
                           ),
                 Text(
-                  percentage.toString(),
+                  percentage.toString() + "%",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.white),
                 ),

@@ -234,44 +234,53 @@ class _ReportDetailState extends State<ReportDetail> {
                     color: Colors.white,
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: size.height * 0.01,
-                        top: size.height * 0.01,
-                        right: size.height * 0.01,
                         bottom: size.height * 0.03,
                       ),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/images/ic_outflow.png",
-                                    width: size.width * 0.1,
-                                    color: kPrimaryColor,
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.02,
-                                  ),
-                                  Text(
-                                    "Outflow ",
-                                    style: TextStyle(
+                          Container(
+                            padding: EdgeInsets.only(top: size.height * 0.01),
+                            margin: EdgeInsets.only(bottom: size.height * 0.02),
+                            width: double.infinity,
+                            color: kPrimaryLightColor.withOpacity(0.2),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/ic_outflow.png",
+                                      width: size.width * 0.1,
+                                      color: kPrimaryColor,
+                                    ),
+                                    SizedBox(
+                                      width: size.width * 0.02,
+                                    ),
+                                    Text(
+                                      "Outflow ",
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    NumberFormat.compact().format(argument
-                                        .revenueReportProvider
-                                        .reportList[argument.index]
-                                        .outflowBillTotal),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.02,
+                                ),
+                                Text(
+                                  NumberFormat.compact().format(argument
+                                      .revenueReportProvider
+                                      .reportList[argument.index]
+                                      .outflowBillTotal),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
