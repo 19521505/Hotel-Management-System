@@ -39,6 +39,17 @@ class RevenueReportProvider extends ChangeNotifier {
         _reportList[index].riskBillTotal;
   }
 
+  bool checkEmptyInflowData(Report report) {
+    bool result = false;
+    if (report.resBillTotal == 0 &&
+        report.roomBillTotal == 0 &&
+        report.riskBillTotal == 0 &&
+        report.entertainmentBillTotal == 0) {
+      result = true;
+    }
+    return result;
+  }
+
   double getPrecentageOfListType(String typeOfList, int index) {
     final report = _reportList[index];
     final totalInFlow = getTotalInflow(index);

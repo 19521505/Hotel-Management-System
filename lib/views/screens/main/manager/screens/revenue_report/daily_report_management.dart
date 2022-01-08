@@ -98,13 +98,19 @@ class _DailyReportScreenState extends State<DailyReportScreen> {
                                       vertical: size.height * 0.01),
                                   child: Row(
                                     children: [
-                                      Image.asset("assets/images/ic_bill.png"),
-                                      Text(
-                                        "Statistic",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                                      Image.asset(
+                                          "assets/images/ic_statistic.png",
+                                          width: size.width * 0.05),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.01),
+                                        child: Text(
+                                          "Statistic",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                     ],
                                   ),

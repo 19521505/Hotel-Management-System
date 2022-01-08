@@ -4,9 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_management_system/models/report/report.dart';
 import 'package:hotel_management_system/view_models/accountant/accountant_provider.dart';
-import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/form_header.dart';
 import 'package:hotel_management_system/views/screens/main/accountant/revenue_report/widgets/indicator.dart';
 import 'package:hotel_management_system/widgets/custom_appbar_title_right.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class RevenueReportResultPage extends StatefulWidget {
@@ -281,9 +281,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xffFF5C2D),
             value: provider.getPrecentageOfListType("RoomBill"),
-            title: provider
-                    .getPrecentageOfListType("RoomBill")
-                    .toStringAsFixed(0) +
+            title: NumberFormat.compact()
+                    .format(provider.getPrecentageOfListType("RoomBill")) +
                 "%",
             radius: radius,
             titleStyle: TextStyle(
@@ -295,9 +294,9 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xffFFA539),
             value: provider.getPrecentageOfListType("ResBill"),
-            title:
-                provider.getPrecentageOfListType("ResBill").toStringAsFixed(0) +
-                    '%',
+            title: NumberFormat.compact()
+                    .format(provider.getPrecentageOfListType("ResBill")) +
+                '%',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -308,9 +307,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xff64B34B),
             value: provider.getPrecentageOfListType("EntertainmentBill"),
-            title: provider
-                    .getPrecentageOfListType("EntertainmentBill")
-                    .toStringAsFixed(0) +
+            title: NumberFormat.compact().format(
+                    provider.getPrecentageOfListType("EntertainmentBill")) +
                 '%',
             radius: radius,
             titleStyle: TextStyle(
@@ -322,9 +320,8 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
           return PieChartSectionData(
             color: const Color(0xff1FB5FF),
             value: provider.getPrecentageOfListType("RiskBill"),
-            title: provider
-                    .getPrecentageOfListType("RiskBill")
-                    .toStringAsFixed(0) +
+            title: NumberFormat.compact()
+                    .format(provider.getPrecentageOfListType("RiskBill")) +
                 '%',
             radius: radius,
             titleStyle: TextStyle(
@@ -417,7 +414,7 @@ class _RevenueReportResultPageState extends State<RevenueReportResultPage> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: (rod.y - 1).toString(),
+                    text: NumberFormat.compact().format((rod.y - 1)),
                     style: const TextStyle(
                       color: Colors.yellow,
                       fontSize: 16,
