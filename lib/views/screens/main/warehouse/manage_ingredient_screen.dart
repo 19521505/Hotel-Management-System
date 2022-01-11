@@ -57,6 +57,7 @@ class _ManageIngredientScreenState extends State<ManageIngredientScreen> {
             onPressed: () {
               showModalBottomSheet(
                 context: context,
+                isScrollControlled: true,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
