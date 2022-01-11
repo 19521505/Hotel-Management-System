@@ -66,17 +66,21 @@ class UpdateHotelBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller:
-                    context.read<HotelManagementProvider>().newRoomPriceText,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller:
+                      context.read<HotelManagementProvider>().newRoomPriceText,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText:
+                        FormatCurrency.currencyFormat.format(room.roomPrice) +
+                            ' VND',
                   ),
-                  hintText:
-                      FormatCurrency.currencyFormat.format(room.roomPrice) +
-                          ' VND',
                 ),
               ),
               SizedBox(
@@ -126,7 +130,10 @@ class UpdateHotelBottomSheet extends StatelessWidget {
 }
 
 class AddHotelBottomSheet extends StatelessWidget {
-  const AddHotelBottomSheet({Key? key}) : super(key: key);
+  const AddHotelBottomSheet({Key? key, required this.insetSize})
+      : super(key: key);
+
+  final double insetSize;
 
   @override
   Widget build(BuildContext context) {
@@ -204,15 +211,19 @@ class AddHotelBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller:
-                    context.read<HotelManagementProvider>().roomPriceText,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller:
+                      context.read<HotelManagementProvider>().roomPriceText,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText: 'Enter Room Price',
                   ),
-                  hintText: 'Enter Room Price',
                 ),
               ),
               SizedBox(

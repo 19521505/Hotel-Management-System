@@ -89,21 +89,25 @@ class UpdateIngreBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller:
-                    context.read<IngredientProvider>().ingreNewPriceText,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: FormatCurrency.currencyFormat
-                          .format(ingredient.ingrePrice) +
-                      ' VND',
-                  hintStyle: TextStyle(
-                    color: blackColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller:
+                      context.read<IngredientProvider>().ingreNewPriceText,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText: FormatCurrency.currencyFormat
+                            .format(ingredient.ingrePrice) +
+                        ' VND',
+                    hintStyle: TextStyle(
+                      color: blackColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
@@ -243,13 +247,17 @@ class AddIngreBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller: context.read<IngredientProvider>().unitText,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    hintText: 'Enter Ingredient Unit'),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller: context.read<IngredientProvider>().unitText,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      hintText: 'Enter Ingredient Unit'),
+                ),
               ),
               SizedBox(
                 height: size.height * 0.015,

@@ -91,17 +91,21 @@ class UpdateTypeTicketBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller:
-                    context.read<TypeTicketManagementProvider>().newPriceText,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller:
+                      context.read<TypeTicketManagementProvider>().newPriceText,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText:
+                        FormatCurrency.currencyFormat.format(typeTicket.price) +
+                            ' VND',
                   ),
-                  hintText:
-                      FormatCurrency.currencyFormat.format(typeTicket.price) +
-                          ' VND',
                 ),
               ),
               SizedBox(
@@ -256,20 +260,24 @@ class AddTicketBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller:
-                    context.read<TypeTicketManagementProvider>().typeText,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: 'Enter Type Ticket',
-                  helperText: '1: Adult, 2: Children',
-                  helperStyle: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    fontStyle: FontStyle.italic,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller:
+                      context.read<TypeTicketManagementProvider>().typeText,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText: 'Enter Type Ticket',
+                    helperText: '1: Adult, 2: Children',
+                    helperStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
               ),

@@ -62,14 +62,18 @@ class AddEntertainmentBottomSheet extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01,
               ),
-              TextField(
-                controller: context
-                    .read<EntertainmentManagmentProvider>()
-                    .entertainNameText,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: TextField(
+                  controller: context
+                      .read<EntertainmentManagmentProvider>()
+                      .entertainNameText,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),

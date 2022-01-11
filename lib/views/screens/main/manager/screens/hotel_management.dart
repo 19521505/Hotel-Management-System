@@ -35,7 +35,9 @@ class _HotelManagementScreenState extends State<HotelManagementScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = context.read<HotelManagementProvider>();
+    final insetSize = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       key: scaffoldKey,
       appBar: AppBar(
         title: Text(
@@ -54,13 +56,15 @@ class _HotelManagementScreenState extends State<HotelManagementScreen> {
           IconButton(
             onPressed: () {
               showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 builder: (context) {
                   return ChangeNotifierProvider.value(
-                      value: provider, child: AddHotelBottomSheet());
+                      value: provider,
+                      child: AddHotelBottomSheet(insetSize: insetSize));
                 },
               );
             },
